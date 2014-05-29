@@ -1,15 +1,13 @@
-"""
-Description : Simple Python implementation of the Apriori Algorithm
-Author      : Abhinav Saini(abhi488@gmail.com)
-Credits     : Cesare Zavattari(cesare@ctrl-z-bg.org) for making suggestions and refactoring code
+# Description : 
+# Author      : Takuma Fujitsuka(UEC Tokyo:fujitsuka@uec.ac.jp)
+# Credits     : 
 
-Usage:
-    $python apriori.py -f DATASET.csv -s minSupport  -c minConfidence
+# Usage:
+# $python neighborhood_apriori.py -f DATASET.csv -s minSupport  -c minConfidence
 
-    Eg.
-        $ python apriori.py -f DATASET.csv -s 0.15 -c 0.6
+# Eg.
+# $ python neighborhood_apriori.py -f DATASET.csv -s 0.15 -c 0.6
 
-"""
 
 import sys
 import re
@@ -19,20 +17,20 @@ from collections import defaultdict
 from optparse    import OptionParser
 
 def subsets(arr):
-    """ Returns non empty subsets of arr"""
+    # 空でない部分集合arrを返す
     return chain(*[combinations(arr,i + 1) for i,a in enumerate(arr)])
 
 
 def returnItemsWithMinSupport(itemSet, transactionList, minSupport, freqSet):
-    """calculates the support for items in the itemSet and returns a subset of the itemSet each of whose elements satisfies the minimum support"""
+    # 集合に含まれるパターンのサポート値を算出, 最小サポートを満たす部分集合を返す
     _itemSet = set()
     localSet = defaultdict(int)
 
     for item in itemSet:
         for transaction in transactionList:
             if item.issubset(transaction):
-                freqSet[item] 	+= 1
-                localSet[item]	+= 1
+                freqSet[item]  += 1
+                localSet[item] += 1
 
     for item,count in localSet.items():
         support = float(count)/len(transactionList)
@@ -43,10 +41,9 @@ def returnItemsWithMinSupport(itemSet, transactionList, minSupport, freqSet):
     return _itemSet
 
 
-
 def joinSet(itemSet,length):
-	"""Join a set with itself and returns the n-element itemsets"""
-	return set([i.union(j) for i in itemSet for j in itemSet if len(i.union(j)) == length])
+    # Join a set with itself and returns the n-element itemsets
+    return set([i.union(j) for i in itemSet for j in itemSet if len(i.union(j)) == length])
 
 
 def getItemSetTransactionList(data_iterator):
@@ -56,27 +53,23 @@ def getItemSetTransactionList(data_iterator):
         transaction = frozenset(record)
         transactionList.append(transaction)
         for item in transaction:
-            itemSet.add(frozenset([item]))		# Generate 1-itemSets
+            itemSet.add(frozenset([item]))  # Generate 1-itemSets
     return itemSet, transactionList
 
-def getDistance():
-    pass
-
 def runApriori(data_iter, minSupport, minConfidence):
-    """
-    run the apriori algorithm. data_iter is a record iterator
-    Return both: 
-     - items (tuple, support)
-     - rules ((pretuple, posttuple), confidence)
-    """
+    # Aprioriを実行. data_iterはレコードイテレータ.
+    # Return both: 
+    #  - items (tuple, support)
+    #  - rules ((pretuple, posttuple), confidence)
+
     itemSet, transactionList = getItemSetTransactionList(data_iter)
-    
+
     freqSet     = defaultdict(int)
-    largeSet    = dict()    # Global dictionary which stores (key=n-itemSets,value=support) which satisfy minSupport
+    largeSet    = dict()    # 最小サポートを満たすパターンを格納する(key=n-itemSets,value=support)
     assocRules  = dict()    # Dictionary which stores Association Rules
 
     oneCSet     = returnItemsWithMinSupport(itemSet, transactionList, minSupport, freqSet)
-    
+
     currentLSet = oneCSet
     k = 2
     while(currentLSet != set([])):
@@ -87,22 +80,14 @@ def runApriori(data_iter, minSupport, minConfidence):
         k = k + 1
 
     def getSupport(item):
-            """local function which Returns the support of an pattern"""
-            return float(freqSet[item])/len(transactionList)
+        # パターンのサポート値を返すローカル関数
+        return float(freqSet[item])/len(transactionList)
 
-    def getDistanceRate():
-            """local function which Returns the distanceRate of an pattern"""
-        pass
-
-    def getNeighborhood():
-        pass
-
-    toRetItems=[]
+    toRetItems=[]    # 返すアイテムを格納しているだけ
     for key,value in largeSet.items():
-        toRetItems.extend([(tuple(item), getSupport(item)) 
-                           for item in value])
+        toRetItems.extend([(tuple(item), getSupport(item)) for item in value])
 
-    toRetRules=[]
+    toRetRules=[]    # 返すルールを格納しているだけ
     for key,value in largeSet.items()[1:]:
         for item in value:
             _subsets = map(frozenset,[x for x in subsets(item)])
@@ -111,13 +96,12 @@ def runApriori(data_iter, minSupport, minConfidence):
                 if len(remain)>0:
                     confidence = getSupport(item)/getSupport(element)
                     if confidence >= minConfidence:
-                        toRetRules.append(((tuple(element),tuple(remain)), 
-                                           confidence))
+                        toRetRules.append(((tuple(element),tuple(remain)),confidence))
     return toRetItems, toRetRules
 
 
 def printResults(items, rules):
-    """prints the generated itemsets and the neighbor rules"""
+    # 評価値に基づいてパターンを出力
     for item, support in items:
         print "pattern: %s , %.3f" % (str(item), support)
     print "\n------------------------ PLANS:"
@@ -127,12 +111,12 @@ def printResults(items, rules):
 
 
 def dataFromFile(fname):
-	"""Function which reads from the file and yields a generator"""
-	file_iter = open(fname, 'rU')
-   	for line in file_iter:
-		line = line.strip().rstrip(',')				# Remove trailing comma
-		record = frozenset(line.split(','))
-		yield record
+    # ファイルからデータを読み込みyieldとして返す
+    file_iter = open(fname, 'rU')
+    for line in file_iter:
+        line = line.strip().rstrip(',')
+        record = frozenset(line.split(','))
+        yield record
 
 
 if __name__ == "__main__":
@@ -155,6 +139,7 @@ if __name__ == "__main__":
 
     minSupport      = options.minS
     minConfidence   = options.minC
-    items, rules    = runApriori(inFile, minSupport, minConfidence) 
+    # 入力値をそのまま代入する
+    items, rules    = runApriori(inFile, minSupport, minConfidence)
 
     printResults(items,rules)
