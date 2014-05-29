@@ -1,8 +1,12 @@
 def getDistance(transactionList, pattern):
     # トランザクション一つに含まれるパターンの距離を返す
     for i in len(pattern):
-        for j in len():
-            pass
+        for j in len(transaction):
+            if (i != 0) and (dist[0] == 0):
+                dist = 0
+            elif (i != 0) and (transaction[i] == pattern[j]):
+                dist[i] += 1
+            elif 
     return dist
 
 def getDistanceList(transactionList, pattern):
@@ -26,8 +30,8 @@ def getDistanceRate(transactionList, pattern):
             weight_sum = weight_sum + discount**distance * weight
     return dist_rate = weight_sum / countAll(transactionList, pattern)
 
-def getNeighborhood(item):
+def getNeighborhood(transactionList, pattern):
     # パターンの距離割合を基に隣接度を返す
-    dist_rate = getDistanceRate()
+    dist_rate = getDistanceRate(transactionList, pattern)
     neighborhood = dist_rate * subsetsum
     return neighborhood

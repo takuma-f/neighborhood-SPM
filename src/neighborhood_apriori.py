@@ -1,3 +1,4 @@
+# coding: UTF-8
 # Description : 
 # Author      : Takuma Fujitsuka(UEC Tokyo:fujitsuka@uec.ac.jp)
 # Credits     : 
@@ -47,13 +48,14 @@ def joinSet(itemSet,length):
 
 
 def getItemSetTransactionList(data_iterator):
+    # 何してるかよくわかんねえ
     transactionList = list()
     itemSet         = set()
     for record in data_iterator:
         transaction = frozenset(record)
         transactionList.append(transaction)
         for item in transaction:
-            itemSet.add(frozenset([item]))  # Generate 1-itemSets
+            itemSet.add(frozenset([item]))
     return itemSet, transactionList
 
 def runApriori(data_iter, minSupport, minConfidence):
