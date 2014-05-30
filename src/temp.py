@@ -3,24 +3,27 @@ def getDistance(record, pattern):
     # レコード一つに含まれるパターンの距離を返す
     distance_sum = 0
     p_diff       = 0
-    count_p        = 0
+    count_p      = 0
     firsthit     = False
+    hit          = False
 
     for p in pattern:    # パターン内の行動の個数回す
-        print "p =",p
         for r in record: # レコード内の行動の個数回す
-            print "r =",r
             if p == r:   # パターン内とレコード内の行動が一致した場合
                 diff      = record.index(r) - pattern.index(p)
                 distance  = diff - p_diff
                 p_diff = diff
                 if count_p == 0 and firsthit == False:
-                    distance = 0
                     firsthit = True
+                    distance = 0
+                if firsthit == True:
+                    hit = True
                 distance_sum += distance
-        count_p += 1
-    if firsthit == False:
-        return "None" # 何も一致しない場合Noneを返す
+        if hit == False:
+            return None
+        else:
+            count_p += 1
+            hit = False
     return distance_sum
 
 def getDistanceList(transactionList, pattern):
@@ -30,8 +33,8 @@ def getDistanceList(transactionList, pattern):
     for record in transactionList:
         print record
         distance = getDistance(record, pattern)
-        print distance
-        if distance != "None": # 0 = False扱い？
+        print "Distance =",distance
+        if distance is not None:
             distance_list[distance] += 1
     return distance_list
 
@@ -68,11 +71,8 @@ if __name__ == '__main__':
     ["Eat","Play"],
     ["Play","Bar"],
     ["Eat","Bar"],
-    ["Shop","Eat","Play","Bar"],
-    ["Shop","Play"]
+    ["Shop","Eat","Play","Bar"]
     ]
-    pattern = ["Shop","Play"] # 存在しないパターン書くとなんかバグ出る
-
-    # 期待する結果[1, 2, 0]
+    pattern = ["Shop","Play"]
 
     print getDistanceList(transactionList,pattern)
