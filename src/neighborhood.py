@@ -1,4 +1,6 @@
 # coding: UTF-8
+import itertools
+
 def getDistance(record, pattern):
     # レコード一つに含まれるパターンの距離を返す
     distance_sum = 0
@@ -46,7 +48,7 @@ def CountAll(distance_list):
 
 def getDistanceRate(transactionList, pattern):
     # パターンの距離を基に距離割合を返す
-    discount   = 0.333
+    discount   = float(1)/3 # 浮動小数点の表現のため
     index      = 0
     weight     = 1.000
     weight_sum = 0
@@ -59,26 +61,32 @@ def getDistanceRate(transactionList, pattern):
     return weight_sum / count
 
 def getSubPattern(pattern):
-    subpattern = []
+    # 入力したパターンの部分パターンをリストで返す
+    # せっかくここで部分パターンの距離求めてるんだからこの値も返したい...
+    sp_list = []
 
-    for action in pattern:
-        pass
-    return subpattern
+    sp_combinations = list(itertools.combinations(pattern, len(pattern)-1))
+    for sp in sp_combinations:
+        sp_distance = getDistance(pattern,sp)
+        if sp_distance is not None:
+            sp_list.append(sp)
+    return sp_list
 
 def getNeighborhood(transactionList, pattern):
     # パターンの距離割合を基に隣接度を返す
-    discount = 0.333
-    index    = 0
+    discount = float(1)/3 # 浮動小数点の表現のため
+    neighborhood = 0
 
-    # サブパターンを見つける
-    # サブパターンの距離を取得する
-    if len(pattern) == 1:
-        neighborhood = getDistanceRate(transactionList, pattern)
-
-
-
+    sp_list = getSubPattern(pattern)
     distance_rate = getDistanceRate(transactionList, pattern)
-    neighborhood = distance_rate * (sumofsp + discount*sumofsp)
+    for sp in sp_list:
+        # サブパターンの距離をgetSubPatternで返せるようにしたい
+        sp_distance = getDistance(pattern,sp)
+        if len(sp) == 1:
+            neighborhood += distance_rate
+        else:
+            sp_neigh = getNeighborhood(transactionList,sp)
+            neighborhood += discount**sp_distance * distance_rate * sp_neigh
     return neighborhood
 
 def getSupport(transactionList, pattern):
@@ -87,6 +95,7 @@ def getSupport(transactionList, pattern):
     return float(CountAll(distance_list)) / len(transactionList)
 
 def getScore(transactionList, pattern):
+    # パターンの推薦スコアを返す
     score = getSupport(transactionList, pattern) * getNeighborhood(transactionList, pattern)
     return score
 
@@ -103,6 +112,6 @@ if __name__ == '__main__':
     ]
     pattern = ["Tea","Shop","Play"]
 
-    print "Distance Rate =",getDistanceRate(transactionList, pattern)
-    print "Support =",getSupport(transactionList, pattern)
+    print "Pattern :", pattern
+    print "Neighborhood =", getNeighborhood(transactionList, pattern)
     print "Score =", getScore(transactionList, pattern)
