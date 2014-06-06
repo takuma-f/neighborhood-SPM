@@ -1,5 +1,5 @@
 # coding: UTF-8
-import itertools
+from itertools import combinations
 
 def getDistance(record, pattern):
     # レコード一つに含まれるパターンの距離を返す
@@ -65,7 +65,7 @@ def getSubPattern(pattern):
     # せっかくここで部分パターンの距離求めてるんだからこの値も返したい...
     sp_list = []
 
-    sp_combinations = list(itertools.combinations(pattern, len(pattern)-1))
+    sp_combinations = list(combinations(pattern, len(pattern)-1))
     for sp in sp_combinations:
         sp_distance = getDistance(pattern,sp)
         if sp_distance is not None:
@@ -110,8 +110,9 @@ if __name__ == '__main__':
     ["Eat","Bar"],
     ["Shop","Eat","Play","Bar"]
     ]
-    pattern = ["Tea","Shop","Play"]
+    pattern = ["Tea","Shop","Eat","Play"]
 
     print "Pattern :", pattern
+    print "Distance Rate =", getDistanceRate(transactionList, pattern)
     print "Neighborhood =", getNeighborhood(transactionList, pattern)
     print "Score =", getScore(transactionList, pattern)

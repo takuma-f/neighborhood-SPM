@@ -1,3 +1,4 @@
+# coding: UTF-8
 """
 Description	: Simple Python implementation of the Apriori Algorithm
 Author 		: Abhinav Saini(abhi488@gmail.com)
@@ -7,7 +8,7 @@ Usage:
 	$python apriori.py -f DATASET.csv -s minSupport  -c minConfidence
 	
 	Eg.
-		$ python apriori.py -f DATASET.csv -s 0.15 -c 0.6
+		$ python apriori.py -f sample_oku.csv -s 0.0 -c 0.0
 
 """
 
@@ -103,19 +104,24 @@ def runApriori(data_iter, minSupport, minConfidence):
                 if len(remain)>0:
                     confidence = getSupport(item)/getSupport(element)
                     if confidence >= minConfidence:
-                        toRetRules.append(((tuple(element),tuple(remain)), 
-                                           confidence))
+                        toRetRules.append(((tuple(element),tuple(remain)), confidence))
     return toRetItems, toRetRules
 
 
-def printResults(items, rules):
+
+def printResults(items):
     """prints the generated itemsets and the confidence rules"""
     for item, support in items:
         print "item: %s , %.3f" % (str(item), support)
-    print "\n------------------------ RULES:"
-    for rule, confidence in rules:
-        pre, post = rule
-        print "Rule: %s ==> %s , %.3f" % (str(pre), str(post), confidence)
+
+# def printResults(items, rules):
+#     """prints the generated itemsets and the confidence rules"""
+#     for item, support in items:
+#         print "item: %s , %.3f" % (str(item), support)
+#     print "\n------------------------ RULES:"
+#     for rule, confidence in rules:
+#         pre, post = rule
+#         print "Rule: %s ==> %s , %.3f" % (str(pre), str(post), confidence)
 
 
 def dataFromFile(fname):
@@ -150,4 +156,4 @@ if __name__ == "__main__":
     minConfidence 	= options.minC
     items, rules	= runApriori(inFile, minSupport, minConfidence)
 
-    printResults(items,rules)
+    printResults(items)
