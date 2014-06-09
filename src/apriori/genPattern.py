@@ -25,8 +25,6 @@ def subsets(arr):
 
 
 def returnItemsWithMinSupport(itemSet, transactionList, minSupport, freqSet):
-    """calculates the support for items in the itemSet and returns a subset of the itemSet 
-    each of whose elements satisfies the minimum support"""
     _itemSet = set()
     localSet = defaultdict(int)
 
@@ -45,9 +43,7 @@ def returnItemsWithMinSupport(itemSet, transactionList, minSupport, freqSet):
     return _itemSet
 
 
-
 def joinSet(itemSet,length):
-    """Join a set with itself and returns the n-element itemsets"""
     return set([i.union(j) for i in itemSet for j in itemSet if len(i.union(j)) == length])
 
 
@@ -55,55 +51,38 @@ def getItemSetTransactionList(data_iterator):
     transactionList = list()
     itemSet         = set()
     for record in data_iterator:
-        transaction = frozenset(record)
+        transaction = list(record)
         transactionList.append(transaction)
         for item in transaction:
             itemSet.add(frozenset([item])) # Generate 1-itemSets
     return itemSet, transactionList
 
 
-def runApriori(data_iter, minSupport):
+def genPattern(data_iter, minSupport):
     """
     run the apriori algorithm. data_iter is a record iterator
     Return both: 
      - items (tuple, support)
-     - rules ((pretuple, posttuple), confidence)
+     - rules ((pretuple, posttuple))
     """
     itemSet, transactionList = getItemSetTransactionList(data_iter)
-    
-    freqSet     = defaultdict(int)
-    largeSet    = dict() # Global dictionary which stores (key=n-itemSets,value=support) which satisfy minSupport
-    assocRules  = dict() # Dictionary which stores Association Rules
-
-    oneCSet     = returnItemsWithMinSupport(itemSet, transactionList, minSupport, freqSet)
-    
-    currentLSet = oneCSet
-    k = 2
-    while(currentLSet != set([])):
-        largeSet[k-1]   = currentLSet
-        currentLSet     = joinSet(currentLSet,k)
-        currentCSet     = returnItemsWithMinSupport(currentLSet, transactionList, minSupport, freqSet)
-        currentLSet     = currentCSet
-        k = k + 1
 
     patternList = list()
-    for key,value in largeSet.items():
-        patternList.extend(list(item) for item in value)
+    for transaction in transactionList:
+        for length in range(len(transaction)):
+            pattern = list(combinations(transaction, length+1))
+            for item in pattern:
+                if not list(item) in patternList:
+                    patternList.append(list(item))
+
     return transactionList, patternList
 
 
-def printResults(items):
-    """prints the generated itemsets and the confidence rules"""
-    for pattern in items:
-        print "Pattern : %s" % str(pattern)
-
-
 def dataFromFile(fname):
-    """Function which reads from the file and yields a generator"""
     file_iter = open(fname, 'rU')
     for line in file_iter:
         line = line.strip().rstrip(',') # Remove trailing comma
-        record = frozenset(line.split(','))
+        record = list(line.split(','))
         yield record
 
 
@@ -111,7 +90,7 @@ if __name__ == "__main__":
 
     optparser = OptionParser()
     optparser.add_option('-f', '--inputFile', dest = 'input', help = 'the filename which contains the comma separated values', default=None)
-    optparser.add_option('-s', '--minSupport', dest='minS', help = 'minimum support value', default=0.15, type='float')
+    optparser.add_option('-s', '--minSupport', dest='minS', help = 'minimum support value', default=0.0, type='float')
 
     (options, args) = optparser.parse_args()
 
@@ -124,8 +103,11 @@ if __name__ == "__main__":
         print 'No dataset filename specified, system with exit\n'
         sys.exit('System will exit')
 
-    minSupport    = options.minS
-    items  = runApriori(inFile, minSupport)
+    minSupport = options.minS
+    transactionList, patternList = genPattern(inFile, minSupport)
 
-    # print items
-    printResults(items)
+    for transaction in transactionList:
+        print "Transaction: %s" % str(transaction)
+
+    for pattern in patternList:
+        print "Pattern: %s" % str(pattern)

@@ -22,7 +22,7 @@ if __name__ == '__main__':
         sys.exit('System will exit')
 
     minSupport    = 0.0
-    transactionList, patternList = gen_pattern.runApriori(inFile, minSupport)
+    transactionList, patternList = gen_pattern.genPattern(inFile, minSupport)
     for pattern in patternList:
         score = neighborhood.getScore(transactionList, pattern)
         print "Pattern:%s Score:%s" % (pattern,score)
