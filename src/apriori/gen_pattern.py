@@ -62,7 +62,7 @@ def getItemSetTransactionList(data_iterator):
     return itemSet, transactionList
 
 
-def runApriori(data_iter, minSupport, minConfidence):
+def runApriori(data_iter, minSupport):
     """
     run the apriori algorithm. data_iter is a record iterator
     Return both: 
@@ -86,14 +86,10 @@ def runApriori(data_iter, minSupport, minConfidence):
         currentLSet     = currentCSet
         k = k + 1
 
-    def getSupport(item):
-            """local function which Returns the support of an item"""
-            return float(freqSet[item])/len(transactionList)
-
-    toRetItems=[]
+    patternList = list()
     for key,value in largeSet.items():
-        toRetItems.extend(list(item) for item in value)
-    return toRetItems
+        patternList.extend(list(item) for item in value)
+    return transactionList, patternList
 
 
 def printResults(items):
@@ -116,7 +112,6 @@ if __name__ == "__main__":
     optparser = OptionParser()
     optparser.add_option('-f', '--inputFile', dest = 'input', help = 'the filename which contains the comma separated values', default=None)
     optparser.add_option('-s', '--minSupport', dest='minS', help = 'minimum support value', default=0.15, type='float')
-    optparser.add_option('-c','--minConfidence', dest='minC', help = 'minimum confidence value', default = 0.6, type='float')
 
     (options, args) = optparser.parse_args()
 
@@ -130,8 +125,7 @@ if __name__ == "__main__":
         sys.exit('System will exit')
 
     minSupport    = options.minS
-    minConfidence = options.minC
-    items  = runApriori(inFile, minSupport, minConfidence)
+    items  = runApriori(inFile, minSupport)
 
     # print items
     printResults(items)
