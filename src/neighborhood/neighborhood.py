@@ -121,10 +121,10 @@ if __name__ == '__main__':
     pattern = ["Tea"]
     print "Pattern:%s Distance Rate:%s Neighborhood:%s Score:%s" % (pattern,getDistanceRate(transactionList, pattern),getNeighborhood(transactionList, pattern),getScore(transactionList, pattern))
 
-    pattern = ["Tea","Shop"]
+    pattern = ["Shop","Bar"]
     print "Pattern:%s Distance Rate:%s Neighborhood:%s Score:%s" % (pattern,getDistanceRate(transactionList, pattern),getNeighborhood(transactionList, pattern),getScore(transactionList, pattern))
 
-    pattern = ["Tea","Shop","Eat"]
+    pattern = ["Tea","Shop","Bar"]
     print "Pattern:%s Distance Rate:%s Neighborhood:%s Score:%s" % (pattern,getDistanceRate(transactionList, pattern),getNeighborhood(transactionList, pattern),getScore(transactionList, pattern))
 
     pattern = ["Tea","Shop","Eat","Play"]

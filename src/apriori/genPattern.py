@@ -1,12 +1,13 @@
 # coding: UTF-8
 """
+Date           : 2014/06/10
 Description    : 
-Author         : 
+Author         : Takuma Fujitsuka(fujitsuka@uec.ac.jp)
 Credits        : 
 
 Usage:
-    $python apriori.py -f DATASET.csv -s minSupport  -c minConfidence
-    
+    $python apriori.py -f DATASET.csv -s minSupport
+
     Eg.
         $ python gen_pattern.py -f sample_oku.csv -s 0.0 -c 0.0
 
@@ -15,36 +16,8 @@ Usage:
 import sys
 import re
 
-from itertools     import chain, combinations
-from collections import defaultdict
-from optparse      import OptionParser
-
-def subsets(arr):
-    """ Returns non empty subsets of arr"""
-    return chain(*[combinations(arr,i + 1) for i,a in enumerate(arr)])
-
-
-def returnItemsWithMinSupport(itemSet, transactionList, minSupport, freqSet):
-    _itemSet = set()
-    localSet = defaultdict(int)
-
-    for item in itemSet:
-        for transaction in transactionList:
-            if item.issubset(transaction):
-                freqSet[item]   += 1
-                localSet[item]  += 1
-
-    for item,count in localSet.items():
-        support = float(count)/len(transactionList)
-        
-        if support >= minSupport:
-            _itemSet.add(item)
-
-    return _itemSet
-
-
-def joinSet(itemSet,length):
-    return set([i.union(j) for i in itemSet for j in itemSet if len(i.union(j)) == length])
+from itertools import chain, combinations
+from optparse  import OptionParser
 
 
 def getItemSetTransactionList(data_iterator):
@@ -59,12 +32,6 @@ def getItemSetTransactionList(data_iterator):
 
 
 def genPattern(data_iter, minSupport):
-    """
-    run the apriori algorithm. data_iter is a record iterator
-    Return both: 
-     - items (tuple, support)
-     - rules ((pretuple, posttuple))
-    """
     itemSet, transactionList = getItemSetTransactionList(data_iter)
 
     patternList = list()

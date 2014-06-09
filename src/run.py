@@ -1,5 +1,5 @@
 # coding: UTF-8
-from apriori      import gen_pattern
+from apriori      import genPattern
 from neighborhood import neighborhood
 from optparse     import OptionParser
 
@@ -16,12 +16,12 @@ if __name__ == '__main__':
     if options.input is None:
         inFile = sys.stdin
     elif options.input is not None:
-        inFile = gen_pattern.dataFromFile(options.input)
+        inFile = genPattern.dataFromFile(options.input)
     else:
         print 'No dataset filename specified, system with exit\n'
         sys.exit('System will exit')
 
-    minSupport    = 0.0
+    minSupport = 0.0
     transactionList, patternList = genPattern.genPattern(inFile, minSupport)
     for pattern in patternList:
         score = neighborhood.getScore(transactionList, pattern)
