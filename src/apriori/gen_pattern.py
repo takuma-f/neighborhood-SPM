@@ -23,6 +23,7 @@ def subsets(arr):
     """ Returns non empty subsets of arr"""
     return chain(*[combinations(arr,i + 1) for i,a in enumerate(arr)])
 
+
 def returnItemsWithMinSupport(itemSet, transactionList, minSupport, freqSet):
     """calculates the support for items in the itemSet and returns a subset of the itemSet 
     each of whose elements satisfies the minimum support"""
@@ -43,19 +44,23 @@ def returnItemsWithMinSupport(itemSet, transactionList, minSupport, freqSet):
 
     return _itemSet
 
+
+
 def joinSet(itemSet,length):
     """Join a set with itself and returns the n-element itemsets"""
     return set([i.union(j) for i in itemSet for j in itemSet if len(i.union(j)) == length])
 
+
 def getItemSetTransactionList(data_iterator):
-    transactionList = list() # 履歴の集合を格納する
-    itemSet         = set() # 行動の集合を格納する
+    transactionList = list()
+    itemSet         = set()
     for record in data_iterator:
         transaction = frozenset(record)
         transactionList.append(transaction)
         for item in transaction:
             itemSet.add(frozenset([item])) # Generate 1-itemSets
     return itemSet, transactionList
+
 
 def runApriori(data_iter, minSupport, minConfidence):
     """
@@ -65,7 +70,7 @@ def runApriori(data_iter, minSupport, minConfidence):
      - rules ((pretuple, posttuple), confidence)
     """
     itemSet, transactionList = getItemSetTransactionList(data_iter)
-
+    
     freqSet     = defaultdict(int)
     largeSet    = dict() # Global dictionary which stores (key=n-itemSets,value=support) which satisfy minSupport
     assocRules  = dict() # Dictionary which stores Association Rules
@@ -81,11 +86,21 @@ def runApriori(data_iter, minSupport, minConfidence):
         currentLSet     = currentCSet
         k = k + 1
 
-    patternList=list()
-    for key,value in largeSet.items():
-        patternList.extend(list(item) for item in value)
+    def getSupport(item):
+            """local function which Returns the support of an item"""
+            return float(freqSet[item])/len(transactionList)
 
-    return transactionList, patternList
+    toRetItems=[]
+    for key,value in largeSet.items():
+        toRetItems.extend(list(item) for item in value)
+    return toRetItems
+
+
+def printResults(items):
+    """prints the generated itemsets and the confidence rules"""
+    for pattern in items:
+        print "Pattern : %s" % str(pattern)
+
 
 def dataFromFile(fname):
     """Function which reads from the file and yields a generator"""
@@ -95,10 +110,6 @@ def dataFromFile(fname):
         record = frozenset(line.split(','))
         yield record
 
-def printResults(items):
-    """prints the generated itemsets and the confidence rules"""
-    for pattern in items:
-        print "Pattern : %s" % str(pattern)
 
 if __name__ == "__main__":
 
@@ -122,4 +133,5 @@ if __name__ == "__main__":
     minConfidence = options.minC
     items  = runApriori(inFile, minSupport, minConfidence)
 
+    # print items
     printResults(items)
