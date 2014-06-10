@@ -1,18 +1,4 @@
 # coding: UTF-8
-"""
-Date           : 2014/06/10
-Description    : 
-Author         : Takuma Fujitsuka(fujitsuka@uec.ac.jp)
-Credits        : 
-
-Usage:
-    $python apriori.py -f DATASET.csv -s minSupport
-
-    Eg.
-        $ python gen_pattern.py -f sample_oku.csv -s 0.0 -c 0.0
-
-"""
-
 import sys
 import re
 

@@ -1,4 +1,18 @@
 # coding: UTF-8
+"""
+Date           : 2014/06/10
+Description    : 
+Author         : Takuma Fujitsuka(fujitsuka@uec.ac.jp)
+Credits        : 
+
+Usage:
+    $python run.py -f DATASET.csv
+
+    Eg.
+        $ python run.py -f TEST_OKU.csv
+
+"""
+
 from apriori      import genPattern
 from neighborhood import neighborhood
 from optparse     import OptionParser
@@ -25,4 +39,4 @@ if __name__ == '__main__':
     transactionList, patternList = genPattern.genPattern(inFile, minSupport)
     for pattern in patternList:
         score = neighborhood.getScore(transactionList, pattern)
-        print "Pattern:%s Score:%s" % (pattern,score)
+        print "%s Score:%s" % (pattern,score)
