@@ -30,7 +30,7 @@ def getDistance(record, pattern):
 
 def getDistanceList(transactionList, pattern):
     # 全てのトランザクションについて距離を求め, パターンごとに距離リストを返す
-    distance_list = [0,0,0] # とりあえずあとで空のリストでアレする方法アレ
+    distance_list = [0,0,0,0,0] # とりあえずあとで空のリストでアレする方法アレ
 
     for record in transactionList:
         distance = getDistance(record, pattern)
@@ -109,23 +109,14 @@ def getScore(transactionList, pattern):
 if __name__ == '__main__':
     transactionList = [
     ["Eat","Bar"],
-    ["Tea","Shop","Eat","Play"],
-    ["Tea","Shop","Eat","Bar"],
+    ["Eat","Tea","Shop","Eat","Play"],
+    ["Eat","Tea","Shop","Eat","Bar"],
     ["Eat","Bar"],
-    ["Eat","Play"],
+    ["Shop","Eat","Play"],
     ["Play","Bar"],
     ["Eat","Bar"],
-    ["Shop","Eat","Play","Bar"]
+    ["Eat","Shop","Eat","Play","Bar"]
     ]
 
-    pattern = ["Tea"]
-    print "Pattern:%s Distance Rate:%s Neighborhood:%s Score:%s" % (pattern,getDistanceRate(transactionList, pattern),getNeighborhood(transactionList, pattern),getScore(transactionList, pattern))
-
-    pattern = ["Shop","Bar"]
-    print "Pattern:%s Distance Rate:%s Neighborhood:%s Score:%s" % (pattern,getDistanceRate(transactionList, pattern),getNeighborhood(transactionList, pattern),getScore(transactionList, pattern))
-
-    pattern = ["Tea","Shop","Bar"]
-    print "Pattern:%s Distance Rate:%s Neighborhood:%s Score:%s" % (pattern,getDistanceRate(transactionList, pattern),getNeighborhood(transactionList, pattern),getScore(transactionList, pattern))
-
-    pattern = ["Tea","Shop","Eat","Play"]
+    pattern = ["Eat","Bar"]
     print "Pattern:%s Distance Rate:%s Neighborhood:%s Score:%s" % (pattern,getDistanceRate(transactionList, pattern),getNeighborhood(transactionList, pattern),getScore(transactionList, pattern))
