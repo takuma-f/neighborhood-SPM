@@ -21,6 +21,7 @@ def getDistance(record, pattern):
                 if firsthit == True:
                     hit = True
                 distance_sum += distance
+                break
         if hit == False:
             return None
         else:
@@ -30,7 +31,8 @@ def getDistance(record, pattern):
 
 def getDistanceList(transactionList, pattern):
     # 全てのトランザクションについて距離を求め, パターンごとに距離リストを返す
-    distance_list = [0,0,0,0,0] # とりあえずあとで空のリストでアレする方法アレ
+    distance_list = [0,0,0,0,0]
+    # とりあえずあとで空のリストでアレする方法アレ
 
     for record in transactionList:
         distance = getDistance(record, pattern)
@@ -119,4 +121,5 @@ if __name__ == '__main__':
     ]
 
     pattern = ["Eat","Bar"]
-    print "Pattern:%s Distance Rate:%s Neighborhood:%s Score:%s" % (pattern,getDistanceRate(transactionList, pattern),getNeighborhood(transactionList, pattern),getScore(transactionList, pattern))
+    print "Pattern:%s" % pattern
+    print "Distance Rate:%s Neighborhood:%s Score:%s" % (getDistanceRate(transactionList, pattern),getNeighborhood(transactionList, pattern),getScore(transactionList, pattern))
