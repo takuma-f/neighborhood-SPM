@@ -1,33 +1,66 @@
 # coding: UTF-8
 from itertools import combinations
+from copy import deepcopy
 
 def getDistance(record, pattern):
-    # レコード一つに含まれるパターンの距離を返す
-    distance_sum = 0
-    p_diff       = 0
-    count_p      = 0
-    firsthit     = False
-    hit          = False
+#     # 距離の組み合わせリストから距離を返す
+#     pass
+
+# def getCombinationList(record, pattern):
+    # 距離の組み合わせリストを返す
+    distance           = list()
+    position           = list()
+    positionStack      = list()
+    combinationList    = list()
+    positionCounter    = 0
+    combinationCounter = 0
 
     for p in pattern:    # パターン内の行動の個数回す
+        hit = False
         for r in record: # レコード内の行動の個数回す
             if p == r:   # パターン内とレコード内の行動が一致した場合
-                diff      = record.index(r) - pattern.index(p)
-                distance  = diff - p_diff
-                p_diff = diff
-                if count_p == 0 and firsthit == False:
-                    firsthit = True
-                    distance = 0
-                if firsthit == True:
-                    hit = True
-                distance_sum += distance
-                break
-        if hit == False:
-            return None
-        else:
-            count_p += 1
-            hit = False
-    return distance_sum
+                # レコード内での行動が出現する位置を記録
+                position.append(positionCounter)
+                hit = True
+            positionCounter += 1 # record.index(r)は使えない
+        positionCounter = 0
+        positionStack.append(position) # positionStackにpositionを統合
+        position = list() # 新たなオブジェクトとしてpositionを再生成
+    if hit is False:
+        return None # 一つでもヒットしないものがあればNoneを返す
+
+    print positionStack
+
+    for stack in positionStack:
+        if len(stack) == 1: # positionが1個の場合
+            if not combinationList: # combinationListが空の場合
+                for position in stack:
+                    combinationList.append([position])
+                    # positionを新しい要素として追加
+            else:
+                for position in stack:
+                    for c in xrange(combinationCounter):
+                        combinationList[c].append(position)
+                        # 既存のListにpositionを追加
+
+        elif len(stack) > 1: # stackにpositionが2個以上ある場合
+            if not combinationList: # combinationListが空の場合
+                for position in stack:
+                    combinationList.append([position])
+                combinationCounter = len(combinationList)
+            else: # ここが一番大事
+                for x in xrange(len(stack)-1):
+                    copies = deepcopy(combinationList)
+                    for copy in copies: # 
+                        combinationList.append(copy)
+                combinationCounter = len(combinationList)
+
+                # ここがうまく動かねえ
+                for position in stack:
+                    for c in xrange(combinationCounter):
+                        combinationList[c].append(position)
+    print combinationList
+    return combinationList
 
 def getDistanceList(transactionList, pattern):
     # 全てのトランザクションについて距離を求め, パターンごとに距離リストを返す
@@ -37,7 +70,8 @@ def getDistanceList(transactionList, pattern):
     for record in transactionList:
         distance = getDistance(record, pattern)
         if distance is not None:
-            distance_list[distance] += 1
+            for d in distance:
+                distance_list[d] += 1
     return distance_list
 
 def CountAll(distance_list):
@@ -108,18 +142,26 @@ def getScore(transactionList, pattern):
         score = getSupport(transactionList, pattern) * getNeighborhood(transactionList, pattern)
     return score
 
-if __name__ == '__main__':
-    transactionList = [
-    ["Eat","Bar"],
-    ["Eat","Tea","Shop","Eat","Play"],
-    ["Eat","Tea","Shop","Eat","Bar"],
-    ["Eat","Bar"],
-    ["Shop","Eat","Play"],
-    ["Play","Bar"],
-    ["Eat","Bar"],
-    ["Eat","Shop","Eat","Play","Bar"]
-    ]
+# def main():
+#     transactionList = [
+#     ["Eat","Bar"],
+#     ["Eat","Tea","Shop","Eat","Play"],
+#     ["Eat","Tea","Shop","Eat","Bar"],
+#     ["Eat","Bar"],
+#     ["Shop","Eat","Play"],
+#     ["Play","Bar"],
+#     ["Eat","Bar"],
+#     ["Eat","Shop","Eat","Play","Bar"]
+#     ]
 
-    pattern = ["Eat","Bar"]
-    print "Pattern:%s" % pattern
-    print "Distance Rate:%s Neighborhood:%s Score:%s" % (getDistanceRate(transactionList, pattern),getNeighborhood(transactionList, pattern),getScore(transactionList, pattern))
+#     pattern = ["Eat","Bar"]
+#     print "Pattern:%s" % pattern
+#     print "Distance Rate:%s Neighborhood:%s Score:%s" % (getDistanceRate(transactionList, pattern),getNeighborhood(transactionList, pattern),getScore(transactionList, pattern))
+
+def main():
+    record = ["Shop","Eat","Tea","Eat","Play"]
+    pattern = ["Eat","Tea","Eat"]
+    getDistance(record,pattern)
+
+if __name__ == '__main__':
+    main()
