@@ -16,7 +16,6 @@ def getItemSetTransactionList(data_iterator):
             itemSet.add(frozenset([item])) # Generate 1-itemSets
     return itemSet, transactionList
 
-
 def genPattern(data_iter, minSupport):
     itemSet, transactionList = getItemSetTransactionList(data_iter)
 
@@ -27,9 +26,7 @@ def genPattern(data_iter, minSupport):
             for item in pattern:
                 if not list(item) in patternList:
                     patternList.append(list(item))
-
     return transactionList, patternList
-
 
 def dataFromFile(fname):
     file_iter = open(fname, 'rU')
@@ -38,9 +35,7 @@ def dataFromFile(fname):
         record = list(line.split(','))
         yield record
 
-
-if __name__ == "__main__":
-
+def main():
     optparser = OptionParser()
     optparser.add_option('-f', '--inputFile', dest = 'input', help = 'the filename which contains the comma separated values', default=None)
     optparser.add_option('-s', '--minSupport', dest='minS', help = 'minimum support value', default=0.0, type='float')
@@ -64,3 +59,6 @@ if __name__ == "__main__":
 
     for pattern in patternList:
         print "Pattern: %s" % str(pattern)
+
+if __name__ == "__main__":
+    main()
