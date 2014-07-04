@@ -1,6 +1,7 @@
 # coding: UTF-8
 from itertools import combinations
 from copy import deepcopy
+import math
 
 def getDistance(record, pattern):
 #     # 距離の組み合わせリストから距離を返す
@@ -37,6 +38,7 @@ def getDistance(record, pattern):
                 for position in stack:
                     combinationList.append([position])
                     # positionを新しい要素として追加
+                combinationCounter = len(combinationList)
             else:
                 for position in stack:
                     for c in xrange(combinationCounter):
@@ -47,18 +49,30 @@ def getDistance(record, pattern):
             if not combinationList: # combinationListが空の場合
                 for position in stack:
                     combinationList.append([position])
+                    # positionを新しい要素として追加
                 combinationCounter = len(combinationList)
             else: # ここが一番大事
                 for x in xrange(len(stack)-1):
                     copies = deepcopy(combinationList)
-                    for copy in copies: # 
+                    for copy in copies:
                         combinationList.append(copy)
                 combinationCounter = len(combinationList)
+                positionIndex = 0
+                if len(stack) > len(copy):
+                    for loop in xrange(combinationCounter):
+                        if loop != 0 and math.fmod(loop,len(copy)) == 0:
+                            positionIndex += 1
+                        combinationList[loop].append(stack[positionIndex])
+                elif len(stack) < len(copy):
+                    for loop in xrange(combinationCounter):
+                        if loop != 0 and math.fmod(loop,len(stack)) == 0:
+                            positionIndex += 1
+                        combinationList[loop].append(stack[positionIndex])
+                elif len(stack) == len(copy):
+                    for loop in xrange(combinationCounter):
+                        combinationList[loop].append(stack[positionIndex])
+                        positionIndex += 1
 
-                # ここがうまく動かねえ
-                for position in stack:
-                    for c in xrange(combinationCounter):
-                        combinationList[c].append(position)
     print combinationList
     return combinationList
 
@@ -159,8 +173,8 @@ def getScore(transactionList, pattern):
 #     print "Distance Rate:%s Neighborhood:%s Score:%s" % (getDistanceRate(transactionList, pattern),getNeighborhood(transactionList, pattern),getScore(transactionList, pattern))
 
 def main():
-    record = ["Shop","Eat","Tea","Eat","Play"]
-    pattern = ["Eat","Tea","Eat"]
+    record  = ["Shop","Eat","Tea","Eat","Play"]
+    pattern = ["Eat"]
     getDistance(record,pattern)
 
 if __name__ == '__main__':
