@@ -3,112 +3,172 @@ from itertools import combinations
 from copy import deepcopy
 import math
 
-def getCombinationList(record, pattern):
+def getPositionStack(record, pattern):
     # 距離の組み合わせリストを返す
-    distance            = list()
     position            = list()
     position_stack      = list()
-    combination_list    = list()
     position_counter    = 0
+
+    try:
+        for p in pattern:    # パターン内の行動の個数回す
+            hit = False
+            for r in record: # レコード内の行動の個数回す
+                if p == r:   # パターン内とレコード内の行動が一致
+                    position.append(position_counter)
+                    hit = True
+                position_counter += 1 # record.index(r)は不可
+            position_counter = 0
+            position_stack.append(position) # positionを統合
+            position = list() # 新たなオブジェクトのpositionを生成
+            if hit is False:
+                return None # 一つでもヒットしなければNone
+        return position_stack
+    except Exception, e:
+        print "Error:getPositionStack"
+
+def getCombinationList(record, pattern):
+    # 距離の組み合わせリストを返す
+    combination_list    = list()
+    distance            = list()
     combination_counter = 0
 
-    for p in pattern:    # パターン内の行動の個数回す
-        hit = False
-        for r in record: # レコード内の行動の個数回す
-            if p == r:   # パターン内とレコード内の行動が一致した場合
-                # レコード内での行動が出現する位置を記録
-                position.append(position_counter)
-                hit = True
-            position_counter += 1 # record.index(r)は使えない
-        position_counter = 0
-        position_stack.append(position) # position_stackにpositionを統合
-        position = list() # 新たなオブジェクトとしてpositionを再生成
-        if hit is False:
-            return None # 一つでもヒットしないものがあればNoneを返す
+    position_stack = getPositionStack(record, pattern)
+    try:
+        if position_stack == None:
+            return None
+        for stack in position_stack:
+            if len(stack) == 1: # positionが1個の場合
+                if not combination_list: # combination_listが空の場合
+                    for position in stack:
+                        combination_list.append([position])
+                        # positionを新しい要素として追加
+                    combination_counter = len(combination_list)
+                else:
+                    for position in stack:
+                        for c in xrange(combination_counter):
+                            combination_list[c].append(position)
+                            # 既存のListにpositionを追加
 
-    for stack in position_stack:
-        if len(stack) == 1: # positionが1個の場合
-            if not combination_list: # combination_listが空の場合
-                for position in stack:
-                    combination_list.append([position])
-                    # positionを新しい要素として追加
-                combination_counter = len(combination_list)
-            else:
-                for position in stack:
-                    for c in xrange(combination_counter):
-                        combination_list[c].append(position)
-                        # 既存のListにpositionを追加
+            elif len(stack) > 1: # stackにpositionが2個以上ある場合
+                if not combination_list: # combination_listが空の場合
+                    for position in stack:
+                        combination_list.append([position])
+                        # positionを新しい要素として追加
+                    combination_counter = len(combination_list)
+                else: # combination_listは空でない場合
+                    for x in xrange(len(stack)-1):
+                        copies = deepcopy(combination_list)
+                        for copy in copies:
+                            combination_list.append(copy)
+                    combination_counter = len(combination_list)
 
-        elif len(stack) > 1: # stackにpositionが2個以上ある場合
-            if not combination_list: # combination_listが空の場合
-                for position in stack:
-                    combination_list.append([position])
-                    # positionを新しい要素として追加
-                combination_counter = len(combination_list)
-            else: # combination_listは空でない場合
-                for x in xrange(len(stack)-1):
-                    copies = deepcopy(combination_list)
-                    for copy in copies:
-                        combination_list.append(copy)
-                combination_counter = len(combination_list)
+                    position_index = 0
+                    if len(stack) > len(copy):
+                        for loop in xrange(combination_counter):
+                            if loop != 0 and math.fmod(loop,len(copies)) == 0:
+                                position_index += 1
+                            combination_list[loop].append(stack[position_index])
 
-                positionIndex = 0
-                if len(stack) > len(copy):
-                    for loop in xrange(combination_counter):
-                        if loop != 0 and math.fmod(loop,len(copy)) == 0:
-                            positionIndex += 1
-                        combination_list[loop].append(stack[positionIndex])
-                elif len(stack) < len(copy):
-                    for loop in xrange(combination_counter):
-                        if loop != 0 and math.fmod(loop,len(stack)) == 0:
-                            positionIndex += 1
-                        combination_list[loop].append(stack[positionIndex])
-                elif len(stack) == len(copy):
-                    for loop in xrange(combination_counter):
-                        combination_list[loop].append(stack[positionIndex])
-                        if loop != 0 and math.fmod(loop+1,len(copy)) == 0:
-                            positionIndex += 1
-    return combination_list
+                    elif len(stack) < len(copy):
+                        for loop in xrange(combination_counter):
+                            if loop != 0 and math.fmod(loop,len(stack)) == 0:
+                                position_index += 1
+                            combination_list[loop].append(stack[position_index])
+
+                    elif len(stack) == len(copy):
+                        for loop in xrange(combination_counter):
+                            if loop != 0:
+                                position_index += 1
+                            if position_index > len(stack) -1:
+                                position_index = 0
+                            combination_list[loop].append(stack[position_index])
+        return combination_list
+    except Exception, e:
+        print "Error:getCombinationList"
 
 def getDistances(record, pattern):
-    # 距離の組み合わせリストから距離を返す
+    # 距離の組み合わせリストから矛盾したものを排除し距離を格納したリストを返す
     distances = list()
     prev      = -1
 
     combination_list = getCombinationList(record, pattern)
-    if combination_list is None:
-        return None
-    for combination in combination_list:
-        diff_sum = 0 # 計算結果を初期化
-        prev = 0
-        first_loop = True
-        for position in combination:
-            if len(combination) != 1:
-                if first_loop == False and prev < position:
-                # 論理的矛盾のない前後関係のみ計算
-                    diff_sum += position - prev - 1
-                    prev = position
-                else:
-                # 論理的矛盾が発生した段階で計算結果を-1とし次の組み合わせへ
-                    diff_sum = False
-            elif len(combination) == 1: # 要素が1個なら距離は0
-                diff_sum = 0
-            prev = position
-            first_loop = False
-        if diff_sum is not False: # 論理的矛盾でdiff_sumはFalse
-            distances.append(diff_sum)
-    return distances
+    try:
+        if combination_list is None:
+            return None
+        for combination in combination_list:
+            diff_sum = 0 # 計算結果を初期化
+            prev = 0
+            first_loop = True
+            for position in combination:
+                if len(combination) != 1:
+                    if first_loop == False and prev < position:
+                    # 論理的矛盾のない前後関係のみ計算
+                        diff_sum += position - prev - 1
+                    elif first_loop == True:
+                        diff_sum = False
+                    else:
+                        # 論理的矛盾が発生した段階で計算結果をFalseとし次の組み合わせへ
+                        diff_sum = False
+                        break
+                elif len(combination) == 1: # 要素が1個なら距離は0
+                    diff_sum = 0
+                prev = position
+                first_loop = False
+
+            if diff_sum is not False: # 論理的矛盾でdiff_sumはFalse
+                distances.append(diff_sum)
+
+        if distances == []:
+            return None
+        else:
+            return distances
+    except Exception, e:
+        print "Error:getDistances"
 
 def getDistanceList(transaction_list, pattern):
     # 全てのトランザクションについて距離を求め, パターンごとに距離リストを返す
-    distance_list = [0,0,0,0,0] # あとで空のリスト生成する方法考える
+    # 各パターンの出現回数も同時に返す
+    distance_list     = [0,0,0,0,0] # あとで空のリスト生成する方法考える
+    frequency_counter = 0
 
     for record in transaction_list:
         distances = getDistances(record, pattern)
         if distances is not None:
             for distance in distances:
                 distance_list[distance] += 1
-    return distance_list
+            frequency_counter += 1
+    return distance_list, frequency_counter
+
+def getDistanceRate(transaction_list, pattern):
+    # パターンの距離を基に距離割合を返す
+    discount   = float(1)/3 # 浮動小数点の表現のため
+    index      = 0
+    weight     = 1.0
+    weight_sum = 0
+
+    distance_list, frequency_counter = getDistanceList(transaction_list, pattern)
+    try:
+        pass
+        def CountAll(distance_list):
+            # 入力した全履歴中におけるパターンの総出現回数の和を返す
+            # 純粋な出現回数であり1レコード中何回出現しても出現するたび加算する
+            count = 0
+            for distance in distance_list:
+                count += distance
+            return count
+
+        count = CountAll(distance_list)
+        for distance in distance_list:
+            weight_sum += discount**index * distance * weight
+            index += 1
+        return weight_sum / count
+    except Exception, e:
+        print "Error:getDistanceRate"
+
+def getSupport(transaction_list, pattern):
+    # パターンのサポート値を返す
+    distance_list,frequency_counter = getDistanceList(transaction_list, pattern)
+    return float(frequency_counter) / len(transaction_list)
 
 def getSubPattern(pattern):
     # 入力したパターンの部分パターンをリストで返す
@@ -123,102 +183,86 @@ def getSubPattern(pattern):
                 sp_list.append(sp)
     return sp_list
 
-def CountAll(distance_list):
-    # パターンの全出現回数の和を返す
-    count = 0
-
-    for distance in distance_list:
-        count += distance
-    return count
-
-def getDistanceRate(transaction_list, pattern):
-    # パターンの距離を基に距離割合を返す
-    discount   = float(1)/3 # 浮動小数点の表現のため
-    index      = 0
-    weight     = 1.0
-    weight_sum = 0
-
-    distance_list = getDistanceList(transaction_list, pattern)
-    count = CountAll(distance_list)
-    for distance in distance_list:
-        weight_sum += discount**index * distance * weight
-        index += 1
-    return weight_sum / count
-
-def getSupport(transaction_list, pattern):
-    # パターンのサポート値を返す
-    distance_list = getDistanceList(transaction_list, pattern)
-    return float(CountAll(distance_list)) / len(transaction_list)
-
 def getNeighborhood(transaction_list, pattern):
     # パターンの距離割合を基に隣接度を返す
     discount = float(1)/3 # 浮動小数点の表現のため
     neighborhood = 0
 
     sp_list = getSubPattern(pattern)
-    if sp_list == []:
-        # リストが空(=単独アイテム)なら隣接度は1
-        neighborhood += 1.0
-    else:
-        distance_rate = getDistanceRate(transaction_list, pattern)
-        for sp in sp_list:
-            # サブパターンの距離をgetSubPatternで返せるようにしたい
-            sp_distance = getDistances(pattern,sp)
-            if len(sp) == 1:
-                neighborhood += distance_rate
-            else:
-                sp_neigh = getNeighborhood(transaction_list,sp)
-                neighborhood += discount**sp_distance * distance_rate * sp_neigh
-    return neighborhood
+    try:
+        if sp_list == []:
+            # リストが空(=単独アイテム)なら隣接度は1
+            neighborhood += 1.0
+        else:
+            distance_rate = getDistanceRate(transaction_list, pattern)
+            for sp in sp_list:
+                # サブパターンの距離をgetSubPatternで返せるようにしたい
+                sp_distance = getDistances(pattern,sp)
+                if len(sp) == 1:
+                    neighborhood += distance_rate
+                else:
+                    sp_neigh = getNeighborhood(transaction_list,sp)
+                    neighborhood += discount**sp_distance * distance_rate * sp_neigh
+        return neighborhood
+    except Exception, e:
+        print "Error:getNeighborhood"
 
 def getScore(transaction_list, pattern):
     # パターンの推薦スコアを返す
-    if len(pattern) == 1:
-        score = 0
-    else:
-        score = getSupport(transaction_list, pattern) * getNeighborhood(transaction_list, pattern)
-    return score
+    try:
+        if len(pattern) == 1:
+            score = 0
+        else:
+            score = getSupport(transaction_list, pattern) * getNeighborhood(transaction_list, pattern)
+        return score
+    except Exception, e:
+        print "Error:getScore"
 
-def test1():
-    transaction_list = [
-    ["Eat","Bar"],
-    ["Eat","Tea","Shop","Eat","Play"],
-    ["Eat","Tea","Shop","Eat","Bar"],
-    ["Eat","Bar"],
-    ["Shop","Eat","Play"],
-    ["Play","Bar"],
-    ["Eat","Bar"],
-    ["Eat","Shop","Eat","Play","Bar"]
-    ]
+def test_getScore():
+    transaction_list = [['Eat', 'Bar'], ['Eat', 'Tea', 'Shop', 'Eat', 'Play'], ['Eat', 'Tea', 'Shop', 'Eat', 'Bar'], ['Eat', 'Bar'], ['Shop', 'Eat', 'Play'], ['Play', 'Bar'], ['Eat', 'Bar'], ['Eat', 'Shop', 'Eat', 'Play', 'Bar']]
 
-    pattern = ["Eat","Bar"]
+    patterns = [['Eat'], ['Bar'], ['Eat', 'Bar'], ['Tea'], ['Shop'], ['Play'], ['Eat', 'Tea'], ['Eat', 'Shop'], ['Eat', 'Eat'], ['Eat', 'Play'], ['Tea', 'Shop'], ['Tea', 'Eat'], ['Tea', 'Play'], ['Shop', 'Eat'], ['Shop', 'Play'], ['Eat', 'Tea', 'Shop'], ['Eat', 'Tea', 'Eat'], ['Eat', 'Tea', 'Play'], ['Eat', 'Shop', 'Eat'], ['Eat', 'Shop', 'Play'], ['Eat', 'Eat', 'Play'], ['Tea', 'Shop', 'Eat'], ['Tea', 'Shop', 'Play'], ['Tea', 'Eat', 'Play'], ['Shop', 'Eat', 'Play'], ['Eat', 'Tea', 'Shop', 'Eat'], ['Eat', 'Tea', 'Shop', 'Play'], ['Eat', 'Tea', 'Eat', 'Play'], ['Eat', 'Shop', 'Eat', 'Play'], ['Tea', 'Shop', 'Eat', 'Play'], ['Eat', 'Tea', 'Shop', 'Eat', 'Play'], ['Tea', 'Bar'], ['Shop', 'Bar'], ['Eat', 'Tea', 'Bar'], ['Eat', 'Shop', 'Bar'], ['Eat', 'Eat', 'Bar'], ['Tea', 'Shop', 'Bar'], ['Tea', 'Eat', 'Bar'], ['Shop', 'Eat', 'Bar'], ['Eat', 'Tea', 'Shop', 'Bar'], ['Eat', 'Tea', 'Eat', 'Bar'], ['Eat', 'Shop', 'Eat', 'Bar'], ['Tea', 'Shop', 'Eat', 'Bar'], ['Eat', 'Tea', 'Shop', 'Eat', 'Bar'], ['Play', 'Bar'], ['Eat', 'Play', 'Bar'], ['Shop', 'Play', 'Bar'], ['Eat', 'Shop', 'Play', 'Bar'], ['Eat', 'Eat', 'Play', 'Bar'], ['Shop', 'Eat', 'Play', 'Bar'], ['Eat', 'Shop', 'Eat', 'Play', 'Bar']]
 
-    print "Pattern:%s" % pattern
-    print "Distance Rate:%s Neighborhood:%s Score:%s" % (getDistanceRate(transaction_list, pattern),getNeighborhood(transaction_list, pattern),getScore(transaction_list, pattern))
 
-def test2():
-    record  = ["Shop","Eat","Tea","Eat","Play"]
+    for pattern in patterns:
+        print
+        print "Pattern:%s" % pattern
+        print getDistanceList(transaction_list,pattern)
+        print "DistanceRate:",getDistanceRate(transaction_list,pattern)
+        print "Score:",getScore(transaction_list,pattern)
 
-    pattern = ["Shop"]
-    print getDistances(record,pattern)
+def test_getDistances():
+    transaction_list = [['Eat', 'Bar'], ['Eat', 'Tea', 'Shop', 'Eat', 'Play'], ['Eat', 'Tea', 'Shop', 'Eat', 'Bar'], ['Eat', 'Bar'], ['Shop', 'Eat', 'Play'], ['Play', 'Bar'], ['Eat', 'Bar'], ['Eat', 'Shop', 'Eat', 'Play', 'Bar']]
 
-    pattern = ["Eat"]
-    print getDistances(record,pattern)
+    patterns = [['Eat'], ['Bar'], ['Eat', 'Bar'], ['Tea'], ['Shop'], ['Play'], ['Eat', 'Tea'], ['Eat', 'Shop'], ['Eat', 'Eat'], ['Eat', 'Play'], ['Tea', 'Shop'], ['Tea', 'Eat'], ['Tea', 'Play'], ['Shop', 'Eat'], ['Shop', 'Play'], ['Eat', 'Tea', 'Shop'], ['Eat', 'Tea', 'Eat'], ['Eat', 'Tea', 'Play'], ['Eat', 'Shop', 'Eat'], ['Eat', 'Shop', 'Play'], ['Eat', 'Eat', 'Play'], ['Tea', 'Shop', 'Eat'], ['Tea', 'Shop', 'Play'], ['Tea', 'Eat', 'Play'], ['Shop', 'Eat', 'Play'], ['Eat', 'Tea', 'Shop', 'Eat'], ['Eat', 'Tea', 'Shop', 'Play'], ['Eat', 'Tea', 'Eat', 'Play'], ['Eat', 'Shop', 'Eat', 'Play'], ['Tea', 'Shop', 'Eat', 'Play'], ['Eat', 'Tea', 'Shop', 'Eat', 'Play'], ['Tea', 'Bar'], ['Shop', 'Bar'], ['Eat', 'Tea', 'Bar'], ['Eat', 'Shop', 'Bar'], ['Eat', 'Eat', 'Bar'], ['Tea', 'Shop', 'Bar'], ['Tea', 'Eat', 'Bar'], ['Shop', 'Eat', 'Bar'], ['Eat', 'Tea', 'Shop', 'Bar'], ['Eat', 'Tea', 'Eat', 'Bar'], ['Eat', 'Shop', 'Eat', 'Bar'], ['Tea', 'Shop', 'Eat', 'Bar'], ['Eat', 'Tea', 'Shop', 'Eat', 'Bar'], ['Play', 'Bar'], ['Eat', 'Play', 'Bar'], ['Shop', 'Play', 'Bar'], ['Eat', 'Shop', 'Play', 'Bar'], ['Eat', 'Eat', 'Play', 'Bar'], ['Shop', 'Eat', 'Play', 'Bar'], ['Eat', 'Shop', 'Eat', 'Play', 'Bar']]
 
-    pattern = ["Shop","Eat"]
-    print getDistances(record,pattern)
 
-    pattern = ["Shop","Tea"]
-    print getDistances(record,pattern)
+    for pattern in patterns:
+        print
+        print
+        print "Pattern:%s" % pattern
+        print
+        for record in transaction_list:
+            print "Record:",record
+            print "Combination List:",getCombinationList(record,pattern)
+            print "Distances:",getDistances(record,pattern)
 
-    pattern = ["Shop","Tea","Play"]
-    print getDistances(record,pattern)
+def test_getCombinationList():
+    transaction_list = [['Eat', 'Bar'], ['Eat', 'Tea', 'Shop', 'Eat', 'Play'], ['Eat', 'Tea', 'Shop', 'Eat', 'Bar'], ['Eat', 'Bar'], ['Shop', 'Eat', 'Play'], ['Play', 'Bar'], ['Eat', 'Bar'], ['Eat', 'Shop', 'Eat', 'Play', 'Bar']]
 
-    pattern = ["Shop","Eat","Play"]
-    print getDistances(record,pattern)
+    patterns = [['Eat'], ['Bar'], ['Eat', 'Bar'], ['Tea'], ['Shop'], ['Play'], ['Eat', 'Tea'], ['Eat', 'Shop'], ['Eat', 'Eat'], ['Eat', 'Play'], ['Tea', 'Shop'], ['Tea', 'Eat'], ['Tea', 'Play'], ['Shop', 'Eat'], ['Shop', 'Play'], ['Eat', 'Tea', 'Shop'], ['Eat', 'Tea', 'Eat'], ['Eat', 'Tea', 'Play'], ['Eat', 'Shop', 'Eat'], ['Eat', 'Shop', 'Play'], ['Eat', 'Eat', 'Play'], ['Tea', 'Shop', 'Eat'], ['Tea', 'Shop', 'Play'], ['Tea', 'Eat', 'Play'], ['Shop', 'Eat', 'Play'], ['Eat', 'Tea', 'Shop', 'Eat'], ['Eat', 'Tea', 'Shop', 'Play'], ['Eat', 'Tea', 'Eat', 'Play'], ['Eat', 'Shop', 'Eat', 'Play'], ['Tea', 'Shop', 'Eat', 'Play'], ['Eat', 'Tea', 'Shop', 'Eat', 'Play'], ['Tea', 'Bar'], ['Shop', 'Bar'], ['Eat', 'Tea', 'Bar'], ['Eat', 'Shop', 'Bar'], ['Eat', 'Eat', 'Bar'], ['Tea', 'Shop', 'Bar'], ['Tea', 'Eat', 'Bar'], ['Shop', 'Eat', 'Bar'], ['Eat', 'Tea', 'Shop', 'Bar'], ['Eat', 'Tea', 'Eat', 'Bar'], ['Eat', 'Shop', 'Eat', 'Bar'], ['Tea', 'Shop', 'Eat', 'Bar'], ['Eat', 'Tea', 'Shop', 'Eat', 'Bar'], ['Play', 'Bar'], ['Eat', 'Play', 'Bar'], ['Shop', 'Play', 'Bar'], ['Eat', 'Shop', 'Play', 'Bar'], ['Eat', 'Eat', 'Play', 'Bar'], ['Shop', 'Eat', 'Play', 'Bar'], ['Eat', 'Shop', 'Eat', 'Play', 'Bar']]
 
-    pattern = ["Shop","Eat","Eat"]
-    print getDistances(record,pattern)
+
+    for pattern in patterns:
+        print
+        print "Pattern:%s" % pattern
+        print
+        for record in transaction_list:
+            print "Record:",record
+            print "Position Stack:",getPositionStack(record,pattern)
+            print "Combination List:",getCombinationList(record,pattern)
+            print
+
 
 if __name__ == '__main__':
-    test1()
+    test_getCombinationList()
