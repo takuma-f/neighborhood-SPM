@@ -77,10 +77,8 @@ def getCombinationList(record, pattern):
 
                     elif len(stack) == len(copy):
                         for loop in xrange(combination_counter):
-                            if loop != 0:
+                            if loop != 0 and math.fmod(loop,len(copies)) == 0:
                                 position_index += 1
-                            if position_index > len(stack) -1:
-                                position_index = 0
                             combination_list[loop].append(stack[position_index])
         return combination_list
     except Exception, e:
