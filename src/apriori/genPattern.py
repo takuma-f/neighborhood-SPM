@@ -7,26 +7,26 @@ from optparse  import OptionParser
 
 
 def getItemSetTransactionList(data_iterator):
-    transactionList = list()
-    itemSet         = set()
+    transaction_list = list()
+    item_set         = set()
     for record in data_iterator:
         transaction = list(record)
-        transactionList.append(transaction)
+        transaction_list.append(transaction)
         for item in transaction:
-            itemSet.add(frozenset([item])) # Generate 1-itemSets
-    return itemSet, transactionList
+            item_set.add(frozenset([item])) # Generate 1-itemSets
+    return item_set, transaction_list
 
 def genPattern(data_iter, minSupport):
-    itemSet, transactionList = getItemSetTransactionList(data_iter)
+    itemSet, transaction_list = getItemSetTransactionList(data_iter)
 
-    patternList = list()
-    for transaction in transactionList:
+    pattern_list = list()
+    for transaction in transaction_list:
         for length in range(len(transaction)):
             pattern = list(combinations(transaction, length+1))
             for item in pattern:
-                if not list(item) in patternList:
-                    patternList.append(list(item))
-    return transactionList, patternList
+                if not list(item) in pattern_list:
+                    pattern_list.append(list(item))
+    return transaction_list, pattern_list
 
 def dataFromFile(fname):
     file_iter = open(fname, 'rU')
@@ -52,13 +52,13 @@ def main():
         sys.exit('System will exit')
 
     minSupport = options.minS
-    transactionList, patternList = genPattern(inFile, minSupport)
+    transaction_list, patternList = genPattern(inFile, minSupport)
 
-    for transaction in transactionList:
-        print "Transaction: %s" % str(transaction)
+    for transaction in transaction_list:
+        print "%s," % str(transaction),
 
     for pattern in patternList:
-        print "Pattern: %s" % str(pattern)
+        print "%s," % str(pattern),
 
 if __name__ == "__main__":
     main()
