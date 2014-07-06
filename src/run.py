@@ -15,12 +15,23 @@ Usage:
 
 from apriori      import genPattern
 from neighborhood import neighborhood
-from optparse     import OptionParser
+from optparse     import OptionParser # optparseは非推奨
 
 import sys
 import re
 
-if __name__ == '__main__':
+def runRecommend():
+    minSupport = 0.0
+    threshold  = 0.5
+
+    transaction_list, pattern_list = genPattern.genPattern(inFile, minSupport)
+    for pattern in pattern_list:
+        score = neighborhood.getScore(transaction_list, pattern)
+        if score > threshold:
+            print "%s Score:%s" % (pattern,score)
+
+def main():
+    # 単体実行時はCSVを引数に実行
     optparser = OptionParser()
     optparser.add_option('-f', '--inputFile', dest = 'input', help = 'the filename which contains the comma separated values', default=None)
 
@@ -36,7 +47,10 @@ if __name__ == '__main__':
         sys.exit('System will exit')
 
     minSupport = 0.0
-    transactionList, patternList = genPattern.genPattern(inFile, minSupport)
-    for pattern in patternList:
-        score = neighborhood.getScore(transactionList, pattern)
+    transaction_list, pattern_list = genPattern.genPattern(inFile, minSupport)
+    for pattern in pattern_list:
+        score = neighborhood.getScore(transaction_list, pattern)
         print "%s Score:%s" % (pattern,score)
+
+if __name__ == '__main__':
+    main()
