@@ -15,7 +15,7 @@ Usage:
 
 from apriori      import genPattern
 from neighborhood import neighborhood
-from optparse     import OptionParser # optparseは非推奨
+from optparse     import OptionParser  # optparseは非推奨
 
 import sys
 import re
@@ -28,7 +28,7 @@ def runRecommend():
     for pattern in pattern_list:
         score = neighborhood.getScore(transaction_list, pattern)
         if score > threshold:
-            print "%s Score:%s" % (pattern,score)
+            print "%s Score:%s" % (pattern, score)
 
 def main():
     # 単体実行時はCSVを引数に実行
@@ -50,7 +50,7 @@ def main():
     transaction_list, pattern_list = genPattern.genPattern(inFile, minSupport)
     for pattern in pattern_list:
         score = neighborhood.getScore(transaction_list, pattern)
-        print "%s Score:%s" % (pattern,score)
+        print "%s Score:%s" % (pattern, score)
 
 if __name__ == '__main__':
     main()
