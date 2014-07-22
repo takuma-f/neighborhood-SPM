@@ -10,24 +10,36 @@ def simUsers(model):
         if getAccuracy(compUser,model) > threshold:
             yield compUser
 
-def matchContext(history, context):
+
+def matchContext(history, input_context):
     # 履歴のコンテキストが適合しているか判定
-    if :
-        return  
+
+    history_context = history[5:3]  # 履歴からコンテキストの部分だけを抽出
+    if input_context == history_context:
+        return True
+    else:
+        return False
+
 
 def addTransactionList(history):
     # コンテキストに適合した履歴を追加
+
+    for record in history:
+        if record is not None:
+            transactionList.append(record)
     pass
 
-def gentransactionList(simUsers,context):
+
+def getTransactionList(simUsers, input_context):
     # 入力したコンテキストに一致する類似ユーザーの履歴集合を返す
     transactionList = list()
 
     for simUser in simUsers():
         for history in historyList:
-            if matchContext(history, context):
+            if matchContext(history, input_context):
                 addTransactionList(history)
     return transactionList
+
 
 def main():
     print "ユーザー名を入力 :"
@@ -38,8 +50,9 @@ def main():
     print "誰と出かけるか(一人/家族/同性/異性 : 0/1/2/3)を入力 :",
     context = input()
 
-    print "あなたと類似したユーザーから抽出した履歴 :"
-    print gentransactionList(simUsers,context)
+    print "現在のコンテキストであなたと類似したユーザーから抽出した履歴 :",
+    print getTransactionList(simUsers,context)
+
 
 if __name__ == '__main__':
     main()

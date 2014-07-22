@@ -1,4 +1,6 @@
+#!/usr/bin/env python
 # coding: UTF-8
+
 from itertools import combinations
 from copy import deepcopy
 import math
@@ -6,8 +8,8 @@ import math
 
 def getPositionStack(record, pattern):
     # 距離の組み合わせリストを返す
-    position         = list()
-    position_stack   = list()
+    position = list()
+    position_stack = list()
     position_counter = 0
 
     try:
@@ -30,7 +32,7 @@ def getPositionStack(record, pattern):
 
 def getCombinationList(record, pattern):
     # 距離の組み合わせリストを返す
-    combination_list    = list()
+    combination_list = list()
     combination_counter = 0
 
     position_stack = getPositionStack(record, pattern)
@@ -77,6 +79,7 @@ def getCombinationList(record, pattern):
                         appendPosition(combination_list, copies, combination_counter)
         return combination_list
     except Exception, e:
+        print "Pattern:", pattern,
         print "Error:getCombinationList"
 
 
@@ -120,7 +123,7 @@ def getDistances(record, pattern):
 def getDistanceList(transaction_list, pattern):
     # 全てのトランザクションについて距離を求め, パターンごとに距離リストを返す
     # 各パターンの出現回数も同時に返す
-    distance_list     = [0, 0, 0, 0, 0]  # あとで空のリスト生成する方法考える
+    distance_list = [0, 0, 0, 0, 0, 0, 0]  # あとで空のリスト生成する方法考える
     frequency_counter = 0
 
     for record in transaction_list:
@@ -134,9 +137,9 @@ def getDistanceList(transaction_list, pattern):
 
 def getDistanceRate(transaction_list, pattern):
     # パターンの距離を基に距離割合を返す
-    discount   = float(1) / 3  # 浮動小数点の表現のため
-    index      = 0
-    weight     = 1.0
+    discount = float(1) / 3  # 浮動小数点の表現のため
+    index = 0
+    weight = 1.0
     weight_sum = 0
 
     distance_list, frequency_counter = getDistanceList(transaction_list, pattern)
@@ -155,6 +158,7 @@ def getDistanceRate(transaction_list, pattern):
             index += 1
         return weight_sum / count
     except Exception, e:
+        print "Pattern:", pattern,
         print "Error:getDistanceRate"
 
 
@@ -177,6 +181,7 @@ def getNeighborhood(transaction_list, pattern):
                         sp_list.append(sp)
             return sp_list
         except Exception, e:
+            print "Pattern:", pattern,
             print "Error:getSubPattern"
 
     sp_list = getSubPattern(pattern)
@@ -196,6 +201,7 @@ def getNeighborhood(transaction_list, pattern):
                         neighborhood += discount**spd * distance_rate * sp_neigh
         return neighborhood
     except Exception, e:
+        print "Pattern:", pattern,
         print "Error:getNeighborhood"
 
 
@@ -213,7 +219,36 @@ def getScore(transaction_list, pattern):
             score = getSupport(transaction_list, pattern) * getNeighborhood(transaction_list, pattern)
         return score
     except Exception, e:
+        print "Pattern:", pattern,
         print "Error:getScore"
+
+
+def getSortedDict(transaction_list, patterns):
+    # PatternとScoreが関連づけられ、スコア順にソートしたdictを返す
+    sorted_dict = dict()
+
+    for pattern in patterns:
+        sorted_dict[getScore(transaction_list, pattern)] = pattern
+    sorted_dict = sorted(sorted_dict.items(), reverse=True)  # スコアの高い順にソート
+    return sorted_dict
+
+
+def convertAction(pattern):
+    # 日本語に直す
+    convertedSet = list()
+
+    for action in pattern:
+        if action == "Eat":
+            convertedSet.append("食事する")
+        elif action == "Tea":
+            convertedSet.append("お茶する")
+        elif action == "Bar":
+            convertedSet.append("居酒屋・バー")
+        elif action == "Shop":
+            convertedSet.append("買い物する")
+        elif action == "Play":
+            convertedSet.append("遊ぶ")
+    return convertedSet
 
 
 def test_getScore():

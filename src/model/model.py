@@ -1,4 +1,6 @@
+#!/usr/bin/env python
 # coding: UTF-8
+
 import sys
 sys.path.append('/Library/Python/2.7/site-packages/libsvm-3.17/python')
 from svm import *
@@ -7,7 +9,7 @@ from svmutil import *
 
 def genModel(user):
     # ユーザー名を入れるとモデルを返す
-    y, x = svm_read_problem(user+".txt")  # 学習データ入力
+    y, x = svm_read_problem(user + ".txt")  # 学習データ入力
     prob = svm_problem(y, x)  # 学習データ読み込み
     param = svm_parameter('-t 2 -c 1')  # パラメータ設定
     model = svm_train(prob, param)  # 学習,分類モデル作成

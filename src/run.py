@@ -1,28 +1,30 @@
+#!/usr/bin/env python
 # coding: UTF-8
 """
-Date           : 2014/06/10
-Description    : 
-Author         : Takuma Fujitsuka(fujitsuka@uec.ac.jp)
-Credits        : 
+Date        : 2014/06/10
+Description :
+Author      : Takuma Fujitsuka(fujitsuka@uec.ac.jp)
+Credits     :
 
 Usage:
     $python run.py -f DATASET.csv
 
     Eg.
-        $ python run.py -f TEST_OKU.csv
+        $ python run.py -f TEST.csv
 
 """
 
-from apriori      import genPattern
+from apriori import genPattern
 from neighborhood import neighborhood
-from optparse     import OptionParser  # optparseは非推奨
+from optparse import OptionParser  # optparseは非推奨
 
 import sys
 import re
 
+
 def runRecommend():
     minSupport = 0.0
-    threshold  = 0.5
+    threshold = 0.5
 
     transaction_list, pattern_list = genPattern.genPattern(inFile, minSupport)
     for pattern in pattern_list:
@@ -30,10 +32,11 @@ def runRecommend():
         if score > threshold:
             print "%s Score:%s" % (pattern, score)
 
+
 def main():
     # 単体実行時はCSVを引数に実行
     optparser = OptionParser()
-    optparser.add_option('-f', '--inputFile', dest = 'input', help = 'the filename which contains the comma separated values', default=None)
+    optparser.add_option('-f', '--inputFile', dest='input', help='the filename which contains the comma separated values', default=None)
 
     (options, args) = optparser.parse_args()
 
@@ -51,6 +54,7 @@ def main():
     for pattern in pattern_list:
         score = neighborhood.getScore(transaction_list, pattern)
         print "%s Score:%s" % (pattern, score)
+
 
 if __name__ == '__main__':
     main()
