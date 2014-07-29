@@ -1,39 +1,40 @@
 # coding: UTF-8
 import sys
-import re
-
-from itertools import chain, combinations
-from optparse  import OptionParser
+from itertools import combinations
+from optparse import OptionParser
 
 
-def getItemSetTransactionList(data_iterator):
+def getItemSetTransactionList(data_iter):
     transaction_list = list()
-    item_set         = set()
-    for record in data_iterator:
+    item_set = set()
+    for record in data_iter:
         transaction = list(record)
         transaction_list.append(transaction)
         for item in transaction:
-            item_set.add(frozenset([item])) # Generate 1-itemSets
+            item_set.add(frozenset([item]))
     return item_set, transaction_list
+
 
 def genPattern(data_iter, minSupport):
     itemSet, transaction_list = getItemSetTransactionList(data_iter)
 
-    pattern_list = list()
+    patterns = list()
     for transaction in transaction_list:
         for length in range(len(transaction)):
             pattern = list(combinations(transaction, length+1))
             for item in pattern:
-                if not list(item) in pattern_list:
-                    pattern_list.append(list(item))
-    return transaction_list, pattern_list
+                if not list(item) in patterns:
+                    patterns.append(list(item))
+    return transaction_list, patterns
+
 
 def dataFromFile(fname):
     file_iter = open(fname, 'rU')
     for line in file_iter:
-        line = line.strip().rstrip(',') # Remove trailing comma
+        line = line.strip().rstrip(',')
         record = list(line.split(','))
         yield record
+
 
 def main():
     optparser = OptionParser()
