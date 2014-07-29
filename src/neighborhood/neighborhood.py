@@ -4,6 +4,8 @@
 from itertools import combinations
 from copy import deepcopy
 import math
+import sys
+import traceback
 
 
 def getPositionStack(record, pattern):
@@ -26,8 +28,8 @@ def getPositionStack(record, pattern):
             if hit is False:
                 return None  # 一つでもヒットしなければNone
         return position_stack
-    except Exception, e:
-        print "Error:getPositionStack"
+    except Exception:
+        printError(pattern, "getPositionStack")
 
 
 def getCombinationList(record, pattern):
@@ -78,9 +80,8 @@ def getCombinationList(record, pattern):
                     elif len(stack) == len(copy):
                         appendPosition(combination_list, copies, combination_counter)
         return combination_list
-    except Exception, e:
-        print "Pattern:", pattern,
-        print "Error:getCombinationList"
+    except Exception:
+        printError(pattern, "getCombinationList")
 
 
 def getDistances(record, pattern):
@@ -116,8 +117,8 @@ def getDistances(record, pattern):
             return None
         else:
             return distances
-    except Exception, e:
-        print "Error:getDistances"
+    except Exception:
+        printError(pattern, getDistances)
 
 
 def getDistanceList(transaction_list, pattern):
@@ -126,13 +127,16 @@ def getDistanceList(transaction_list, pattern):
     distance_list = [0, 0, 0, 0, 0, 0, 0]  # あとで空のリスト生成する方法考える
     frequency_counter = 0
 
-    for record in transaction_list:
-        distances = getDistances(record, pattern)
-        if distances is not None:
-            for distance in distances:
-                distance_list[distance] += 1
-            frequency_counter += 1
-    return distance_list, frequency_counter
+    try:
+        for record in transaction_list:
+            distances = getDistances(record, pattern)
+            if distances is not None:
+                for distance in distances:
+                    distance_list[distance] += 1
+                frequency_counter += 1
+        return distance_list, frequency_counter
+    except Exception:
+        printError(pattern, "getDistanceList")
 
 
 def getDistanceRate(transaction_list, pattern):
@@ -157,9 +161,8 @@ def getDistanceRate(transaction_list, pattern):
             weight_sum += discount**index * distance * weight
             index += 1
         return weight_sum / count
-    except Exception, e:
-        print "Pattern:", pattern,
-        print "Error:getDistanceRate"
+    except Exception:
+        printError(pattern, "getDistanceRate")
 
 
 def getNeighborhood(transaction_list, pattern):
@@ -180,9 +183,14 @@ def getNeighborhood(transaction_list, pattern):
                     if sp_distance is not None:
                         sp_list.append(sp)
             return sp_list
-        except Exception, e:
-            print "Pattern:", pattern,
-            print "Error:getSubPattern"
+        except Exception:
+            print pattern,
+            info = sys.exc_info()  # エラーの情報をsysモジュールから取得
+            tbinfo = traceback.format_tb(info[2])  # tracebackモジュールのformat_tbメソッドで特定の書式に変換
+            print "Error:getSubPattern".ljust(80, "=")  # 収集した情報を読みやすいように整形して出力する
+            for tb in tbinfo:
+                print tb
+            print "%s" % str(info[1])
 
     sp_list = getSubPattern(pattern)
     sp_list = sorted(set(sp_list), key=sp_list.index)
@@ -200,9 +208,8 @@ def getNeighborhood(transaction_list, pattern):
                         sp_neigh = getNeighborhood(transaction_list, sp)
                         neighborhood += discount**spd * distance_rate * sp_neigh
         return neighborhood
-    except Exception, e:
-        print "Pattern:", pattern,
-        print "Error:getNeighborhood"
+    except Exception:
+        printError(pattern, "getSubPattern")
 
 
 def getScore(transaction_list, pattern):
@@ -218,9 +225,8 @@ def getScore(transaction_list, pattern):
         else:
             score = getSupport(transaction_list, pattern) * getNeighborhood(transaction_list, pattern)
         return score
-    except Exception, e:
-        print "Pattern:", pattern,
-        print "Error:getScore"
+    except Exception:
+        printError(pattern, "getScore")
 
 
 def getSortedDict(transaction_list, patterns):
@@ -234,7 +240,7 @@ def getSortedDict(transaction_list, patterns):
 
 
 def convertAction(pattern):
-    # 日本語に直す
+    # 日本語に直す(util.pyを作成して移動する？)
     convertedSet = list()
 
     for action in pattern:
@@ -242,16 +248,31 @@ def convertAction(pattern):
             convertedSet.append("食事する")
         elif action == "Tea":
             convertedSet.append("お茶する")
-        elif action == "Bar":
-            convertedSet.append("居酒屋・バー")
-        elif action == "Shop":
-            convertedSet.append("買い物する")
         elif action == "Play":
             convertedSet.append("遊ぶ")
+        elif action == "Sight":
+            convertedSet.append("名所・名勝を見る")
+        elif action == "Appreciate":
+            convertedSet.append("鑑賞する")
+        elif action == "Shop":
+            convertedSet.append("買い物する")
     return convertedSet
 
 
+def printError(pattern, methodname):
+    # エラー出力用のメソッド(util.pyに移動？)
+    print pattern
+    info = sys.exc_info()  # エラーの情報をsysモジュールから取得
+    tbinfo = traceback.format_tb(info[2])  # tracebackモジュールのformat_tbメソッドで特定の書式に変換
+    print "Error:"+methodname.ljust(80, "=")  # 収集した情報を読みやすいように整形して出力する
+    for tb in tbinfo:
+        print tb
+    print "%s" % str(info[1])
+    print
+
+
 def test_getScore():
+    # モジュールのテストメソッド
     transaction_list = [['Eat', 'Bar'], ['Eat', 'Tea', 'Shop', 'Eat', 'Play'], ['Eat', 'Tea', 'Shop', 'Eat', 'Bar'], ['Eat', 'Bar'], ['Shop', 'Eat', 'Play'], ['Play', 'Bar'], ['Eat', 'Bar'], ['Eat', 'Shop', 'Eat', 'Play', 'Bar']]
 
     patterns = [['Eat'], ['Bar'], ['Eat', 'Bar'], ['Tea'], ['Shop'], ['Play'], ['Eat', 'Tea'], ['Eat', 'Shop'], ['Eat', 'Eat'], ['Eat', 'Play'], ['Tea', 'Shop'], ['Tea', 'Eat'], ['Tea', 'Play'], ['Shop', 'Eat'], ['Shop', 'Play'], ['Eat', 'Tea', 'Shop'], ['Eat', 'Tea', 'Eat'], ['Eat', 'Tea', 'Play'], ['Eat', 'Shop', 'Eat'], ['Eat', 'Shop', 'Play'], ['Eat', 'Eat', 'Play'], ['Tea', 'Shop', 'Eat'], ['Tea', 'Shop', 'Play'], ['Tea', 'Eat', 'Play'], ['Shop', 'Eat', 'Play'], ['Eat', 'Tea', 'Shop', 'Eat'], ['Eat', 'Tea', 'Shop', 'Play'], ['Eat', 'Tea', 'Eat', 'Play'], ['Eat', 'Shop', 'Eat', 'Play'], ['Tea', 'Shop', 'Eat', 'Play'], ['Eat', 'Tea', 'Shop', 'Eat', 'Play'], ['Tea', 'Bar'], ['Shop', 'Bar'], ['Eat', 'Tea', 'Bar'], ['Eat', 'Shop', 'Bar'], ['Eat', 'Eat', 'Bar'], ['Tea', 'Shop', 'Bar'], ['Tea', 'Eat', 'Bar'], ['Shop', 'Eat', 'Bar'], ['Eat', 'Tea', 'Shop', 'Bar'], ['Eat', 'Tea', 'Eat', 'Bar'], ['Eat', 'Shop', 'Eat', 'Bar'], ['Tea', 'Shop', 'Eat', 'Bar'], ['Eat', 'Tea', 'Shop', 'Eat', 'Bar'], ['Play', 'Bar'], ['Eat', 'Play', 'Bar'], ['Shop', 'Play', 'Bar'], ['Eat', 'Shop', 'Play', 'Bar'], ['Eat', 'Eat', 'Play', 'Bar'], ['Shop', 'Eat', 'Play', 'Bar'], ['Eat', 'Shop', 'Eat', 'Play', 'Bar']]
