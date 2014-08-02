@@ -14,29 +14,16 @@ Usage:
 
 """
 
-from apriori import genPattern
-from neighborhood import neighborhood
+from apriori import genPattern as apriori
+from neighborhood import neighborhood as neigh
 from optparse import OptionParser  # optparseは非推奨
-
 import sys
-import re
-
-
-def runRecommend():
-    minSupport = 0.0
-    threshold = 0.5
-
-    transaction_list, pattern_list = genPattern.genPattern(inFile, minSupport)
-    for pattern in pattern_list:
-        score = neighborhood.getScore(transaction_list, pattern)
-        if score > threshold:
-            print "%s Score:%s" % (pattern, score)
 
 
 def main():
     # 単体実行時はCSVを引数に実行
     optparser = OptionParser()
-    optparser.add_option('-f', '--inputFile', dest='input', help='the filename which contains the comma separated values', default=None)
+    optparser.add_option('-f', '--inputFile', dest='input', default=None)
 
     (options, args) = optparser.parse_args()
 
@@ -44,15 +31,15 @@ def main():
     if options.input is None:
         inFile = sys.stdin
     elif options.input is not None:
-        inFile = genPattern.dataFromFile(options.input)
+        inFile = apriori.dataFromFile(options.input)
     else:
         print 'No dataset filename specified, system with exit\n'
         sys.exit('System will exit')
 
     minSupport = 0.0
-    transaction_list, pattern_list = genPattern.genPattern(inFile, minSupport)
+    transaction_list, pattern_list = apriori.genPattern(inFile, minSupport)
     for pattern in pattern_list:
-        score = neighborhood.getScore(transaction_list, pattern)
+        score = neigh.getScore(transaction_list, pattern)
         print "%s Score:%s" % (pattern, score)
 
 
