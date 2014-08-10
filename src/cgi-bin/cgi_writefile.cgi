@@ -5,12 +5,12 @@ import sys
 sys.path.append('/Users/Admin/dev/neighborhood_SPM/src/')
 sys.stderr = sys.stdout
 import cgi
+import cgitb
 from tools import util as util
 
 
-def writeFile():
-    # 履歴情報をファイルに追記・保存する
-    form = cgi.FieldStorage()
+# 履歴情報をファイルに追記・保存する
+def writeFile(form):
     f = None
     try:
         f = open('userData/'+form['userId'].value+'_history.txt', 'a')
@@ -47,28 +47,9 @@ def writeFile():
 
 def main():
     print "<!DOCTYPE html>"
-    print
-    print """
-    <html lang="ja">
-    <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="素晴らしくNice choice.な">
-    <meta name="TakumaFUJITSUKA" content="">
-    <link rel="icon" href="../../favicon.ico">
-
-    <title>Perfect Planner</title>
-    </head>
-
-    <body>
-    """
-
-    writeFile()
-    print "履歴の登録が完了しました。ブラウザの戻るボタンで戻ってください。"
-
-    print "</body></html>"
-    import cgitb
+    form = cgi.FieldStorage()
+    print form
+    writeFile(form)
     cgitb.enable()
 
 
