@@ -241,7 +241,6 @@ def getDict(transaction_list, patterns):
         key = str(pattern)
         pattern_dict[key] = getScore(transaction_list, pattern)
     return pattern_dict
-    # sorted_dict = sorted(sorted_dict.keys(), reverse=True)
 
 
 # モジュールのテストメソッド
@@ -264,6 +263,22 @@ def test_getScore():
             util.printError()
     f.close()
 
+def test_json():
+    f = open("./testlog.txt", "w")
+    sys.stdout = f
+    transaction_list = [['Sight', 'Eat', 'Sight', 'Eat', 'Sight']]
+
+    patterns = [['Sight'], ['Eat'], ['Sight', 'Eat'], ['Sight', 'Sight'], ['Eat', 'Sight'], ['Eat', 'Eat'], ['Sight', 'Eat', 'Sight'], ['Sight', 'Eat', 'Eat'], ['Sight', 'Sight', 'Eat'], ['Sight', 'Sight', 'Sight'], ['Eat', 'Sight', 'Eat'], ['Eat', 'Sight', 'Sight'], ['Eat', 'Eat', 'Sight'], ['Sight', 'Eat', 'Sight', 'Eat'], ['Sight', 'Eat', 'Sight', 'Sight'], ['Sight', 'Eat', 'Eat', 'Sight'], ['Sight', 'Sight', 'Eat', 'Sight'], ['Eat', 'Sight', 'Eat', 'Sight'], ['Sight', 'Eat', 'Sight', 'Eat', 'Sight']]
+
+    import json
+    print "DICT:"
+    pattern_dict = getDict(transaction_list, patterns)
+    print pattern_dict
+    print "JSON:"
+    json_pattern_dict = json.dumps(pattern_dict)
+    print json_pattern_dict  # 呼び出し元へはprintで返す？
+    f.close()
+
 
 if __name__ == '__main__':
-    test_getScore()
+    test_json()

@@ -5,21 +5,39 @@ import sys
 import traceback
 
 
+# エラー出力用のメソッド
 def printError():
-    # エラー出力用のメソッド
     # エラーの情報をsysモジュールから取得
     info = sys.exc_info()
     # tracebackモジュールのformat_tbメソッドで特定の書式に変換
     tbinfo = traceback.format_tb(info[2])
-    print "="*50
+    print "="*60
     for tb in tbinfo:
         print tb
     print "%s" % str(info[1])
-    print "="*50
+    print "="*60
 
 
+# str()にしたパターンをlist()に再変換する
+def convertList(pattern):
+    action_list = list()
+    start_word = False
+    for p in pattern:
+        if (p == "\'" or p == '\"') and start_word is False:
+            action = str()
+            start_word = True
+        elif (p == "\'" or p == '\"') and start_word is True:
+            action_list.append(action)
+            start_word = False
+        elif (p != "\'" or p != '\"') and start_word is True:
+            action += p
+        elif (p != "\'" or p != '\"') and start_word is False:
+            pass
+    return action_list
+
+
+# 出力時に日本語に直す
 def convertAction(pattern):
-    # 出力時に日本語に直す
     convertedSet = list()
 
     for action in pattern:
