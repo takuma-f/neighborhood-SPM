@@ -76,132 +76,156 @@ def main():
     </div>
     <div id="inputHistory" class="container">
       <div class="col-md-11 col-md-offset-1">
-      <form method="post" action="./cgi_writefile.cgi">
-        <div class="row">
-          <div class="col-md-2">
-            <br>
-            <input type="text" id="userId" name="userId" placeholder="ユーザーIDを入力">
+        <form action="#">
+          <div class="row">
+            <div class="col-md-2">
+              <br>
+              <input type="text" id="userId" name="userId" placeholder="ユーザーIDを入力">
+            </div>
           </div>
-        </div>
-        <div class="row">
-          <div class="col-md-2">
-            <br>
-            <input type="date" id="date" name="date">
+          <div class="row">
+            <div class="col-md-2">
+              <br>
+              <input type="date" id="date" name="date">
+            </div>
+            <div class="col-md-6">
+              <br>
+              同伴者を選択して下さい : 
+              <input type="radio" name="companion" value="0"> 一人
+              <input type="radio" name="companion" value="1"> 同性の友人
+              <input type="radio" name="companion" value="2"> 異性の友人
+              <input type="radio" name="companion" value="3"> 親・家族
+            </div>
+            <div class="col-md-4">
+              <br> 
+              <select id="budget" name="budget">
+                <option value="">予算を選択して下さい</option>
+                <option value="1">0 ~ 1000円</option>
+                <option value="2">1000 ~ 5000円</option>
+                <option value="3">5000 ~ 10000円</option>
+                <option value="4">10000円以上</option>
+              </select>
+            </div>
           </div>
-          <div class="col-md-6">
-            <br>
-            同伴者を選択して下さい : 
-            <input type="radio" name="companion" value="0"> 一人
-            <input type="radio" name="companion" value="1"> 同性の友人
-            <input type="radio" name="companion" value="2"> 異性の友人
-            <input type="radio" name="companion" value="3"> 親・家族
-          </div>
-          <div class="col-md-4">
-            <br> 
-            <select id="budget" name="budget">
-              <option value="">予算を選択して下さい</option>
-              <option value="1">0 ~ 1000円</option>
-              <option value="2">1000 ~ 5000円</option>
-              <option value="3">5000 ~ 10000円</option>
-              <option value="4">10000円以上</option>
-            </select>
-          </div>
-        </div>
-        <br>
-        <div class="row">
+          <br>
+          <div class="row">
   """
 
   for x in xrange(1,6):
     print """
-          <div class="col-md-2">
-            <input type="text" id="venue%s" placeholder="%s箇所目に訪れた場所"/>
-          </div>
+    <div class="col-md-2">
+      <input type="text" id="venue%s" placeholder="%s箇所目に訪れた場所"/>
+    </div>
     """ % (x,x)
 
   print """
-        </div>
-        <br>
-        <div class="row">
+  </div>
+  <br>
+  <div class="row">
   """
 
   for x in xrange(1,6):
     print """
-          <div class="col-md-2">
-            <select id="action%s" name="action%s">
-              <option value="">取った行動を選択</option>
-              <option value="Eat">食事する</option>
-              <option value="Tea">お茶する</option>
-              <option value="Play">遊ぶ</option>
-              <option value="Sight">名所・名勝を見る</option>
-              <option value="Appreciate">鑑賞する</option>
-              <option value="Shop">買い物する</option>
-            </select>
-          </div>
+    <div class="col-md-2">
+      <select id="action%s" name="action%s" style="width:150px;">
+        <option value="">取った行動を選択</option>
+        <option value="Eat">食事する</option>
+        <option value="Tea">お茶する</option>
+        <option value="Play">遊ぶ</option>
+        <option value="Sight">名所・名勝を見る</option>
+        <option value="Appreciate">鑑賞する</option>
+        <option value="Shop">買い物する</option>
+      </select>
+    </div>
     """ % (x,x)
 
   print """
-        </div>
-        <br>
-        <div class="row">
+  </div>
+  <br>
+  <div class="row">
   """
 
   for x in xrange(1,6):
     print """
-          <div class="col-md-2">
-            <select id="genre%s" name="genre%s">
-              <option value="">施設のジャンルを選択</option>
-              <option value="1">和食</option>
-              <option value="2">中華料理</option>
-              <option value="3">焼肉・韓国料理</option>
-              <option value="4">イタリアン</option>
-              <option value="5">フレンチ</option>
-              <option value="6">ラーメン</option>
-              <option value="7">カレー</option>
-              <option value="8">ファストフード</option>
-              <option value="9">居酒屋・バー</option>
-              <option value="10">カフェ・スイーツ(和菓子)</option>
-              <option value="11">カフェ・スイーツ(洋菓子)</option>
-              <option value="12">百貨店</option>
-              <option value="13">ファッション</option>
-              <option value="14">家具</option>
-              <option value="15">雑貨屋</option>
-              <option value="16">書店</option>
-              <option value="17">家電量販店</option>
-              <option value="18">趣味品</option>
-              <option value="19">遊園地</option>
-              <option value="20">水族館</option>
-              <option value="21">美術館</option>
-              <option value="22">博物館</option>
-              <option value="23">映画館</option>
-              <option value="24">カラオケ</option>
-              <option value="25">屋内スポーツ施設</option>
-              <option value="26">屋外スポーツ施設</option>
-              <option value="27">アウトドア施設</option>
-              <option value="28">イベント会場</option>
-              <option value="29">史跡</option>
-              <option value="30">神社・仏閣</option>
-              <option value="31">展望台・タワー</option>
-              <option value="32">公園</option>
-              <option value="33">その他</option>
-            </select>
-          </div>
+    <div class="col-md-2">
+      <select id="genre%s" name="genre%s" style="width:150px;">
+        <option value="">施設のジャンルを選択</option>
+        <optgroup label="Eat">
+          <option value="1">和食</option>
+          <option value="2">中華料理</option>
+          <option value="3">焼肉・韓国料理</option>
+          <option value="4">イタリアン</option>
+          <option value="5">フレンチ</option>
+          <option value="6">他洋食</option>
+          <option value="7">カレー・アジア料理</option>
+          <option value="8">ラーメン・麺類</option>
+          <option value="9">ファストフード・牛丼</option>
+          <option value="10">居酒屋・バー</option>
+        </optgroup>
+
+        <optgroup label="Tea">
+          <option value="11">カフェ・スイーツ(和風)</option>
+          <option value="12">カフェ・スイーツ(洋風)</option>
+        </optgroup>
+
+        <optgroup label="Play">
+          <option value="13">遊園地</option>
+          <option value="14">水族館</option>
+          <option value="15">映画館</option>
+          <option value="16">カラオケ</option>
+          <option value="17">スポーツ施設</option>
+          <option value="18">アウトドアレジャー施設</option>
+          <option value="19">イベント会場</option>
+          <option value="20">温泉・リゾート施設</option>
+        </optgroup>
+
+        <optgroup label="Sight">
+          <option value="21">神社・仏閣</option>
+          <option value="22">史跡</option>
+          <option value="23">展望台・タワー</option>
+          <option value="24">公園</option>
+        </optgroup>
+
+        <optgroup label="Appreciate">
+          <option value="25">博物館</option>
+          <option value="26">美術館</option>
+          <option value="27">資料館</option>
+        </optgroup>
+
+        <optgroup label="Shop">
+          <option value="28">百貨店</option>
+          <option value="29">ファッション</option>
+          <option value="30">食品(持ち帰り)</option>
+          <option value="31">菓子(持ち帰り)</option>
+          <option value="32">酒類(持ち帰り)</option>
+          <option value="33">雑貨・土産物</option>
+          <option value="34">食器・壷</option>
+          <option value="35">宝飾品</option>
+          <option value="36">書店</option>
+          <option value="37">家電量販店</option>
+          <option value="38">スポーツ用品店</option>
+          <option value="39">家具屋</option>
+          <option value="40">趣味品</option>
+        </optgroup>
+      </select>
+    </div>
     """ % (x,x)
 
   print """
-        </div>
-        <br>
-        <div class="row">
+  </div>
+  <br>
+  <div class="row">
   """
 
   for x in xrange(1,6):
     print """
-          <div class="col-md-2">
-            <select id="rate%s" name="rate%s">
-              <option value="">評価を選択</option>
-              <option value="1">満足</option>
-              <option value="-1">不満</option>
-            </select>
-          </div>
+    <div class="col-md-2">
+      <select id="rate%s" name="rate%s" style="width:150px;">
+        <option value="">評価を選択</option>
+        <option value="1">満足</option>
+        <option value="-1">不満</option>
+      </select>
+    </div>
     """ % (x,x)
 
   print """
@@ -210,27 +234,32 @@ def main():
         <div class="row">
           <div class="col-md-5">
             <button type="button" id="submitHistory" class="btn btn-primary">登録する</button>
-            <button type="button" id="reset" class="btn btn-default">リセット</button>
+            <button type="reset" class="btn btn-default">リセット</button>
             <span id="submitResult"></span>
           </div>
         </div>
       </form>
-      </div>
-      <div class="row">
-        <div class="col-md-8" style="background-color: red;">履歴情報の表示</div>
-        <div class="col-md-4" style="background-color: yellow;">生成したモデルからユーザーの情報を提示</div>
-      </div>
-    </div><!-- /.container -->
+    </div>
+    <div class="row">
+      <div class="col-md-8" style="background-color:red;">履歴情報の表示</div>
+      <div class="col-md-4" style="background-color:yellow;">生成したモデルからユーザーの情報を提示</div>
+    </div>
+  </div><!-- /.container -->
 
 
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script src="../dist/js/bootstrap.min.js"></script>
-    <script src="../assets/js/docs.min.js"></script>
-    <script src="../js/ajax.js"></script>
+  <!-- Bootstrap core JavaScript
+  ================================================== -->
+  <!-- Placed at the end of the document so the pages load faster -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <script src="../dist/js/bootstrap.min.js"></script>
+  <script src="../assets/js/docs.min.js"></script>
+  <script src="../js/ajax.js"></script>
+  <script src="../js/ConnectedSelect.js"></script>
   """
+  print "<script>"
+  for x in xrange(1,6):
+    print "ConnectedSelect(['action%s','genre%s']);" % (x, x)
+  print "</script>"
   print "</body></html>"
   import cgitb
   cgitb.enable()

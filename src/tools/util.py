@@ -54,3 +54,49 @@ def convertAction(pattern):
         elif action == "Shop":
             convertedSet.append("買い物する")
     return convertedSet
+
+
+# Model生成可能な形式にContext, 履歴を変換し保存
+def convertUserDataForGenModel(user):
+    f = None
+    model_f = None
+    result = ""
+    try:
+        f = open('userData/'+user+'_history.txt', 'r')
+        for line in f:
+            splited_line = line.split(', ')
+            splited_line
+            rates = splited_line[18:23]
+            companion = splited_line[1]
+            budget = splited_line[2]
+            genres = splited_line[8:13]
+            for (rate, genre) in zip(rates, genres):
+                if int(genre) != 0:
+                    result += str(rate).replace(('\r\n'or'\r'or'\n'), '')
+                    for counter in xrange(0, 4):
+                        if counter == int(companion):
+                            result += " "+str(counter+1)+":1"
+                        else:
+                            result += " "+str(counter+1)+":0"
+
+                    for counter in xrange(0, 5):
+                        if counter == int(budget):
+                            result += " "+str(counter+5)+":1"
+                        else:
+                            result += " "+str(counter+5)+":0"
+
+                    for counter in xrange(1, 32):
+                        if counter == int(genre):
+                            result += " "+str(counter+9)+":1"
+                        else:
+                            result += " "+str(counter+9)+":0"
+                    result += "\r\n"
+                else:
+                    pass
+        model_f = open('userData/'+user+'_svm.txt', 'w')
+        model_f.write(result)
+    except IOError:
+        printError()
+    finally:
+        if (f):
+            f.close()
