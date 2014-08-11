@@ -14,61 +14,16 @@ from model import model as svm
 from tools import util as util
 
 
-def convertUserDataForGenModel(user):
-    # Model生成可能な形式にContext, 履歴を変換し保存
-    f = None
-    model_f = None
-    result = ""
-    try:
-        f = open('userData/'+user+'_history.txt', 'r')
-        for line in f:
-            splited_line = line.split(', ')
-            splited_line
-            rates = splited_line[18:23]
-            companion = splited_line[1]
-            budget = splited_line[2]
-            genres = splited_line[8:13]
-            for (rate, genre) in zip(rates, genres):
-                if int(genre) != 0:
-                    result += str(rate).replace(('\r\n'or'\r'or'\n'), '')
-                    for counter in xrange(0, 4):
-                        if counter == int(companion):
-                            result += " "+str(counter+1)+":1"
-                        else:
-                            result += " "+str(counter+1)+":0"
-
-                    for counter in xrange(0, 5):
-                        if counter == int(budget):
-                            result += " "+str(counter+5)+":1"
-                        else:
-                            result += " "+str(counter+5)+":0"
-
-                    for counter in xrange(1, 32):
-                        if counter == int(genre):
-                            result += " "+str(counter+9)+":1"
-                        else:
-                            result += " "+str(counter+9)+":0"
-                    result += "\r\n"
-                else:
-                    pass
-        model_f = open('userData/'+user+'_svm.txt', 'w')
-        model_f.write(result)
-    except IOError:
-        util.printError()
-    finally:
-        if (f):
-            f.close()
-
-
 def main():
     input_data = cgi.FieldStorage()
     user = input_data["userId"].value
 
     # ユーザーのモデルを生成
-    convertUserDataForGenModel(user)
+    util.convertUserDataForGenModel(user)
     model = svm.genModel(user)
     svm.saveModel(user+'.model', model)
 
+    # 類似ユーザーの履歴から入力したコンテキストに一致するもののリストを受け取る
     data_iter = genIter.getDataIter(user, model, input_data)
     transaction_list, patterns = apriori.genPattern(data_iter, minSupport=0.0)
     pattern_dict = neigh.getDict(transaction_list, patterns)
@@ -90,11 +45,11 @@ def main():
             </div>
             <div class="panel-body">
               <div class="container">
-        """ % (counter,counter)
+        """ % (counter, counter)
         # ここでpはlist()でなく文字列になっていることに注意
         p = util.convertList(p)
         convert_p = util.convertAction(p)
-        for (action,a) in zip(convert_p,p):
+        for (action, a) in zip(convert_p, p):
             print '<div class="col-md-2">'
             print '<div class="row">'
             print action
@@ -178,10 +133,10 @@ def main():
     </div>
     <div class="panel-footer">
       <button type="button" class="btn btn-primary btn-small" id="like">
-        <i class="glyphicon glyphicon-plus">このプランを保存</i>
+        <i class="glyphicon glyphicon-plus"></i> このプランを保存
       </button>
       <button type="button" class="btn btn-default btn-small" id="like">
-        <i class="glyphicon glyphicon-share">シェア</i>
+        <i class="glyphicon glyphicon-share"></i> シェア
       </button>
     </div>
   </div>
