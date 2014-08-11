@@ -2,7 +2,7 @@ $('#submitContext').click(function() {
   var button = $(this);
     button.attr('disabled', true);
 
-  var hostUrl= './cgi_inputContext.cgi';
+  var hostUrl= './cgi_genPlan.cgi';
   var param1 = $('#userId').val();
   var param2 = $('input:radio[name="companion"]:checked').val();
   var param3 = $('#budget').val();
@@ -64,18 +64,20 @@ $('#submitHistory').click(function() {
       venue3:param7, venue4:param8, venue5:param9, 
       genre1:param10, genre2:param11, genre3:param12, 
       genre4:param13, genre5:param14, action1:param15, 
-      action2:param16, action3:param17, action4:param18, action5:param19, rate1:param20, rate2:param21, rate3:param22, rate4:param23, rate5:param24},
+      action2:param16, action3:param17, action4:param18, 
+      action5:param19, rate1:param20, rate2:param21, 
+      rate3:param22, rate4:param23, rate5:param24},
     dataType: "HTML",
     timeout: 100000,
     success: function(res) {
       $("#submitResult").append('<span id="alert">データの登録が完了しました.</span>');
-      $("#alert").fadeOut(3000).queue(function() {
+      $("#alert").fadeOut(1500).queue(function() {
         this.remove();
       });
     },
     error: function(XMLHttpRequest, textStatus, errorThrown) {
       $("#submitResult").append('<span id="alert">データの登録に失敗しました.</span>');
-      $("#alert").fadeOut(3000).queue(function() {
+      $("#alert").fadeOut(1500).queue(function() {
         this.remove();
       });
     },
