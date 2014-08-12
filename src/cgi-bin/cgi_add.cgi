@@ -132,7 +132,7 @@ def main():
         <option value="Eat">食事する</option>
         <option value="Tea">お茶する</option>
         <option value="Play">遊ぶ</option>
-        <option value="Sight">名所・名勝を見る</option>
+        <option value="Sight">名所を見る・歩く</option>
         <option value="Appreciate">鑑賞する</option>
         <option value="Shop">買い物する</option>
       </select>
@@ -151,7 +151,7 @@ def main():
       <select id="genre%s" name="genre%s" style="width:150px;">
         <option value="">施設のジャンルを選択</option>
         <optgroup label="Eat">
-          <option value="1">和食</option>
+          <option value="1">寿司・和食</option>
           <option value="2">中華料理</option>
           <option value="3">焼肉・韓国料理</option>
           <option value="4">イタリアン</option>
@@ -159,7 +159,7 @@ def main():
           <option value="6">他洋食</option>
           <option value="7">カレー・アジア料理</option>
           <option value="8">ラーメン・麺類</option>
-          <option value="9">ファストフード・牛丼</option>
+          <option value="9">ファストフード・牛丼・定食</option>
           <option value="10">居酒屋・バー</option>
         </optgroup>
 
@@ -172,40 +172,41 @@ def main():
           <option value="13">遊園地</option>
           <option value="14">水族館</option>
           <option value="15">映画館</option>
-          <option value="16">カラオケ</option>
+          <option value="16">カラオケ・ゲームセンター</option>
           <option value="17">スポーツ施設</option>
           <option value="18">アウトドアレジャー施設</option>
           <option value="19">イベント会場</option>
           <option value="20">温泉・リゾート施設</option>
+          <option value="21">夜遊び・ディスコクラブ</option>
         </optgroup>
 
         <optgroup label="Sight">
-          <option value="21">神社・仏閣</option>
-          <option value="22">史跡</option>
-          <option value="23">展望台・タワー</option>
-          <option value="24">公園</option>
+          <option value="22">神社・仏閣</option>
+          <option value="23">史跡</option>
+          <option value="24">展望台・タワー</option>
+          <option value="25">公園・ビーチ</option>
         </optgroup>
 
         <optgroup label="Appreciate">
-          <option value="25">博物館</option>
-          <option value="26">美術館</option>
-          <option value="27">資料館</option>
+          <option value="26">博物館</option>
+          <option value="27">美術館</option>
+          <option value="28">資料館</option>
         </optgroup>
 
         <optgroup label="Shop">
-          <option value="28">百貨店</option>
-          <option value="29">ファッション</option>
-          <option value="30">食品(持ち帰り)</option>
-          <option value="31">菓子(持ち帰り)</option>
-          <option value="32">酒類(持ち帰り)</option>
-          <option value="33">雑貨・土産物</option>
-          <option value="34">食器・壷</option>
-          <option value="35">宝飾品</option>
-          <option value="36">書店</option>
-          <option value="37">家電量販店</option>
-          <option value="38">スポーツ用品店</option>
-          <option value="39">家具屋</option>
-          <option value="40">趣味品</option>
+          <option value="29">百貨店</option>
+          <option value="30">ファッション</option>
+          <option value="31">食品(持ち帰り)</option>
+          <option value="32">菓子(持ち帰り)</option>
+          <option value="33">酒類(持ち帰り)</option>
+          <option value="34">雑貨・土産物</option>
+          <option value="35">食器・壷</option>
+          <option value="36">宝飾品</option>
+          <option value="37">書店</option>
+          <option value="38">家電量販店</option>
+          <option value="39">スポーツ用品店</option>
+          <option value="40">家具屋</option>
+          <option value="41">趣味品</option>
         </optgroup>
       </select>
     </div>
@@ -229,21 +230,21 @@ def main():
     """ % (x,x)
 
   print """
+      </div>
+      <br>
+      <div class="row">
+        <div class="col-md-5">
+          <button type="button" id="submitHistory" class="btn btn-primary">登録する</button>
+          <button type="reset" class="btn btn-default">リセット</button>
+          <span id="submitResult"></span>
         </div>
-        <br>
-        <div class="row">
-          <div class="col-md-5">
-            <button type="button" id="submitHistory" class="btn btn-primary">登録する</button>
-            <button type="reset" class="btn btn-default">リセット</button>
-            <span id="submitResult"></span>
-          </div>
-        </div>
-      </form>
-    </div>
-    <div class="row">
+      </div>
+    </form>
+  </div>
+<!--     <div class="row">
       <div class="col-md-8" style="background-color:red;">履歴情報の表示</div>
       <div class="col-md-4" style="background-color:yellow;">生成したモデルからユーザーの情報を提示</div>
-    </div>
+    </div> -->
   </div><!-- /.container -->
 
 
