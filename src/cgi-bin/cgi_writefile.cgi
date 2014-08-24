@@ -6,7 +6,6 @@ sys.path.append('/Users/Admin/dev/neighborhood_SPM/src/')
 sys.stderr = sys.stdout
 import cgi
 import cgitb
-from tools import util as util
 
 
 # 履歴情報をファイルに追記・保存する
@@ -38,18 +37,21 @@ def writeFile(form):
             ", " + form['rate4'].value + \
             ", " + form['rate5'].value + \
             "\r\n")
-    except IOError:
-        util.printError()
+    except Exception:
+        raise
     finally:
         if(f):
             f.close()
 
 
 def main():
-    print "<!DOCTYPE html>"
-    form = cgi.FieldStorage()
-    print form
-    writeFile(form)
+    print '<!DOCTYPE html>'
+    try:
+        form = cgi.FieldStorage()
+        writeFile(form)
+        print '<span id="alert">登録完了.</span>'
+    except Exception:
+        print '<span id="alert">入力エラー.</span>'
     cgitb.enable()
 
 

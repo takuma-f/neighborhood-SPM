@@ -17,7 +17,7 @@ $('#submitContext').click(function() {
       $('#planArea').html(res);
     },
     error: function(XMLHttpRequest, textStatus, errorThrown) {
-      alert(errorThrown)
+      alert(errorThrown);
     },
     complete: function() {
       button.attr('disabled', false);
@@ -26,13 +26,39 @@ $('#submitContext').click(function() {
 });
 
 
+// $('#viewPlan').click(function() {
+//   var button = $(this);
+//     button.attr('disabled', true);
+
+//   var hostUrl= './cgi_ref.cgi';
+//   var param1 = $('#userId').val();
+//   $.ajax({
+//     url: hostUrl,
+//     type:'POST',
+//     scriptCharset: 'utf-8',
+//     data: {userId:param1},
+//     dataType: 'HTML',
+//     timeout: 100000,
+//     success: function(res) {
+//       $('#planArea').html(res);
+//     },
+//     error: function(XMLHttpRequest, textStatus, errorThrown) {
+//       alert(errorThrown);
+//     },
+//     complete: function() {
+//       button.attr('disabled', false);
+//     }
+//   });
+// });
+
+
 $('#submitHistory').click(function() {
   var button = $(this);
     button.attr("disabled", true);
 
   var hostUrl= './cgi_writefile.cgi';
   var param1 = $('#userId').val();
-  var param2 = $('#date').val()
+  var param2 = $('#date').val();
   var param3 = $('input:radio[name="companion"]:checked').val();
   var param4 = $('#budget').val();
   var param5 = $('#venue1').val();
@@ -57,8 +83,8 @@ $('#submitHistory').click(function() {
   var param24 = $('#rate5').val();
   $.ajax({
     url: hostUrl,
-    type:"POST",
-    scriptCharset: "utf-8",
+    type:'POST',
+    scriptCharset: 'utf-8',
     data: {userId:param1, date:param2, companion:param3, 
       budget:param4, venue1:param5, venue2:param6, 
       venue3:param7, venue4:param8, venue5:param9, 
@@ -67,17 +93,18 @@ $('#submitHistory').click(function() {
       action2:param16, action3:param17, action4:param18, 
       action5:param19, rate1:param20, rate2:param21, 
       rate3:param22, rate4:param23, rate5:param24},
-    dataType: "HTML",
+    dataType: 'HTML',
     timeout: 100000,
     success: function(res) {
-      $("#submitResult").append('<span id="alert">データの登録が完了しました.</span>');
-      $("#alert").fadeOut(1500).queue(function() {
+      alert(res)
+      $('#response').html(res);
+      $('#alert').fadeOut(1500).queue(function() {
         this.remove();
       });
     },
     error: function(XMLHttpRequest, textStatus, errorThrown) {
-      $("#submitResult").append('<span id="alert">データの登録に失敗しました.</span>');
-      $("#alert").fadeOut(1500).queue(function() {
+      $('#response').html('<span id="alert">予期せぬエラーが発生しました.</span>');
+      $('#alert').fadeOut(1500).queue(function() {
         this.remove();
       });
     },
@@ -86,3 +113,29 @@ $('#submitHistory').click(function() {
     }
   });
 });
+
+
+// $('#addPlace').click(function() {
+//   var button = $(this);
+//     button.attr('disabled', true);
+
+//   var hostUrl= '';
+//   var param1 = ;
+//   $.ajax({
+//     url: hostUrl,
+//     type:'POST',
+//     scriptCharset: 'utf-8',
+//     data: {currentAmount:param1},
+//     dataType: 'HTML',
+//     timeout: 100000,
+//     success: function(res) {
+//       $('#ItemBox').html(res);
+//     },
+//     error: function(XMLHttpRequest, textStatus, errorThrown) {
+//       alert(errorThrown);
+//     },
+//     complete: function() {
+//       button.attr('disabled', false);
+//     }
+//   });
+// });

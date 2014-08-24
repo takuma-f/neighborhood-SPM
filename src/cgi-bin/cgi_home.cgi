@@ -77,50 +77,47 @@ def main():
     </div>
   </div>
 
-  <div id="contextArea" class="container">
-    <form action="#">
-      <div class="row">
-        <div class="col-md-2">
+  <div class="container">
+    <br>
+    <div class="row">
+      <div id="planArea" class="col-md-10"></div>
+      <div class="col-md-2 well">
+        <div class="col-md-12">
+          <form action="#">
+            <div class="row">
+              <input type="text" id="userId" name="userId" placeholder="ユーザーIDを入力" style="width:150px;">
+            </div>
+            <div class="row">
+              <input type="date" id="date" name="date" style="width:150px;">
+            </div>
+            <div class="row">
+              <br>
+              同伴者を選択:<br>
+              <input type="radio" name="companion" value="0"> 一人 <br>
+              <input type="radio" name="companion" value="1"> 同性の友人 <br>
+              <input type="radio" name="companion" value="2"> 異性の友人 <br>
+              <input type="radio" name="companion" value="3"> 親・家族 <br>
+            </div>
+            <div class="row">
+              <br>
+              <select id="budget" name="budget">
+                <option value="">予算を選択して下さい</option>
+                <option value="1">0 ~ 1000円</option>
+                <option value="2">1000 ~ 5000円</option>
+                <option value="3">5000 ~ 10000円</option>
+                <option value="4">10000円以上</option>
+              </select>
+            </div>
+          </form>
           <br>
-          <input type="text" id="userId" name="userId" placeholder="ユーザーIDを入力">
+          <div class="row">
+            <button type="button" class="btn btn-primary" id="submitContext" style="width:150px;">プランを作る</button>
+            <button type="reset" class="btn btn-default" id="resetContext" style="width:150px;">条件をリセット</button>
+          </div>
         </div>
       </div>
-      <div class="row">
-        <div class="col-md-2" id="row_date">
-          <br>
-          <input type="date" id="date" name="date">
-        </div>
-        <div class="col-md-6">
-          <br>
-          同伴者を選択して下さい : 
-          <input type="radio" name="companion" value="0"> 一人
-          <input type="radio" name="companion" value="1"> 同性の友人
-          <input type="radio" name="companion" value="2"> 異性の友人
-          <input type="radio" name="companion" value="3"> 親・家族
-        </div>
-        <div class="col-md-4">
-          <br>
-          予算を選択して下さい : 
-          <select id="budget" name="budget">
-            <option value="0"></option>
-            <option value="1">0 ~ 1000円</option>
-            <option value="2">1000 ~ 5000円</option>
-            <option value="3">5000 ~ 10000円</option>
-            <option value="4">10000円以上</option>
-          </select>
-        </div>
-      </div>
-      <br>
-      <div class="row">
-        <div class="col-md-4">
-          <button type="button" class="btn btn-primary" id="submitContext">この条件でプランを作る</button>
-          <button type="button" class="btn btn-default" id="resetContext">条件をリセット</button>
-        </div>
-      </div>
-    </form>
-  </div><!-- /.container -->
-  <div id="planArea" class="container">
-  </div><!-- /.container -->
+    </div>
+  </div>
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
