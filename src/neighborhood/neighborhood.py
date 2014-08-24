@@ -234,6 +234,26 @@ def getScore(transaction_list, pattern):
         raise
 
 
+# confidence値によるスコアを返す
+def getConfScore(transaction_list, pattern):
+    # パターンのサポート値を返す
+    def getSupport(transaction_list, pattern):
+        distance_list, frequency_counter = getDistanceList(transaction_list, pattern)
+        return float(frequency_counter) / len(transaction_list)
+
+    try:
+        if len(pattern) == 1:
+            score = 0
+        else:
+            subpattern = deepcopy(pattern)
+            del subpattern[len(pattern)-1:]
+            score = getSupport(transaction_list, pattern) / getSupport(transaction_list, subpattern)
+        return score
+    except Exception:
+        print "Error: getConfScore"
+        raise
+
+
 # PatternとScoreが関連づけられたdictを返す
 def getDict(transaction_list, patterns):
     pattern_dict = dict()
@@ -245,11 +265,11 @@ def getDict(transaction_list, patterns):
 
 # モジュールのテストメソッド
 def test_getScore():
-    f = open("./testlog.txt", "w")
-    sys.stdout = f
-    transaction_list = [['Sight', 'Eat', 'Sight', 'Eat', 'Sight']]
+    # f = open("./testlog.txt", "w")
+    # sys.stdout = f
+    transaction_list = [["Eat", "Bar"], ["Tea", "Shop", "Eat", "Play"], ["Tea", "Shop", "Eat", "Bar"], ["Eat", "Bar"], ["Eat", "Play"], ["Play", "Bar"], ["Eat", "Bar"], ["Shop", "Eat", "Play", "Bar"]]
 
-    patterns = [['Sight'], ['Eat'], ['Sight', 'Eat'], ['Sight', 'Sight'], ['Eat', 'Sight'], ['Eat', 'Eat'], ['Sight', 'Eat', 'Sight'], ['Sight', 'Eat', 'Eat'], ['Sight', 'Sight', 'Eat'], ['Sight', 'Sight', 'Sight'], ['Eat', 'Sight', 'Eat'], ['Eat', 'Sight', 'Sight'], ['Eat', 'Eat', 'Sight'], ['Sight', 'Eat', 'Sight', 'Eat'], ['Sight', 'Eat', 'Sight', 'Sight'], ['Sight', 'Eat', 'Eat', 'Sight'], ['Sight', 'Sight', 'Eat', 'Sight'], ['Eat', 'Sight', 'Eat', 'Sight'], ['Sight', 'Eat', 'Sight', 'Eat', 'Sight']]
+    patterns = [["Eat"], ["Bar"], ["Tea"], ["Shop"], ["Play"], ["Tea", "Eat"], ["Eat", "Bar"], ["Tea", "Eat", "Bar"], ["Shop", "Eat", "Play", "Bar"]]
 
     for pattern in patterns:
         try:
@@ -257,28 +277,12 @@ def test_getScore():
             print "Distance List:", getDistanceList(transaction_list, pattern)
             print "DistanceRate:", round(getDistanceRate(transaction_list, pattern), 3)
             print "Neighborhood:", round(getNeighborhood(transaction_list, pattern), 3)
-            print "Score:", round(getScore(transaction_list, pattern), 3)
+            print "Score:", round(getConfScore(transaction_list, pattern), 3)
             print
         except Exception:
             util.printError()
-    f.close()
-
-def test_json():
-    f = open("./testlog.txt", "w")
-    sys.stdout = f
-    transaction_list = [['Sight', 'Eat', 'Sight', 'Eat', 'Sight']]
-
-    patterns = [['Sight'], ['Eat'], ['Sight', 'Eat'], ['Sight', 'Sight'], ['Eat', 'Sight'], ['Eat', 'Eat'], ['Sight', 'Eat', 'Sight'], ['Sight', 'Eat', 'Eat'], ['Sight', 'Sight', 'Eat'], ['Sight', 'Sight', 'Sight'], ['Eat', 'Sight', 'Eat'], ['Eat', 'Sight', 'Sight'], ['Eat', 'Eat', 'Sight'], ['Sight', 'Eat', 'Sight', 'Eat'], ['Sight', 'Eat', 'Sight', 'Sight'], ['Sight', 'Eat', 'Eat', 'Sight'], ['Sight', 'Sight', 'Eat', 'Sight'], ['Eat', 'Sight', 'Eat', 'Sight'], ['Sight', 'Eat', 'Sight', 'Eat', 'Sight']]
-
-    import json
-    print "DICT:"
-    pattern_dict = getDict(transaction_list, patterns)
-    print pattern_dict
-    print "JSON:"
-    json_pattern_dict = json.dumps(pattern_dict)
-    print json_pattern_dict  # 呼び出し元へはprintで返す？
-    f.close()
+    # f.close()
 
 
 if __name__ == '__main__':
-    test_json()
+    test_getScore()
