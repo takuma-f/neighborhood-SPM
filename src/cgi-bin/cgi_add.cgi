@@ -95,7 +95,7 @@ def main():
         <br>
         <br>
         <select id="action%s" name="action%s" style="width:150px;">
-          <option value="">取った行動を選択</option>
+          <option value="0">取った行動を選択</option>
           <option value="Eat">食事する</option>
           <option value="Tea">お茶する</option>
           <option value="Play">遊ぶ</option>
@@ -106,7 +106,7 @@ def main():
         <br>
         <br>
         <select id="genre%s" name="genre%s" style="width:150px;">
-          <option value="">施設のジャンルを選択</option>
+          <option value="0">施設のジャンルを選択</option>
           <optgroup label="Eat">
             <option value="1">寿司・和食</option>
             <option value="2">中華料理</option>

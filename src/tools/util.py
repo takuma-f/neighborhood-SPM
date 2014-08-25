@@ -85,7 +85,7 @@ def convertUserDataForGenModel(user):
                         else:
                             result += " "+str(counter+5)+":0"
 
-                    for counter in xrange(1, 32):
+                    for counter in xrange(1, 41):
                         if counter == int(genre):
                             result += " "+str(counter+9)+":1"
                         else:
