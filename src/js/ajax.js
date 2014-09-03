@@ -96,8 +96,7 @@ $('#submitHistory').click(function() {
     dataType: 'HTML',
     timeout: 100000,
     success: function(res) {
-      alert(res)
-      $('#response').html(res);
+      $('#response').html('<span id="alert">登録完了.</span>');
       $('#alert').fadeOut(1500).queue(function() {
         this.remove();
       });

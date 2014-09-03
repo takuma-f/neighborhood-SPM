@@ -46,8 +46,7 @@ def getCombinationList(record, pattern):
         if position_stack is None:
             return None
         for stack in position_stack:
-            if len(stack) == 1:
-            # positionが1個の場合
+            if len(stack) == 1:  # positionが1個の場合
                 if not combination_list:
                     for position in stack:
                         combination_list.append([position])
@@ -55,11 +54,9 @@ def getCombinationList(record, pattern):
                 else:
                     for position in stack:
                         for c in xrange(combination_counter):
-                            combination_list[c].append(position)
-                            # 既存のListにpositionを追加
+                            combination_list[c].append(position)  # 既存のListにpositionを追加
 
-            elif len(stack) > 1:
-            # stackにpositionが2個以上ある場合
+            elif len(stack) > 1:  # stackにpositionが2個以上ある場合
                 if not combination_list:
                     for position in stack:
                         combination_list.append([position])
@@ -152,17 +149,16 @@ def getDistanceRate(transaction_list, pattern):
     index = 0
     weight = 1.0
     weight_sum = 0
-
     distance_list, frequency_counter = getDistanceList(transaction_list, pattern)
-    try:
-        def CountAll(distance_list):
-            # 入力した全履歴中におけるパターンの総出現回数の和を返す
-            # 純粋な出現回数であり1レコード中何回出現しても出現するたび加算する
-            count = 0
-            for distance in distance_list:
-                count += distance
-            return count
 
+    # 入力した全履歴中におけるパターンの総出現回数の和を返す
+    # 純粋な出現回数であり1レコード中何回出現しても出現するたび加算する
+    def CountAll(distance_list):
+        count = 0
+        for distance in distance_list:
+            count += distance
+        return count
+    try:
         count = CountAll(distance_list)
         for distance in distance_list:
             weight_sum += discount**index * distance * weight
@@ -264,7 +260,7 @@ def getDict(transaction_list, patterns):
 
 
 # モジュールのテストメソッド
-def test_getScore():
+def test():
     # f = open("./testlog.txt", "w")
     # sys.stdout = f
     transaction_list = [["Eat", "Bar"], ["Tea", "Shop", "Eat", "Play"], ["Tea", "Shop", "Eat", "Bar"], ["Eat", "Bar"], ["Eat", "Play"], ["Play", "Bar"], ["Eat", "Bar"], ["Shop", "Eat", "Play", "Bar"]]
@@ -285,4 +281,4 @@ def test_getScore():
 
 
 if __name__ == '__main__':
-    test_getScore()
+    test()
