@@ -26,32 +26,6 @@ $('#submitContext').click(function() {
 });
 
 
-// $('#viewPlan').click(function() {
-//   var button = $(this);
-//     button.attr('disabled', true);
-
-//   var hostUrl= './cgi_ref.cgi';
-//   var param1 = $('#userId').val();
-//   $.ajax({
-//     url: hostUrl,
-//     type:'POST',
-//     scriptCharset: 'utf-8',
-//     data: {userId:param1},
-//     dataType: 'HTML',
-//     timeout: 100000,
-//     success: function(res) {
-//       $('#planArea').html(res);
-//     },
-//     error: function(XMLHttpRequest, textStatus, errorThrown) {
-//       alert(errorThrown);
-//     },
-//     complete: function() {
-//       button.attr('disabled', false);
-//     }
-//   });
-// });
-
-
 $('#submitHistory').click(function() {
   var button = $(this);
     button.attr("disabled", true);
@@ -129,6 +103,32 @@ $('#submitHistory').click(function() {
 //     timeout: 100000,
 //     success: function(res) {
 //       $('#ItemBox').html(res);
+//     },
+//     error: function(XMLHttpRequest, textStatus, errorThrown) {
+//       alert(errorThrown);
+//     },
+//     complete: function() {
+//       button.attr('disabled', false);
+//     }
+//   });
+// });
+
+
+// $('#viewPlan').click(function() {
+//   var button = $(this);
+//     button.attr('disabled', true);
+
+//   var hostUrl= './cgi_ref.cgi';
+//   var param1 = $('#userId').val();
+//   $.ajax({
+//     url: hostUrl,
+//     type:'POST',
+//     scriptCharset: 'utf-8',
+//     data: {userId:param1},
+//     dataType: 'HTML',
+//     timeout: 100000,
+//     success: function(res) {
+//       $('#planArea').html(res);
 //     },
 //     error: function(XMLHttpRequest, textStatus, errorThrown) {
 //       alert(errorThrown);

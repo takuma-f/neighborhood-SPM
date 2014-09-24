@@ -259,6 +259,15 @@ def getDict(transaction_list, patterns):
     return pattern_dict
 
 
+# Patternとconfidence値によるScoreが関連づけられたdictを返す
+def getConfDict(transaction_list, patterns):
+    pattern_dict = dict()
+    for pattern in patterns:
+        key = str(pattern)
+        pattern_dict[key] = getConfScore(transaction_list, pattern)
+    return pattern_dict
+
+
 # モジュールのテストメソッド
 def test():
     # f = open("./testlog.txt", "w")

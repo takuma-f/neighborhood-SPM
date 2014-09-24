@@ -12,12 +12,13 @@ $('[id^=savePlan]').click(function() {
   var param7 = $('#venue'+val+'3').val() || "None";
   var param8 = $('#venue'+val+'4').val() || "None";
   var param9 = $('#venue'+val+'5').val() || "None";
+  var param10 = $('#which'+val).val() || "None";
   if (param5 != "None") {
     $.ajax({
       url: hostUrl,
       type:'POST',
       scriptCharset: 'utf-8',
-      data: {userId:param1, date:param2, companion:param3, budget:param4, venue1:param5, venue2:param6, venue3:param7, venue4:param8, venue5:param9, order:val},
+      data: {userId:param1, date:param2, companion:param3, budget:param4, venue1:param5, venue2:param6, venue3:param7, venue4:param8, venue5:param9, which:param10, order:val},
       dataType: 'HTML',
       timeout: 100000,
       success: function(res) {

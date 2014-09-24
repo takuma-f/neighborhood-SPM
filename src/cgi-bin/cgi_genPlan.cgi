@@ -6,6 +6,7 @@ sys.path.append('/Users/Admin/dev/neighborhood_SPM/src/')
 sys.stderr = sys.stdout
 import cgi
 import cgitb
+import random
 
 from neighborhood import neighborhood as neigh
 from apriori import genPattern as apriori
@@ -26,41 +27,14 @@ def main():
     # 類似ユーザーの履歴から入力したコンテキストに一致するもののリストを受け取る
     data_iter = genIter.getDataIter(user, model, input_data)
     transaction_list, patterns = apriori.genPattern(data_iter, minSupport=0.0)
+
     pattern_dict = neigh.getDict(transaction_list, patterns)
     sorted_dict = sorted(pattern_dict.items(), key=lambda x: x[1], reverse=True)
 
+    pattern_confDict = neigh.getConfDict(transaction_list, patterns)
+    sorted_confDict = sorted(pattern_confDict.items(), key=lambda x: x[1], reverse=True)
+
     print "<!DOCTYPE html>"
-    print """
-  <div class="col-md-12">
-    <div id="plan%s" class="panel panel-default">
-      <div class="panel-heading">
-        <h3 class="panel-title">抽出データ詳細</h3>
-      </div>
-        <div class="panel-body">
-          <div class="row">
-    """
-    for sim_user in genIter.getSimUsers(user, model):
-      print "類似ユーザー:%s (類似度%s)" % (sim_user, svm.getAccuracy(sim_user, model))
-      print "<br>"
-      for history_context, history in genIter.getHistories(sim_user):
-        print "抽出されたパターン :<br>"
-        history = util.convertAction(history)
-        for h in history:
-          print "%s -> " % h
-        print "<br>"
-      print "<br>"
-    print "コンテキストにマッチしたパターン :<br>"
-    for transaction in transaction_list:
-      transaction = util.convertAction(transaction)
-      for t in transaction:
-        print "%s -> " % t
-      print "<br>"
-    print """
-        </div>
-      </div>
-    </div>
-  </div>
-    """
     counter = 0
     for p, s in sorted_dict:
         counter += 1
@@ -72,14 +46,13 @@ def main():
     <div id="plan%s" class="panel panel-default">
       <div class="panel-heading">
         <h3 class="panel-title">おすすめプラン%s</h3>
-        このプランのおすすめ度・・・%s点
+        <!-- このプランのおすすめ度・・・%s点 -->
       </div>
         <div class="panel-body">
           <div class="row">
             <form id="planForm%s">
         """ % (counter, counter, int(recommend_score), counter)
-        # ここでpはlist()でなく文字列になっていることに注意
-        p = util.convertList(p)
+        p = util.convertList(p)  # ここでpはlist()でなく文字列になっていることに注意
         convert_p = util.convertAction(p)
         counter_a = 0
         print """
@@ -93,6 +66,7 @@ def main():
             print '<h4>%s %s</h4>' % (counter_a, action)
             print "</div>"
             print '<div class="row">'
+            print '<input type="hidden" id="which%s" value="%s">' % (counter, counter)
             if a == "1":
               print """
               <!--和食・寿司-->
@@ -493,6 +467,7 @@ def main():
               print """
               <!--家具屋-->
               <select id="venue%s%s" size="5" style="width:250px;">
+                <option value="">IKEA立川</option>
               </select>
               """ % (counter, counter_a)
             elif a == "41":
@@ -509,14 +484,13 @@ def main():
         </div>
       </div>
       <div class="panel-footer">
-        <button type="button" class="btn btn-primary btn-small" id="savePlan%s" form="planForm%s" value="%s"><i class="glyphicon glyphicon-plus"></i> このプランを保存</button>
-        <!-- <button type="button" class="btn btn-default btn-small" id="sharePlan"><i class="glyphicon glyphicon-share"></i> シェア</button> -->
+        <button type="button" class="btn btn-primary btn-small" id="savePlan%s" form="planForm%s" value="%s"><i class="glyphicon glyphicon-plus"></i> このプランを選択</button>
         <span id="response%s"></span>
       </div>
     </div>
   </div>
         """ % (counter, counter, counter, counter)
-        if counter == 5:
+        if counter == 10:
             break
     print """
   <script src="../js/ajaxSave.js"></script>

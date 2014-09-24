@@ -13,9 +13,9 @@ from tools import util as util
 def writeFile(form):
     f = None
     try:
-        f = open('userData/'+form['userId'].value+'_saved.txt', 'a')
-        f.write(form['date'].value + ", "\
-        + form['userId'].value + ", "\
+        f = open('userData/'+form['userId'].value+'.log', 'a')
+        f.write(form['userId'].value + ", "\
+        + form['date'].value + ", "\
         + form['companion'].value + ", "\
         + form['budget'].value + ", "\
         + form['venue1'].value + ", "\
@@ -23,9 +23,10 @@ def writeFile(form):
         + form['venue3'].value + ", "\
         + form['venue4'].value + ", "\
         + form['venue5'].value + ", "\
+        + form['which'].value + ", "\
         + form['order'].value + "\r\n")
-    except IOError:
-        util.printError()
+    except Exception:
+        raise
     finally:
         if(f):
             f.close()
@@ -33,8 +34,11 @@ def writeFile(form):
 
 def main():
     print '<!DOCTYPE html>'
-    form = cgi.FieldStorage()
-    writeFile(form)
+    try:
+        form = cgi.FieldStorage()
+        writeFile(form)
+    except Exception:
+        raise
     cgitb.enable()
 
 
