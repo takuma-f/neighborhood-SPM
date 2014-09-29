@@ -18,13 +18,20 @@ def writeFile(form):
         + form['date'].value + ", "\
         + form['companion'].value + ", "\
         + form['budget'].value + ", "\
+        + form['pattern1'].value + ", "\
+        + form['pattern2'].value + ", "\
+        + form['pattern3'].value + ", "\
+        + form['pattern4'].value + ", "\
+        + form['pattern5'].value + ", "\
+        + form['pattern6'].value + ", "\
+        + form['order'].value + ", "\
+        + form['amount'].value + ", "\
+        + form['which'].value + ", "\
         + form['venue1'].value + ", "\
         + form['venue2'].value + ", "\
         + form['venue3'].value + ", "\
         + form['venue4'].value + ", "\
-        + form['venue5'].value + ", "\
-        + form['which'].value + ", "\
-        + form['order'].value + "\r\n")
+        + form['venue5'].value + "\r\n")
     except Exception:
         raise
     finally:

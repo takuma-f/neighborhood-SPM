@@ -278,12 +278,10 @@ def test():
 
     for pattern in patterns:
         try:
-            print "Pattern:%s" % pattern
-            print "Distance List:", getDistanceList(transaction_list, pattern)
-            print "DistanceRate:", round(getDistanceRate(transaction_list, pattern), 3)
-            print "Neighborhood:", round(getNeighborhood(transaction_list, pattern), 3)
-            print "Score:", round(getConfScore(transaction_list, pattern), 3)
-            print
+            pattern_dict = getDict(transaction_list, patterns)
+            sorted(pattern_dict.items(), key=lambda x: x[1], reverse=True)
+            dict_keys = pattern_dict.keys()
+            print dict_keys
         except Exception:
             util.printError()
     # f.close()
