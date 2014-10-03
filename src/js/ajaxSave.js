@@ -21,12 +21,18 @@ $('[id^=savePlan]').click(function() {
   var param16 = $('#venue'+val+'3').val() || "None";
   var param17 = $('#venue'+val+'4').val() || "None";
   var param18 = $('#venue'+val+'5').val() || "None";
-  if (param5 != "None") {
+  if (param14 != "None") {
     $.ajax({
       url: hostUrl,
       type:'POST',
       scriptCharset: 'utf-8',
-      data: {userId:param1, date:param2, companion:param3, budget:param4, pattern1:param5, pattern2:param6, pattern3:param7, pattern4:param8, pattern5:param9, pattern6:param10, order:param11, amount:param12, which:param13, venue1:param14, venue2:param15, venue3:param16, venue4:param17, venue5:param18}
+      data: {userId:param1, date:param2, companion:param3, 
+        budget:param4, pattern1:param5, pattern2:param6, 
+        pattern3:param7, pattern4:param8, pattern5:param9, 
+        pattern6:param10, order:param11, amount:param12, 
+        which:param13, venue1:param14, venue2:param15, 
+        venue3:param16, venue4:param17, venue5:param18},
+        // 最後のカンマ忘れやすいので注意すること
       dataType: 'HTML',
       timeout: 100000,
       success: function(res) {

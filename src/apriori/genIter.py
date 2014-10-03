@@ -9,7 +9,7 @@ from model import model as svm
 
 # 類似ユーザーを抽出し逐次的に返す
 def getSimUsers(user, model):
-    threshold = 0.6  # 全部類似させるため0.0に設定中
+    threshold = 0.6  # 過半数超えていれば類似していると判断してよいだろう
 
     # システムから自分以外の全てのユーザーを返す(SQL導入後はSQLアクセス)
     def getOtherUsers():

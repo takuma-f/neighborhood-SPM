@@ -91,7 +91,7 @@ def main():
     print """
     <div class="col-md-3">
       <div class="col-md-12" id="ItemBox">
-        <input type="text" id="venue%s" placeholder="%s箇所目に訪れた場所"/>
+        <input type="text" id="venue%s" value="%s箇所目に訪れた場所"/>
         <br>
         <br>
         <select id="action%s" name="action%s" style="width:150px;">
@@ -164,7 +164,7 @@ def main():
         <br>
         <br>
         <select id="rate%s" name="rate%s" style="width:150px;">
-          <option value="">評価を選択</option>
+          <option value="0">評価を選択</option>
           <option value="1">満足</option>
           <option value="-1">不満</option>
         </select>
@@ -178,9 +178,9 @@ def main():
         </div>
       </div>
       <div class="panel-footer">
-        <button type="button" class="btn btn-primary btn-small" id="addplace"><i class="glyphicon glyphicon-plus"></i> 訪れた場所を追加</button>
+<!--         <button type="button" class="btn btn-primary btn-small" id="addplace"><i class="glyphicon glyphicon-plus"></i> 訪れた場所を追加</button>
         <button type="button" class="btn btn-default btn-small" id="removeplace"><i class="glyphicon glyphicon-minus"></i> 訪れた場所を減らす</button>
-      </div>
+ -->      </div>
     </div>
   </div>
   """
