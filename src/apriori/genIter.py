@@ -15,7 +15,7 @@ def getSimUsers(user, model):
     def getOtherUsers():
         other_users = list()
         # other_users = ["0140001", "0140002", "0140003", "0140004", "0140005", "0140006", "0140007", "0140008", "0140009", "0140010"]
-        other_users = ["0140001", "0140002", "0140003", "0140004", "0140005"]
+        other_users = ["0140001", "0140002", "0140003", "0140004", "0140005", "tomura", "tatsumi", "murata"]
         return other_users
 
     other_users = getOtherUsers()

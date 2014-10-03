@@ -21,6 +21,19 @@ $('[id^=savePlan]').click(function() {
   var param16 = $('#venue'+val+'3').val() || "None";
   var param17 = $('#venue'+val+'4').val() || "None";
   var param18 = $('#venue'+val+'5').val() || "None";
+  var param19 = $('#which1').val() || "None";
+  var param20 = $('#which2').val() || "None";
+  var param21 = $('#which3').val() || "None";
+  var param22 = $('#which4').val() || "None";
+  var param23 = $('#which5').val() || "None";
+  var param24 = $('#which6').val() || "None";
+  var param25 = $('#amtItem1').val() || "None";
+  var param26 = $('#amtItem2').val() || "None";
+  var param27 = $('#amtItem3').val() || "None";
+  var param28 = $('#amtItem4').val() || "None";
+  var param29 = $('#amtItem5').val() || "None";
+  var param30 = $('#amtItem6').val() || "None";
+  var param31 = $('#seed').val() || "None";
   if (param14 != "None") {
     $.ajax({
       url: hostUrl,
@@ -31,7 +44,12 @@ $('[id^=savePlan]').click(function() {
         pattern3:param7, pattern4:param8, pattern5:param9, 
         pattern6:param10, order:param11, amount:param12, 
         which:param13, venue1:param14, venue2:param15, 
-        venue3:param16, venue4:param17, venue5:param18},
+        venue3:param16, venue4:param17, venue5:param18, 
+        type1:param19, type2:param20, type3:param21, 
+        type4:param22, type5:param23, type6:param24, 
+        amount1:param25, amount2:param26, amount3:param27, 
+        amount4:param28, amount5:param29, amount6:param30, 
+        seed:param31},
         // 最後のカンマ忘れやすいので注意すること
       dataType: 'HTML',
       timeout: 100000,

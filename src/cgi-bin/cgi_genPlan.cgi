@@ -63,7 +63,7 @@ def main():
         if random.randint(1, 2) == 1:
             if neigh_count < 3:
                 p, s = sorted_dict.pop()
-                while p in display:
+                while (p in display) or (len(util.convertList(p)) < 4):
                     p, s = sorted_dict.pop()
                 else:
                     which = "neigh"  # 隣接度のマーカー
@@ -71,7 +71,7 @@ def main():
                     display.append(p)
             else:
                 p, s = sorted_confDict.pop()
-                while (p in display) or (len(util.convertAction(p)) < 4):
+                while (p in display) or (len(util.convertList(p)) < 4):
                     p, s = sorted_confDict.pop()
                 else:
                   which = "conf"  # 信頼度のマーカー
@@ -80,7 +80,7 @@ def main():
         else:
             if conf_count < 3:
                 p, s = sorted_confDict.pop()
-                while (p in display) or (len(util.convertAction(p)) < 4):
+                while (p in display) or (len(util.convertList(p)) < 4):
                     p, s = sorted_confDict.pop()
                 else:
                   which = "conf"  # 信頼度のマーカー
@@ -88,7 +88,7 @@ def main():
                   display.append(p)
             else:
                 p, s = sorted_dict.pop()
-                while p in display:
+                while (p in display) or (len(util.convertList(p)) < 4):
                     p, s = sorted_dict.pop()
                 else:
                     which = "neigh"  # 隣接度のマーカー
@@ -98,7 +98,6 @@ def main():
         p = util.convertList(p)  # ここでpはlist()でなく文字列になっていることに注意
         convert_p = util.convertAction(p)
         counter_a = 0
-        print unixtime
 
         # 隠れ変数の定義
         print """
@@ -106,7 +105,8 @@ def main():
         <input type="hidden" id="which%s" value="%s">
         <input type="hidden" id="ordPlan%s" value="%s">
         <input type="hidden" id="amtItem%s" value="%s">
-        """ % (counter, str(convert_p), counter, which, counter, counter, counter, len(p))
+        <input type="hidden" id="seed" value="%s">
+        """ % (counter, str(convert_p), counter, which, counter, counter, counter, len(p), unixtime)
 
         for (action, a) in zip(convert_p, p):
             counter_a += 1
