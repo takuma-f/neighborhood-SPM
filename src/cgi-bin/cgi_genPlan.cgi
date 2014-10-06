@@ -105,8 +105,9 @@ def main():
         <input type="hidden" id="which%s" value="%s">
         <input type="hidden" id="ordPlan%s" value="%s">
         <input type="hidden" id="amtItem%s" value="%s">
+        <input type="hidden" id="score%s" value="%s">
         <input type="hidden" id="seed" value="%s">
-        """ % (counter, str(convert_p), counter, which, counter, counter, counter, len(p), unixtime)
+        """ % (counter, str(convert_p), counter, which, counter, counter, counter, len(p), counter, s, unixtime)
 
         for (action, a) in zip(convert_p, p):
             counter_a += 1

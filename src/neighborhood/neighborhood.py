@@ -272,18 +272,20 @@ def getConfDict(transaction_list, patterns):
 def test():
     # f = open("./testlog.txt", "w")
     # sys.stdout = f
-    transaction_list = [["Eat", "Bar"], ["Tea", "Shop", "Eat", "Play"], ["Tea", "Shop", "Eat", "Bar"], ["Eat", "Bar"], ["Eat", "Play"], ["Play", "Bar"], ["Eat", "Bar"], ["Shop", "Eat", "Play", "Bar"]]
+    transaction_list = [["A","B","C","D","E"]]
 
-    patterns = [["Eat"], ["Bar"], ["Tea"], ["Shop"], ["Play"], ["Tea", "Eat"], ["Eat", "Bar"], ["Tea", "Eat", "Bar"], ["Shop", "Eat", "Play", "Bar"]]
+    patterns = [["A","B","C","D"], ["A","B","D","E"], ["C","D","E"], ["B","D","E"]]
 
     for pattern in patterns:
         try:
             pattern_dict = getDict(transaction_list, patterns)
+            pattern_confDict = getConfDict(transaction_list, patterns)
             sorted(pattern_dict.items(), key=lambda x: x[1], reverse=True)
-            dict_keys = pattern_dict.keys()
-            print dict_keys
+            sorted(pattern_confDict.items(), key=lambda x: x[1], reverse=True)
         except Exception:
             util.printError()
+    print pattern_dict
+    print pattern_confDict
     # f.close()
 
 

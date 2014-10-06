@@ -34,6 +34,12 @@ $('[id^=savePlan]').click(function() {
   var param29 = $('#amtItem5').val() || "None";
   var param30 = $('#amtItem6').val() || "None";
   var param31 = $('#seed').val() || "None";
+  var param32 = $('#score1').val() || "None";
+  var param33 = $('#score2').val() || "None";
+  var param34 = $('#score3').val() || "None";
+  var param35 = $('#score4').val() || "None";
+  var param36 = $('#score5').val() || "None";
+  var param37 = $('#score6').val() || "None";
   if (param14 != "None") {
     $.ajax({
       url: hostUrl,
@@ -49,7 +55,9 @@ $('[id^=savePlan]').click(function() {
         type4:param22, type5:param23, type6:param24, 
         amount1:param25, amount2:param26, amount3:param27, 
         amount4:param28, amount5:param29, amount6:param30, 
-        seed:param31},
+        seed:param31, score1:param32, score2:param33, 
+        score3:param34, score4:param35, score5:param36, 
+        score6:param37},
         // 最後のカンマ忘れやすいので注意すること
       dataType: 'HTML',
       timeout: 100000,
