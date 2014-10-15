@@ -28,7 +28,7 @@ def main():
     svm.saveModel(user+'.model', model)
 
     # 類似ユーザーの履歴から入力したコンテキストに一致するもののリストを受け取る
-    data_iter = genIter.getDataIter(user, model, input_data)
+    data_iter, sim_iter = genIter.getDataIter(user, model, input_data)
     transaction_list, patterns = apriori.genPattern(data_iter, minSupport=0.0)
 
     pattern_dict = neigh.getDict(transaction_list, patterns)
@@ -38,10 +38,51 @@ def main():
     sorted_confDict = sorted(pattern_confDict.items(), key=lambda x: x[1])
 
     print "<!DOCTYPE html>"
+
+    print """
+  <div class="col-md-12">
+    <div id="plan%s" class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">抽出データ詳細</h3>
+      </div>
+        <div class="panel-body">
+          <div class="row">
+    """
+    for sim_user in genIter.getSimUsers(user, model):
+      print "類似ユーザー:%s (類似度%s)" % (sim_user, svm.getAccuracy(sim_user, model))
+      print "<br>"
+      for history_context, history in genIter.getHistories(sim_user):
+        print "抽出されたパターン :<br>"
+        history = util.convertAction(history)
+        for h in history:
+          print "%s -> " % h
+        print "<br>"
+      print "<br>"
+    print "コンテキストにマッチしたパターン :<br>"
+    for transaction in transaction_list:
+      transaction = util.convertAction(transaction)
+      for t in transaction:
+        print "%s -> " % t
+      print "<br>"
+    print """
+        </div>
+      </div>
+    </div>
+  </div>
+    """
+
+    conv_data_iter = list()
+    for data in data_iter:
+        conv_data_iter.append(util.convertAction(data))
+    print '<form id="analystic">'
+    print '<input type="hidden" id="data_iter" value="%s">' % conv_data_iter
+    print '<input type="hidden" id="sim_iter" value="%s">' % sim_iter
+    print '</form>'
+
     counter = 0
     neigh_count = 0
     conf_count = 0
-    display = []
+    display = list()
     # for p, s in sorted_dict:
     for i in xrange(1, 11):
         counter += 1

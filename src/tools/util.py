@@ -171,6 +171,3 @@ def convertUserDataForGenModel(user):
     finally:
         if (f):
             f.close()
-
-if __name__ == '__main__':
-    convertUserDataForGenModel("0140004")

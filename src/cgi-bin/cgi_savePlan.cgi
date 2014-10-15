@@ -21,7 +21,9 @@ def writeFile(form):
         + form['order'].value + ","\
         + form['amount'].value + ","\
         + form['which'].value + ",\r\n"\
-        + "seed:" + form['seed'].value + ",\r\n"\
+        + "seed," + form['seed'].value + ",\r\n"\
+        + form['data_iter'].value + ",\r\n"\
+        + form['sim_iter'].value + ",\r\n"\
         + form['type1'].value + ","\
         + form['amount1'].value + ","\
         + form['score1'].value + ","\

@@ -40,6 +40,8 @@ $('[id^=savePlan]').click(function() {
   var param35 = $('#score4').val() || "None";
   var param36 = $('#score5').val() || "None";
   var param37 = $('#score6').val() || "None";
+  var param38 = $('#data_iter').val() || "None";
+  var param39 = $('#sim_iter').val() || "None";
   if (param14 != "None") {
     $.ajax({
       url: hostUrl,
@@ -57,7 +59,7 @@ $('[id^=savePlan]').click(function() {
         amount4:param28, amount5:param29, amount6:param30, 
         seed:param31, score1:param32, score2:param33, 
         score3:param34, score4:param35, score5:param36, 
-        score6:param37},
+        score6:param37, data_iter:param38, sim_iter:param39},
         // 最後のカンマ忘れやすいので注意すること
       dataType: 'HTML',
       timeout: 100000,
