@@ -189,14 +189,14 @@ def convertUserDataForGenSeqModel(user):
             genres = splited_line[8:13]
             rates = splited_line[18:23]
             length = 0
-            label = 0
+            label = -1
             rate_sum = 0
             for genre in genres:
                 if str(genre) != "0":
                     length += 1
             for rate in rates:
                 rate_sum += int(str(rate).replace(('\r\n'or'\r'or'\n'), ''))
-            if rate_sum > length/2:  # 長さの半分以上満足ならば満足した
+            if rate_sum > length/2.0:  # 長さの半分以上満足ならば満足した
                 label = 1
             result += str(label)
             for counter in xrange(0, 4):  # 同伴者
@@ -225,6 +225,8 @@ def convertUserDataForGenSeqModel(user):
             for rate, counter in zip(rates, xrange(1, 6)):
                 if int(rate) == 1:
                     result += " "+str(counter+216)+":1"
+                elif int(rate) == -1:
+                    result += " "+str(counter+216)+":-1"
                 else:
                     result += " "+str(counter+216)+":0"
             result += "\r\n"
@@ -235,10 +237,3 @@ def convertUserDataForGenSeqModel(user):
     finally:
         if (f):
             f.close()
-
-
-def main():
-    convertUserDataForGenSeqModel("0140009")
-
-if __name__ == '__main__':
-    main()

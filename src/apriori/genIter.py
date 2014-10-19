@@ -12,7 +12,6 @@ def getSimUsers(user, model):
     # threshold = 0.6  # 過半数超えていれば類似していると判断してよいだろう
     threshold = 0.0  # 検証用
 
-
     # システムから自分以外の全てのユーザーを返す(SQL導入後はSQLアクセス)
     def getOtherUsers():
         other_users = list()
