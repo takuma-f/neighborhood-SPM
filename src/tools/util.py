@@ -137,10 +137,10 @@ def convertUserDataForGenModel(user):
         for line in f:
             splited_line = line.split(', ')
             splited_line
-            rates = splited_line[18:23]
             companion = splited_line[1]
             budget = splited_line[2]
             genres = splited_line[8:13]
+            rates = splited_line[18:23]
             for (rate, genre) in zip(rates, genres):
                 if int(genre) != 0:
                     result += str(rate).replace(('\r\n'or'\r'or'\n'), '')
@@ -171,3 +171,74 @@ def convertUserDataForGenModel(user):
     finally:
         if (f):
             f.close()
+
+
+# SeqModel生成可能な形式にContext, 履歴を変換し保存
+def convertUserDataForGenSeqModel(user):
+    f = None
+    model_f = None
+    result = str()
+    length = 0
+    try:
+        f = open('userData/'+user+'_history.txt', 'r')
+        for line in f:
+            splited_line = line.split(', ')
+            splited_line
+            companion = splited_line[1]
+            budget = splited_line[2]
+            genres = splited_line[8:13]
+            rates = splited_line[18:23]
+            length = 0
+            label = 0
+            rate_sum = 0
+            for genre in genres:
+                if str(genre) != "0":
+                    length += 1
+            for rate in rates:
+                rate_sum += int(str(rate).replace(('\r\n'or'\r'or'\n'), ''))
+            if rate_sum > length/2:  # 長さの半分以上満足ならば満足した
+                label = 1
+            result += str(label)
+            for counter in xrange(0, 4):  # 同伴者
+                if counter == int(companion):
+                    result += " "+str(counter)+":1"
+                else:
+                    result += " "+str(counter)+":0"
+            for counter in xrange(1, 5):  # 予算
+                if counter == int(budget):
+                    result += " "+str(counter+3)+":1"
+                else:
+                    result += " "+str(counter+3)+":0"
+            for counter in xrange(1, 6):
+                if counter == int(length):
+                    result += " "+str(counter+7)+":1"
+                else:
+                    result += " "+str(counter+7)+":0"
+            margin = 12
+            for genre in genres:
+                for counter in xrange(1, 41):
+                    if counter == int(genre):
+                        result += " "+str(counter+margin)+":1"
+                    else:
+                        result += " "+str(counter+margin)+":0"
+                margin += 41
+            for rate, counter in zip(rates, xrange(1, 6)):
+                if int(rate) == 1:
+                    result += " "+str(counter+216)+":1"
+                else:
+                    result += " "+str(counter+216)+":0"
+            result += "\r\n"
+            model_f = open('userData/'+user+'_svm.txt', 'w')
+            model_f.write(result)
+    except IOError:
+        printError()
+    finally:
+        if (f):
+            f.close()
+
+
+def main():
+    convertUserDataForGenSeqModel("0140009")
+
+if __name__ == '__main__':
+    main()

@@ -18,12 +18,12 @@ from tools import util as util
 
 def main():
     unixtime = int(time.time())
-    random.seed(unixtime)  # 乱数シードを固定(POPとrandam)
+    random.seed(unixtime)  # 乱数シードを設定(POPとrandam)
     input_data = cgi.FieldStorage()
     user = input_data["userId"].value
 
     # ユーザーのモデルを生成
-    util.convertUserDataForGenModel(user)
+    util.convertUserDataForGenSeqModel(user)
     model = svm.genModel(user)
     svm.saveModel(user+'.model', model)
 
