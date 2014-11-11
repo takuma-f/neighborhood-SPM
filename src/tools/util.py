@@ -187,18 +187,20 @@ def convertUserDataForGenSeqModel(user):
             companion = splited_line[1]
             budget = splited_line[2]
             genres = splited_line[8:13]
-            rates = splited_line[18:23]
+            label = splited_line[18]
+            # rates = splited_line[18:23]
             length = 0
-            label = -1
-            rate_sum = 0
+            # label = -1
+            # rate_sum = 0
             for genre in genres:
                 if str(genre) != "0":
                     length += 1
-            for rate in rates:
-                rate_sum += int(str(rate).replace(('\r\n'or'\r'or'\n'), ''))
-            if rate_sum > length/2.0:  # 長さの半分以上満足ならば満足した
-                label = 1
-            result += str(label)
+            result += str(label).replace(('\r\n'or'\r'or'\n'), '')
+            # for rate in rates:
+            #     rate_sum += int(str(rate).replace(('\r\n'or'\r'or'\n'), ''))
+            # if rate_sum > length/2.0:  # 長さの半分以上満足ならば満足した
+            #     label = 1
+            # result += str(label)
             for counter in xrange(0, 4):  # 同伴者
                 if counter == int(companion):
                     result += " "+str(counter)+":1"
@@ -209,7 +211,7 @@ def convertUserDataForGenSeqModel(user):
                     result += " "+str(counter+3)+":1"
                 else:
                     result += " "+str(counter+3)+":0"
-            for counter in xrange(1, 6):
+            for counter in xrange(1, 6):  # 長さ
                 if counter == int(length):
                     result += " "+str(counter+7)+":1"
                 else:
@@ -222,13 +224,13 @@ def convertUserDataForGenSeqModel(user):
                     else:
                         result += " "+str(counter+margin)+":0"
                 margin += 41
-            for rate, counter in zip(rates, xrange(1, 6)):
-                if int(rate) == 1:
-                    result += " "+str(counter+216)+":1"
-                elif int(rate) == -1:
-                    result += " "+str(counter+216)+":-1"
-                else:
-                    result += " "+str(counter+216)+":0"
+            # for rate, counter in zip(rates, xrange(1, 6)):
+            #     if int(rate) == 1:
+            #         result += " "+str(counter+216)+":1"
+            #     elif int(rate) == -1:
+            #         result += " "+str(counter+216)+":-1"
+            #     else:
+            #         result += " "+str(counter+216)+":0"
             result += "\r\n"
             model_f = open('userData/'+user+'_svm.txt', 'w')
             model_f.write(result)
@@ -237,3 +239,6 @@ def convertUserDataForGenSeqModel(user):
     finally:
         if (f):
             f.close()
+
+if __name__ == '__main__':
+    convertUserDataForGenSeqModel("0140011")
