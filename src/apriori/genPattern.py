@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # coding: UTF-8
 import sys
+import random
 from itertools import combinations
 from optparse import OptionParser
 
@@ -29,6 +30,19 @@ def genPattern(data_iter, minSupport):
     return transaction_list, patterns
 
 
+# lengthで指定した長さのランダムパターンをquantity個持つリストを返す
+def genRandomPattern(data_iter, length, quantity):
+    patterns = list()
+    pattern = list()
+
+    for q in xrange(quantity):
+        for l in xrange(length):
+            pattern.append(random.choice(data_iter))
+        patterns.append(pattern)
+        pattern = list()
+    return patterns
+
+
 def dataFromFile(fname):
     file_iter = open(fname, 'rU')
     for line in file_iter:
@@ -38,29 +52,7 @@ def dataFromFile(fname):
 
 
 def main():
-    optparser = OptionParser()
-    optparser.add_option('-f', '--inputFile', dest = 'input', help = 'the filename which contains the comma separated values', default=None)
-    optparser.add_option('-s', '--minSupport', dest='minS', help = 'minimum support value', default=0.0, type='float')
-
-    (options, args) = optparser.parse_args()
-
-    inFile = None
-    if options.input is None:
-        inFile = sys.stdin
-    elif options.input is not None:
-        inFile = dataFromFile(options.input)
-    else:
-        print 'No dataset filename specified, system with exit\n'
-        sys.exit('System will exit')
-
-    minSupport = options.minS
-    transaction_list, patternList = genPattern(inFile, minSupport)
-
-    for transaction in transaction_list:
-        print "%s," % str(transaction),
-
-    for pattern in patternList:
-        print "%s," % str(pattern),
+    pass
 
 if __name__ == "__main__":
     main()

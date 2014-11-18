@@ -13,7 +13,7 @@ from svmutil import *
 def genModel(user):
     y, x = svm_read_problem('userData/'+user+'_svm.txt')  # 学習データ読み込み
     prob = svm_problem(y, x)  # 学習データ入力
-    param = svm_parameter('-t 2 -c 2048 -g 2.0')  # パラメータ設定
+    param = svm_parameter('-t 2 -c 0.03125 -g 0.0078125')  # パラメータ設定
     model = svm_train(prob, param)  # 学習,分類モデル作成
     return model
 
@@ -30,38 +30,101 @@ def getAccuracy(comp_user, model):
     return p_acc[0] / 100  # p_labelとか一緒に出力するとgenIterで正常に判別されなくなる
 
 
-def main():
+def main3():
+    y, x = svm_read_problem('0140014_svm.txt')  # 学習データ読み込み
+    prob = svm_problem(y, x)  # 学習データ入力
+    param = svm_parameter('-t 2 -c 0.03125 -g 0.0078125')  # パラメータ設定
+    model = svm_train(prob, param)  # 学習,分類モデル作成
+    saveModel('0140014.model', model)
+
+
+def main2():
+    y, x = svm_read_problem('test001_svm.txt')  # 学習データ読み込み
+    prob = svm_problem(y, x)  # 学習データ入力
+    param = svm_parameter('-t 2 -c 0.03125 -g 0.0078125')  # パラメータ設定
+    model = svm_train(prob, param)  # 学習,分類モデル作成
+    saveModel('test001.model', model)
+
     y, x = svm_read_problem('0140006_svm.txt')  # 学習データ読み込み
     prob = svm_problem(y, x)  # 学習データ入力
-    param = svm_parameter('-t 2 -c 2.0 -g 2.0')  # パラメータ設定
     model = svm_train(prob, param)  # 学習,分類モデル作成
-    saveModel('0140006_svm.model', model)
+    saveModel('0140006.model', model)
+
+    y, x = svm_read_problem('0140007_svm.txt')  # 学習データ読み込み
+    prob = svm_problem(y, x)  # 学習データ入力
+    model = svm_train(prob, param)  # 学習,分類モデル作成
+    saveModel('0140007.model', model)
+
+    y, x = svm_read_problem('0140008_svm.txt')  # 学習データ読み込み
+    prob = svm_problem(y, x)  # 学習データ入力
+    model = svm_train(prob, param)  # 学習,分類モデル作成
+    saveModel('0140008.model', model)
+
+    y, x = svm_read_problem('0140009_svm.txt')  # 学習データ読み込み
+    prob = svm_problem(y, x)  # 学習データ入力
+    model = svm_train(prob, param)  # 学習,分類モデル作成
+    saveModel('0140009.model', model)
+
+    y, x = svm_read_problem('0140010_svm.txt')  # 学習データ読み込み
+    prob = svm_problem(y, x)  # 学習データ入力
+    model = svm_train(prob, param)  # 学習,分類モデル作成
+    saveModel('0140010.model', model)
+
+    y, x = svm_read_problem('0140011_svm.txt')  # 学習データ読み込み
+    prob = svm_problem(y, x)  # 学習データ入力
+    model = svm_train(prob, param)  # 学習,分類モデル作成
+    saveModel('0140011.model', model)
+
+    y, x = svm_read_problem('0140012_svm.txt')  # 学習データ読み込み
+    prob = svm_problem(y, x)  # 学習データ入力
+    model = svm_train(prob, param)  # 学習,分類モデル作成
+    saveModel('0140012.model', model)
+
+    y, x = svm_read_problem('0140013_svm.txt')  # 学習データ読み込み
+    prob = svm_problem(y, x)  # 学習データ入力
+    model = svm_train(prob, param)  # 学習,分類モデル作成
+    saveModel('0140013.model', model)
+
+
+def main():
+    y, x = svm_read_problem('test001_svm.txt')  # 学習データ読み込み
+    prob = svm_problem(y, x)  # 学習データ入力
+    param = svm_parameter('-t 2 -c 0.03125 -g 0.0078125')  # パラメータ設定
+    model = svm_train(prob, param)  # 学習,分類モデル作成
+    saveModel('test001_svm.model', model)
     test_name = "0140007_svm.txt"
     yt, xt = svm_read_problem(test_name)
     p_label, p_acc, p_val = svm_predict(yt, xt, model)
     print p_label, p_acc[0]
+    test_name = "0140008_svm.txt"
+    yt, xt = svm_read_problem(test_name)
+    p_label, p_acc, p_val = svm_predict(yt, xt, model)
+    print p_label, p_acc[0]
+    test_name = "0140009_svm.txt"
+    yt, xt = svm_read_problem(test_name)
+    p_label, p_acc, p_val = svm_predict(yt, xt, model)
+    print p_label, p_acc[0]
+    test_name = "0140010_svm.txt"
+    yt, xt = svm_read_problem(test_name)
+    p_label, p_acc, p_val = svm_predict(yt, xt, model)
+    print p_label, p_acc[0]
+    test_name = "0140011_svm.txt"
+    yt, xt = svm_read_problem(test_name)
+    p_label, p_acc, p_val = svm_predict(yt, xt, model)
+    print p_label, p_acc[0]
+    test_name = "0140012_svm.txt"
+    yt, xt = svm_read_problem(test_name)
+    p_label, p_acc, p_val = svm_predict(yt, xt, model)
+    print p_label, p_acc[0]
+    test_name = "0140013_svm.txt"
+    yt, xt = svm_read_problem(test_name)
+    p_label, p_acc, p_val = svm_predict(yt, xt, model)
+    print p_label, p_acc[0]
+    test_name = "0140014_svm.txt"
+    yt, xt = svm_read_problem(test_name)
+    p_label, p_acc, p_val = svm_predict(yt, xt, model)
+    print p_label, p_acc[0]
 
-    # y, x = svm_read_problem('test2.scale')  # 学習データ読み込み
-    # prob = svm_problem(y, x)  # 学習データ入力
-    # param = svm_parameter('-t 0 -c 32.0')  # パラメータ設定
-    # model = svm_train(prob, param)  # 学習,分類モデル作成
-    # saveModel('test2_scale.model', model)
-    # for i in xrange(1, 10):
-    #     test_name = "test2_case"+str(i)+".scale"
-    #     yt, xt = svm_read_problem(test_name)
-    #     p_label, p_acc, p_val = svm_predict(yt, xt, model)
-    #     print p_label, p_acc[0]
-
-    # y, x = svm_read_problem('rbf1.txt')  # 学習データ読み込み
-    # prob = svm_problem(y, x)  # 学習データ入力
-    # param = svm_parameter('-t 2 -c 512 -g 0.5')  # パラメータ設定
-    # model = svm_train(prob, param)  # 学習,分類モデル作成
-    # saveModel('rbf1.model', model)
-    # for i in xrange(1, 11):
-    #     test_name = "rbf1_case"+str(i)+".txt"
-    #     yt, xt = svm_read_problem(test_name)
-    #     p_label, p_acc, p_val = svm_predict(yt, xt, model)
-    #     print p_label, p_acc[0]
 
 if __name__ == '__main__':
     main()

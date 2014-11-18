@@ -39,6 +39,8 @@ def main():
 
     print "<!DOCTYPE html>"
 
+# 検証用の詳細パネル(原則コメントアウト)
+# ---ここから---
     print """
   <div class="col-md-12">
     <div id="plan%s" class="panel panel-default">
@@ -70,7 +72,6 @@ def main():
     </div>
   </div>
     """
-
     conv_data_iter = list()
     for data in data_iter:
         conv_data_iter.append(util.convertAction(data))
@@ -78,6 +79,7 @@ def main():
     print '<input type="hidden" id="data_iter" value="%s">' % conv_data_iter
     print '<input type="hidden" id="sim_iter" value="%s">' % sim_iter
     print '</form>'
+# ---ここまで---
 
     counter = 0
     neigh_count = 0

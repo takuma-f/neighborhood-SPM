@@ -17,7 +17,7 @@ def main():
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="素晴らしくNice choice.な">
+    <meta name="description" content="">
     <meta name="TakumaFUJITSUKA" content="">
     <link rel="icon" href="../../favicon.ico">
 
@@ -78,166 +78,139 @@ def main():
       <form action="#">
         <br>
         <div class="row">
-          <div class="col-md-10">
+          <div class="col-md-12">
             <div id="plan%s" class="panel panel-default">
               <div class="panel-heading">
-                <h3 class="panel-title">履歴を入力！</h3>
+                <h3 class="panel-title">出かける時に好む・よく取る行動を5つ選択してください！</h3>
               </div>
               <div class="panel-body">
                 <div class="row">
+                  <div class="col-md-12">
+                    <input type="text" id="userId" name="userId" placeholder="ユーザーIDを入力" style="width:150px; height:30px;">
+                    <input type="date" id="date" name="date" style="width:150px; height:30px;">
+                    <select id="companion" name="companion">
+                      <option value="">同伴者を選択して下さい</option>
+                      <option value="0">一人</option>
+                      <option value="1">友人</option>
+                      <option value="2">恋人</option>
+                      <option value="3">家族</option>
+                    </select>
+                    <select id="budget" name="budget">
+                      <option value="">予算を選択して下さい</option>
+                      <option value="1">0 ~ 1000円</option>
+                      <option value="2">1000 ~ 5000円</option>
+                      <option value="3">5000 ~ 10000円</option>
+                      <option value="4">10000円以上</option>
+                    </select>
+                  </div>
+                </div>
+                <br />
+                <div class="row">
+                  <div class="col-md-1"></div>
   """
 
   for x in xrange(1,6):
     print """
-    <div class="col-md-3">
-      <div class="col-md-12" id="ItemBox">
-        <input type="text" id="venue%s" value="%s箇所目に訪れた場所"/>
-        <br>
-        <br>
-        <select id="action%s" name="action%s" style="width:150px;">
-          <option value="0">取った行動を選択</option>
-          <option value="Eat">食事する</option>
-          <option value="Tea">お茶する</option>
-          <option value="Play">遊ぶ</option>
-          <option value="Sight">名所を見る・歩く</option>
-          <option value="Appreciate">鑑賞する</option>
-          <option value="Shop">買い物する</option>
-        </select>
-        <br>
-        <br>
-        <select id="genre%s" name="genre%s" style="width:150px;">
-          <option value="0">施設のジャンルを選択</option>
-          <optgroup label="Eat">
-            <option value="1">和食・寿司</option>
-            <option value="2">中華料理</option>
-            <option value="3">焼肉・焼き物・韓国料理</option>
-            <option value="4">イタリアン・フレンチ他洋食</option>
-            <option value="5">ファミリーレストラン</option>
-            <option value="6">定食</option>
-            <option value="7">カレー・アジア料理</option>
-            <option value="8">ラーメン・麺類</option>
-            <option value="9">ファストフード・牛丼</option>
-            <option value="10">居酒屋・バー</option>
-          </optgroup>
-          <optgroup label="Tea">
-            <option value="11">カフェ・スイーツ（和風）</option>
-            <option value="12">カフェ・スイーツ（洋風）</option>
-          </optgroup>
-          <optgroup label="Play">
-            <option value="13">遊園地</option>
-            <option value="14">水族館</option>
-            <option value="15">映画館・劇場</option>
-            <option value="16">カラオケ・ゲームセンター</option>
-            <option value="17">スポーツ施設</option>
-            <option value="18">レジャー施設・ビーチ</option>
-            <option value="19">イベント会場</option>
-            <option value="20">温泉・リゾート施設</option>
-            <option value="21">夜遊び・ディスコクラブ</option>
-          </optgroup>
-          <optgroup label="Sight">
-            <option value="22">神社・仏閣</option>
-            <option value="23">史跡</option>
-            <option value="24">展望台・タワー</option>
-            <option value="25">公園・庭園</option>
-          </optgroup>
-          <optgroup label="Appreciate">
-            <option value="26">博物館</option>
-            <option value="27">美術館・ギャラリー</option>
-            <option value="28">資料館・ミュージアム</option>
-          </optgroup>
-          <optgroup label="Shop">
-            <option value="29">百貨店</option>
-            <option value="30">ファッション</option>
-            <option value="31">食品（持ち帰り）</option>
-            <option value="32">菓子（持ち帰り）</option>
-            <option value="33">酒類（持ち帰り）</option>
-            <option value="34">雑貨・土産物</option>
-            <option value="35">食器・花器</option>
-            <option value="36">宝飾品</option>
-            <option value="37">書店</option>
-            <option value="38">家電量販店</option>
-            <option value="39">スポーツ用品店</option>
-            <option value="40">家具屋</option>
-            <option value="41">その他趣味品</option>
-          </optgroup>
-        </select>
-        <br>
-        <br>
-        <select id="rate%s" name="rate%s" style="width:150px;">
-          <option value="0">評価を選択</option>
-          <option value="1">満足</option>
-          <option value="-1">不満</option>
-        </select>
-        <br>
-        <br>
-      </div>
+    <div class="col-md-2" id="ItemBox">
+      <select id="action%s" name="action%s" style="width:150px;">
+        <option value="0">行動を選択</option>
+        <option value="Eat">食事する</option>
+        <option value="Tea">お茶する</option>
+        <option value="Play">遊ぶ</option>
+        <option value="Sight">名所を見る・歩く</option>
+        <option value="Appreciate">鑑賞する</option>
+        <option value="Shop">買い物する</option>
+      </select>
+      <br>
+      <br>
+      <select id="genre%s" name="genre%s" style="width:150px;">
+        <option value="0">ジャンルを選択</option>
+        <optgroup label="Eat">
+          <option value="1">和食・寿司</option>
+          <option value="2">中華料理</option>
+          <option value="3">焼肉・焼き物・韓国料理</option>
+          <option value="4">イタリアン・フレンチ他洋食</option>
+          <option value="5">ファミリーレストラン</option>
+          <option value="6">定食</option>
+          <option value="7">カレー・アジア料理</option>
+          <option value="8">ラーメン・麺類</option>
+          <option value="9">ファストフード・牛丼</option>
+          <option value="10">居酒屋・バー</option>
+        </optgroup>
+        <optgroup label="Tea">
+          <option value="11">カフェ・スイーツ（和風）</option>
+          <option value="12">カフェ・スイーツ（洋風）</option>
+        </optgroup>
+        <optgroup label="Play">
+          <option value="13">遊園地</option>
+          <option value="14">水族館</option>
+          <option value="15">映画館・劇場</option>
+          <option value="16">カラオケ・ゲームセンター</option>
+          <option value="17">スポーツ施設</option>
+          <option value="18">レジャー施設・ビーチ</option>
+          <option value="19">イベント会場</option>
+          <option value="20">温泉・リゾート施設</option>
+          <option value="21">夜遊び・ディスコクラブ</option>
+        </optgroup>
+        <optgroup label="Sight">
+          <option value="22">神社・仏閣</option>
+          <option value="23">史跡</option>
+          <option value="24">展望台・タワー</option>
+          <option value="25">公園・庭園</option>
+        </optgroup>
+        <optgroup label="Appreciate">
+          <option value="26">博物館</option>
+          <option value="27">美術館・ギャラリー</option>
+          <option value="28">資料館・ミュージアム</option>
+        </optgroup>
+        <optgroup label="Shop">
+          <option value="29">百貨店</option>
+          <option value="30">ファッション</option>
+          <option value="31">食品（持ち帰り）</option>
+          <option value="32">菓子（持ち帰り）</option>
+          <option value="33">酒類（持ち帰り）</option>
+          <option value="34">雑貨・土産物</option>
+          <option value="35">食器・花器</option>
+          <option value="36">宝飾品</option>
+          <option value="37">書店</option>
+          <option value="38">家電量販店</option>
+          <option value="39">スポーツ用品店</option>
+          <option value="40">家具屋</option>
+          <option value="41">その他趣味品</option>
+        </optgroup>
+      </select>
     </div>
-    """ % (x,x,x,x,x,x,x,x)
+    """ % (x,x,x,x)
 
   print """
-        </div>
-      </div>
-      <div class="panel-footer">
-<!--         <button type="button" class="btn btn-primary btn-small" id="addplace"><i class="glyphicon glyphicon-plus"></i> 訪れた場所を追加</button>
-        <button type="button" class="btn btn-default btn-small" id="removeplace"><i class="glyphicon glyphicon-minus"></i> 訪れた場所を減らす</button>
- -->      </div>
-    </div>
-  </div>
-  """
-
-  print """
-        <div class="col-md-2 well">
-          <div class="col-md-12">
-            <div class="row">
-              <input type="text" id="userId" name="userId" placeholder="ユーザーIDを入力" style="width:150px;">
             </div>
-            <div class="row">
-              <input type="date" id="date" name="date" style="width:150px;">
-            </div>
-            <div class="row">
-              <br>
-              同伴者を選択:<br>
-              <input type="radio" name="companion" value="0"> 一人 <br>
-              <input type="radio" name="companion" value="1"> 同性の友人 <br>
-              <input type="radio" name="companion" value="2"> 異性の友人 <br>
-              <input type="radio" name="companion" value="3"> 親・家族 <br>
-            </div>
-            <div class="row">
-              <br>
-              <select id="budget" name="budget">
-                <option value="">予算を選択して下さい</option>
-                <option value="1">0 ~ 1000円</option>
-                <option value="2">1000 ~ 5000円</option>
-                <option value="3">5000 ~ 10000円</option>
-                <option value="4">10000円以上</option>
-              </select>
-            </div>
-            <br>
-            <div class="row">
-              <button type="button" class="btn btn-primary" id="submitHistory" style="width:150px;">登録</button>
-              <button type="reset" class="btn btn-default" id="resetContext" style="width:150px;">リセット</button>
-              <div id="response"></div>
-            </div>
+          </div>
+          <div class="panel-footer">
+            <button type="button" class="btn btn-primary" id="genPattern" style="width:150px;">行動パターン生成！</button>
+            <div id="sendResponse"></div>
           </div>
         </div>
       </div>
-    </form>
-  </div>
+    </div>
+  </form>
+  <div id="patternArea" class="row"></div>
+</div>
 
-  <!-- Bootstrap core JavaScript
-  ================================================== -->
-  <!-- Placed at the end of the document so the pages load faster -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-  <script src="../dist/js/bootstrap.min.js"></script>
-  <script src="../assets/js/docs.min.js"></script>
-  <script src="../js/ajax.js"></script>
-  <script src="../js/ConnectedSelect.js"></script>
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="../dist/js/bootstrap.min.js"></script>
+<script src="../assets/js/docs.min.js"></script>
+<script src="../js/ajax2.js"></script>
+<script src="../js/ConnectedSelect.js"></script><!-- 行動とジャンルの連動プルダウン -->
   """
+  # ConnectedSelect.jsの関連付けを初期化
   print "<script>"
-
   for x in xrange(1,6):
     print "ConnectedSelect(['action%s','genre%s']);" % (x, x)
   print "</script>"
+
   print "</body></html>"
   import cgitb
   cgitb.enable()

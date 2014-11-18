@@ -25,7 +25,6 @@ $('#submitContext').click(function() {
   });
 });
 
-
 $('#submitHistory').click(function() {
   var button = $(this);
     button.attr("disabled", true);
@@ -70,10 +69,6 @@ $('#submitHistory').click(function() {
     dataType: 'HTML',
     timeout: 100000,
     success: function(res) {
-      $('#response').html('<span id="alert">登録完了.</span>');
-      $('#alert').fadeOut(1500).queue(function() {
-        this.remove();
-      });
     },
     error: function(XMLHttpRequest, textStatus, errorThrown) {
       $('#response').html('<span id="alert">予期せぬエラーが発生しました.</span>');

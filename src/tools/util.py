@@ -127,6 +127,39 @@ def convertAction(pattern):
     return convertedSet
 
 
+def detParentAction(pattern):
+    action_set = list()
+
+    for genre in pattern:
+        if 0 < int(genre) < 11:
+            action_set.append("Eat")
+        elif 10 < int(genre) < 13:
+            action_set.append("Tea")
+        elif 12 < int(genre) < 22:
+            action_set.append("Play")
+        elif 21 < int(genre) < 26:
+            action_set.append("Sight")
+        elif 25 < int(genre) < 29:
+            action_set.append("Appreciate")
+        elif 28 < int(genre) < 42:
+            action_set.append("Shop")
+    return action_set
+
+
+def arrangeGenreList(genre_list):
+    if len(genre_list) != 5:
+        genre_list.append("0")
+        arrangeGenreList(genre_list)
+    return genre_list
+
+
+def arrangeActionList(action_list):
+    if len(action_list) != 5:
+        action_list.append("None")
+        arrangeActionList(action_list)
+    return action_list
+
+
 # Model生成可能な形式にContext, 履歴を変換し保存
 def convertUserDataForGenModel(user):
     f = None
@@ -203,22 +236,22 @@ def convertUserDataForGenSeqModel(user):
             # result += str(label)
             for counter in xrange(0, 4):  # 同伴者
                 if counter == int(companion):
-                    result += " "+str(counter)+":1"
+                    result += " "+str(counter+1)+":1"
                 else:
-                    result += " "+str(counter)+":0"
+                    result += " "+str(counter+1)+":0"
             for counter in xrange(1, 5):  # 予算
                 if counter == int(budget):
-                    result += " "+str(counter+3)+":1"
+                    result += " "+str(counter+4)+":1"
                 else:
-                    result += " "+str(counter+3)+":0"
+                    result += " "+str(counter+4)+":0"
             for counter in xrange(1, 6):  # 長さ
                 if counter == int(length):
-                    result += " "+str(counter+7)+":1"
+                    result += " "+str(counter+8)+":1"
                 else:
-                    result += " "+str(counter+7)+":0"
-            margin = 12
+                    result += " "+str(counter+8)+":0"
+            margin = 13
             for genre in genres:
-                for counter in xrange(1, 41):
+                for counter in xrange(1, 42):
                     if counter == int(genre):
                         result += " "+str(counter+margin)+":1"
                     else:
@@ -240,5 +273,20 @@ def convertUserDataForGenSeqModel(user):
         if (f):
             f.close()
 
+
+def main2():
+    user = "0140014"
+    convertUserDataForGenSeqModel(user)
+
+
+def main():
+    for x in xrange(6,10):
+        user = "014000"+str(x)
+        convertUserDataForGenSeqModel(user)
+    for x in xrange(10,14):
+        user = "01400"+str(x)
+        convertUserDataForGenSeqModel(user)
+
+
 if __name__ == '__main__':
-    convertUserDataForGenSeqModel("0140011")
+    main2()
