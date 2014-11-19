@@ -35,10 +35,13 @@ def genRandomPattern(data_iter, length, quantity):
     patterns = list()
     pattern = list()
 
-    for q in xrange(quantity):
-        for l in xrange(length):
-            pattern.append(random.choice(data_iter))
-        patterns.append(pattern)
+    while len(patterns) < quantity:
+        while len(pattern) < length:
+            item = random.choice(data_iter)
+            if item not in pattern:
+                pattern.append(item)
+        if pattern not in patterns:
+            patterns.append(pattern)
         pattern = list()
     return patterns
 
@@ -52,7 +55,9 @@ def dataFromFile(fname):
 
 
 def main():
-    pass
+    print genRandomPattern(["A","B","C","D","E"], 5, 5)
+    print genRandomPattern(["A","B","C","D","E"], 4, 3)
+    print genRandomPattern(["A","B","C","D","E"], 3, 2)
 
 if __name__ == "__main__":
     main()
