@@ -15,7 +15,8 @@ def getSimUsers(user, model):
     # システムから自分以外の全てのユーザーを返す(SQL導入後はSQLアクセス)
     def getOtherUsers():
         other_users = list()
-        other_users = ["0140006", "0140007", "0140008", "0140009", "0140010", "0140011", "0140012", "0140013"]
+        # other_users = ["0140006", "0140007", "0140008", "0140009", "0140010", "0140011", "0140012", "0140013"]
+        other_users = ["0140006"]
         return other_users
 
     other_users = getOtherUsers()
@@ -30,13 +31,14 @@ def getSimUsers(user, model):
             yield sim_user
 
 
-# 類似ユーザーの履歴に含まれるコンテキストとジャンル(行動)を取得
+# 類似ユーザーの履歴に含まれるラベル、コンテキスト、ジャンル(行動)を取得
 def getHistories(sim_user):
     f = open('userData/'+sim_user+'_history.txt', 'r')
     for line in f:
         history_context = list()
         history = list()
         splited_line = line.split(', ')
+        label = int(splited_line[18])
         contexts = splited_line[1:3]
         genres = splited_line[8:13]
         # actions = splited_line[13:18]
@@ -48,7 +50,7 @@ def getHistories(sim_user):
         # for action in actions:
         #     if action != '0':
         #         history.append(action)
-        yield history_context, history
+        yield label, history_context, history
 
 
 # 履歴のコンテキストが適合しているか判定
@@ -68,14 +70,15 @@ def matchContext(history_context, input_data):
         return False
 
 
-# 類似ユーザーの履歴から入力したコンテキストに一致するもののリストを返す
+# 類似ユーザーの履歴から入力したlabel=1かつコンテキストに一致するもののリストを返す
 def getDataIter(user, model, input_data):
     data_iter = list()
     sim_iter = list()
 
     for sim_user in getSimUsers(user, model):
-        for history_context, history in getHistories(sim_user):
-            if matchContext(history_context, input_data):
-                data_iter.append(history)
-                sim_iter.append(sim_user)
+        for label, history_context, history in getHistories(sim_user):
+            if label == 1:
+                if matchContext(history_context, input_data):
+                    data_iter.append(history)
+                    sim_iter.append(sim_user)
     return data_iter, sim_iter
