@@ -31,15 +31,14 @@ def main():
     for x, p in enumerate(xrange(1, 11)):
         counter = x + 1
         print """
-<div class="col-md-12">
-  <div id="panel%s" class="panel panel-default">
-    <div class="panel-heading">
-      <h3 class="panel-title">行動パターン%s</h3>
-    </div>
-    <div class="panel-body">
-      <div class="row">
-        <form id="patternForm">
-          <div class="col-md-1"></div>
+<div id="panel%s" class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">行動パターン%s</h3>
+  </div>
+  <div class="panel-body">
+    <div class="row">
+      <form id="patternForm">
+        <div class="col-md-1"></div>
         """ % (counter, counter)
 
         if counter < 6:
@@ -74,13 +73,12 @@ def main():
       <br />
       <br />
       <button type="button" class="btn btn-primary btn-small" id="saveRating" form="patternForm" value="%s">
-        <i class="glyphicon glyphicon-plus"></i> 評価を送信
+        <i class="glyphicon glyphicon-plus"></i> 評価を送信！
       </button>
       <span id="saveResponse"></span>
             """ % (counter)
 
         print"""
-    </div>
   </div>
 </div>
         """

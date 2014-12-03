@@ -42,16 +42,15 @@ def main():
 # 検証用の詳細パネル(原則コメントアウト)
 # ---ここから---
     print """
-  <div class="col-md-12">
-    <div id="plan%s" class="panel panel-default">
-      <div class="panel-heading">
-        <h3 class="panel-title">抽出データ詳細</h3>
-      </div>
-        <div class="panel-body">
-          <div class="row">
+<div id="detail" class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">抽出データ詳細</h3>
+  </div>
+    <div class="panel-body">
+      <div class="row">
     """
     for sim_user in genIter.getSimUsers(user, model):
-      print "類似ユーザー:%s (類似度%s)" % (sim_user, svm.getAccuracy(sim_user, model))
+      print "ユーザー:%s (類似度%s)" % (sim_user, svm.getAccuracy(sim_user, model))
       print "<br>"
       for label, history_context, history in genIter.getHistories(sim_user):
         print "抽出されたパターン :<br>"
@@ -67,10 +66,9 @@ def main():
         print "%s -> " % t
       print "<br>"
     print """
-        </div>
-      </div>
     </div>
   </div>
+</div>
     """
     conv_data_iter = list()
     for data in data_iter:
@@ -92,14 +90,13 @@ def main():
         #   top_score = s
         # recommend_score = 100 * (s/top_score)
         print """
-  <div class="col-md-12">
-    <div id="plan%s" class="panel panel-default">
-      <div class="panel-heading">
-        <h3 class="panel-title">おすすめプラン%s</h3>
-      </div>
-        <div class="panel-body">
-          <div class="row">
-            <form id="planForm%s">
+<div id="plan%s" class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">おすすめプラン%s</h3>
+  </div>
+    <div class="panel-body">
+      <div class="row">
+        <form id="planForm%s">
         """ % (counter, counter, counter)
 
         # 乱数で入れ替える
@@ -154,11 +151,12 @@ def main():
 
         for (action, a) in zip(convert_p, p):
             counter_a += 1
-            print '<div class="col-md-4">'
+            print '<div class="col-md-4 well">'
             print '<div class="row">'
-            print '<h4>%s %s</h4>' % (counter_a, action)
+            print '<h4>%sヶ所目：%s</h4>' % (counter_a, action)
             print "</div>"
             print '<div class="row">'
+            print '<div class="text-center">'
             if a == "1":
               print """
               <!--和食・寿司-->
@@ -589,17 +587,29 @@ def main():
               """ % (counter, counter_a)
             print "</div>"
             print "</div>"
+            print "</div>"
         print """
           </form>
         </div>
       </div>
       <div class="panel-footer">
-        <button type="button" class="btn btn-primary btn-small" id="savePlan%s" form="planForm%s" value="%s"><i class="glyphicon glyphicon-plus"></i> このプランを選択</button>
-        <span id="response%s"></span>
-      </div>
-    </div>
+        """
+        print """
+        <input type="radio" form="patternForm" name="rate%s" value="1"> このプランは面白そう！
+        <input type="radio" form="patternForm" name="rate%s" value="-1"> このプランはイマイチ
+        """ % (counter, counter)
+        if counter == 6:
+          print """
+        <br />
+        <br />
+        <button type="button" class="btn btn-primary btn-small" id="saveRating" form="planForm">
+          <i class="glyphicon glyphicon-plus"></i> 評価を送信！
+        </button>
+          """
+        print """
   </div>
-        """ % (counter, counter, counter, counter)
+</div>
+        """
         if counter == 6:
             break  # 6個提示
     print """

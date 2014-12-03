@@ -78,35 +78,34 @@ def main():
       <form action="#">
         <br>
         <div class="row">
-          <div class="col-md-12">
-            <div id="plan%s" class="panel panel-default">
-              <div class="panel-heading">
-                <h3 class="panel-title">出かける時に好む・よく取る行動を5つ選択してください！</h3>
-              </div>
-              <div class="panel-body">
-                <div class="row">
-                  <div class="col-md-12">
-                    <input type="text" id="userId" name="userId" placeholder="ユーザーIDを入力" style="width:150px; height:30px;">
-                    <input type="date" id="date" name="date" style="width:150px; height:30px;">
-                    <select id="companion" name="companion" style="width:180px;">
-                      <option value="">同伴者を選択して下さい</option>
-                      <option value="1">一人</option>
-                      <option value="2">友人</option>
-                      <option value="3">恋人</option>
-                      <option value="4">家族</option>
-                    </select>
-                    <select id="budget" name="budget" style="width:180px;">
-                      <option value="">予算を選択して下さい</option>
-                      <option value="1">0 ~ 5000円</option>
-                      <option value="2">5000 ~ 10000円</option>
-                      <option value="3">10000 ~ 30000円</option>
-                      <option value="4">30000円以上</option>
-                    </select>
-                  </div>
+          <div id="inputContext" class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title">出かける時に好む・よく取る行動を5つ選択してください！</h3>
+            </div>
+            <div class="panel-body">
+              <div class="row">
+                <div class="col-md-12">
+                  <input type="text" id="userId" name="userId" placeholder="ユーザーIDを入力" style="width:150px; height:30px;">
+                  <input type="date" id="date" name="date" style="width:150px; height:30px;">
+                  <select id="companion" name="companion" style="width:180px;">
+                    <option value="">同伴者を選択して下さい</option>
+                    <option value="1">一人</option>
+                    <option value="2">友人</option>
+                    <option value="3">恋人</option>
+                    <option value="4">家族</option>
+                  </select>
+                  <select id="budget" name="budget" style="width:180px;">
+                    <option value="">予算を選択して下さい</option>
+                    <option value="1">0 ~ 5000円</option>
+                    <option value="2">5000 ~ 10000円</option>
+                    <option value="3">10000 ~ 30000円</option>
+                    <option value="4">30000円以上</option>
+                  </select>
                 </div>
-                <br />
-                <div class="row">
-                  <div class="col-md-1"></div>
+              </div>
+              <br />
+              <div class="row">
+                <div class="col-md-1"></div>
   """
 
   for x in xrange(1,6):
@@ -183,12 +182,11 @@ def main():
     """ % (x,x,x,x)
 
   print """
-            </div>
           </div>
-          <div class="panel-footer">
-            <button type="button" class="btn btn-primary" id="genPattern" style="width:150px;">行動パターン生成！</button>
-            <div id="sendResponse"></div>
-          </div>
+        </div>
+        <div class="panel-footer">
+          <button type="button" class="btn btn-primary" id="genPattern" style="width:150px;">行動パターン生成！</button>
+          <div id="sendResponse"></div>
         </div>
       </div>
     </div>

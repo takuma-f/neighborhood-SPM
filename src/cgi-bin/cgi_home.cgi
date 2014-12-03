@@ -76,49 +76,44 @@ def main():
       </div><!--/.nav-collapse -->
     </div>
   </div>
-
   <div class="container">
-    <br>
-    <div class="row">
-      <div id="planArea" class="col-md-10"></div>
-      <div class="col-md-2 well">
-        <div class="col-md-12">
-          <form action="#">
+    <form action="#">
+      <br>
+      <div class="row">
+        <div id="inputContext" class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">ユーザーID, 日付, 同伴者, 予算を入力してください！</h3>
+          </div>
+          <div class="panel-body">
             <div class="row">
-              <input type="text" id="userId" name="userId" placeholder="ユーザーIDを入力" style="width:150px;">
+              <div class="col-md-12">
+                <input type="text" id="userId" name="userId" placeholder="ユーザーIDを入力" style="width:150px; height:30px;">
+                <input type="date" id="date" name="date" style="width:150px; height:30px;">
+                <select id="companion" name="companion" style="width:150px;">
+                  <option value="">同伴者を選択して下さい</option>
+                  <option value="1">一人</option>
+                  <option value="2">友人</option>
+                  <option value="3">恋人</option>
+                  <option value="4">家族</option>
+                </select>
+                <select id="budget" name="budget" style="width:150px;">
+                  <option value="">予算を選択して下さい</option>
+                  <option value="1">0 ~ 5000円</option>
+                  <option value="2">5000 ~ 10000円</option>
+                  <option value="3">10000 ~ 30000円</option>
+                  <option value="4">30000円以上</option>
+                </select>
+              </div>
             </div>
-            <div class="row">
-              <input type="date" id="date" name="date" style="width:150px;">
-            </div>
-            <div class="row">
-              <br>
-              <select id="companion" name="companion" style="width:150px;">
-                <option value="">同伴者を選択して下さい</option>
-                <option value="1">一人</option>
-                <option value="2">友人</option>
-                <option value="3">恋人</option>
-                <option value="4">家族</option>
-              </select>
-            </div>
-            <div class="row">
-              <br>
-              <select id="budget" name="budget" style="width:150px;">
-                <option value="">予算を選択して下さい</option>
-                <option value="1">0 ~ 5000円</option>
-                <option value="2">5000 ~ 10000円</option>
-                <option value="3">10000 ~ 30000円</option>
-                <option value="4">30000円以上</option>
-              </select>
-            </div>
-          </form>
-          <br>
-          <div class="row">
+          </div>
+          <div class="panel-footer">
             <button type="button" class="btn btn-primary" id="submitContext" style="width:150px;">プランを作る</button>
             <button type="reset" class="btn btn-default" id="resetContext" style="width:150px;">条件をリセット</button>
           </div>
         </div>
       </div>
-    </div>
+    </form>
+  <div id="planArea" class="row"></div>
   </div>
     <!-- Bootstrap core JavaScript
     ================================================== -->
