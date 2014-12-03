@@ -4,7 +4,7 @@ $('#submitContext').click(function() {
 
   var hostUrl= './cgi_genPlan.cgi';
   var param1 = $('#userId').val();
-  var param2 = $('input:radio[name="companion"]:checked').val();
+  var param2 = $('#companion').val();
   var param3 = $('#budget').val();
   $.ajax({
     url: hostUrl,
@@ -32,7 +32,7 @@ $('#submitHistory').click(function() {
   var hostUrl= './cgi_writefile.cgi';
   var param1 = $('#userId').val();
   var param2 = $('#date').val();
-  var param3 = $('input:radio[name="companion"]:checked').val();
+  var param3 = $('#companion').val();
   var param4 = $('#budget').val();
   var param5 = $('#venue1').val();
   var param6 = $('#venue2').val();

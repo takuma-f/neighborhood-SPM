@@ -13,7 +13,7 @@ from svmutil import *
 def genModel(user):
     y, x = svm_read_problem('userData/'+user+'_svm.txt')  # 学習データ読み込み
     prob = svm_problem(y, x)  # 学習データ入力
-    param = svm_parameter('-t 2 -c 0.03125 -g 0.0078125')  # パラメータ設定
+    param = svm_parameter('-t 2 -c 2.0 -g 2.0')  # パラメータ設定
     model = svm_train(prob, param)  # 学習,分類モデル作成
     return model
 
@@ -27,7 +27,7 @@ def saveModel(modelName, model):
 def getAccuracy(comp_user, model):
     yt, xt = svm_read_problem('userData/'+comp_user+'_svm.txt')
     p_label, p_acc, p_val = svm_predict(yt, xt, model)
-    return p_acc[0] / 100  # p_labelとか一緒に出力するとgenIterで正常に判別されなくなる
+    return p_label, p_acc[0] / 100  # p_labelとか一緒に出力するとgenIterで正常に判別されなくなる
 
 
 def main3():
@@ -89,38 +89,11 @@ def main2():
 def main():
     y, x = svm_read_problem('test001_svm.txt')  # 学習データ読み込み
     prob = svm_problem(y, x)  # 学習データ入力
-    param = svm_parameter('-t 2 -c 0.03125 -g 0.0078125')  # パラメータ設定
+    param = svm_parameter('-t 2 -c 2.0 -g 2.0')  # パラメータ設定
+    # param = svm_parameter('-t 2 -c 0.03125 -g 0.0078125')  # パラメータ設定
     model = svm_train(prob, param)  # 学習,分類モデル作成
     saveModel('test001_svm.model', model)
-    test_name = "0140007_svm.txt"
-    yt, xt = svm_read_problem(test_name)
-    p_label, p_acc, p_val = svm_predict(yt, xt, model)
-    print p_label, p_acc[0]
-    test_name = "0140008_svm.txt"
-    yt, xt = svm_read_problem(test_name)
-    p_label, p_acc, p_val = svm_predict(yt, xt, model)
-    print p_label, p_acc[0]
-    test_name = "0140009_svm.txt"
-    yt, xt = svm_read_problem(test_name)
-    p_label, p_acc, p_val = svm_predict(yt, xt, model)
-    print p_label, p_acc[0]
-    test_name = "0140010_svm.txt"
-    yt, xt = svm_read_problem(test_name)
-    p_label, p_acc, p_val = svm_predict(yt, xt, model)
-    print p_label, p_acc[0]
-    test_name = "0140011_svm.txt"
-    yt, xt = svm_read_problem(test_name)
-    p_label, p_acc, p_val = svm_predict(yt, xt, model)
-    print p_label, p_acc[0]
-    test_name = "0140012_svm.txt"
-    yt, xt = svm_read_problem(test_name)
-    p_label, p_acc, p_val = svm_predict(yt, xt, model)
-    print p_label, p_acc[0]
-    test_name = "0140013_svm.txt"
-    yt, xt = svm_read_problem(test_name)
-    p_label, p_acc, p_val = svm_predict(yt, xt, model)
-    print p_label, p_acc[0]
-    test_name = "0140014_svm.txt"
+    test_name = "0140006_svm.txt"
     yt, xt = svm_read_problem(test_name)
     p_label, p_acc, p_val = svm_predict(yt, xt, model)
     print p_label, p_acc[0]

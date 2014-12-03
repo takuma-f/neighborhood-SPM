@@ -5,7 +5,7 @@ $('[id^=savePlan]').click(function() {
   var hostUrl= './cgi_savePlan.cgi';
   var param1 = $('#userId').val();
   var param2 = $('#date').val();
-  var param3 = $('input:radio[name="companion"]:checked').val();
+  var param3 = $('#companion').val();
   var param4 = $('#budget').val();
   var param5 = $('#pattern1').val() || "None";
   var param6 = $('#pattern2').val() || "None";

@@ -53,7 +53,7 @@ def main():
     for sim_user in genIter.getSimUsers(user, model):
       print "類似ユーザー:%s (類似度%s)" % (sim_user, svm.getAccuracy(sim_user, model))
       print "<br>"
-      for history_context, history in genIter.getHistories(sim_user):
+      for label, history_context, history in genIter.getHistories(sim_user):
         print "抽出されたパターン :<br>"
         history = util.convertAction(history)
         for h in history:

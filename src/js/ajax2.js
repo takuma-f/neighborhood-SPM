@@ -1,3 +1,30 @@
+$('#submitContext').click(function() {
+  var button = $(this);
+    button.attr('disabled', true);
+
+  var hostUrl= './cgi_genPlan.cgi';
+  var param1 = $('#userId').val();
+  var param2 = $('#companion').val();
+  var param3 = $('#budget').val();
+  $.ajax({
+    url: hostUrl,
+    type:'POST',
+    scriptCharset: 'utf-8',
+    data: {userId:param1, companion:param2, budget:param3},
+    dataType: 'HTML',
+    timeout: 100000,
+    success: function(res) {
+      $('#planArea').html(res);
+    },
+    error: function(XMLHttpRequest, textStatus, errorThrown) {
+      alert(errorThrown);
+    },
+    complete: function() {
+      button.attr('disabled', false);
+    }
+  });
+});
+
 $('#genPattern').click(function() {
   var button = $(this);
     button.attr('disabled', true);

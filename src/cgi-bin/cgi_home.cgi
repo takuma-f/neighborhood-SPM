@@ -19,7 +19,7 @@ def main():
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="素晴らしくNice choice.な">
+    <meta name="description" content="">
     <meta name="TakumaFUJITSUKA" content="">
     <link rel="icon" href="../../favicon.ico">
 
@@ -92,20 +92,22 @@ def main():
             </div>
             <div class="row">
               <br>
-              同伴者を選択:<br>
-              <input type="radio" name="companion" value="0"> 一人 <br>
-              <input type="radio" name="companion" value="1"> 同性の友人 <br>
-              <input type="radio" name="companion" value="2"> 異性の友人 <br>
-              <input type="radio" name="companion" value="3"> 親・家族 <br>
+              <select id="companion" name="companion" style="width:150px;">
+                <option value="">同伴者を選択して下さい</option>
+                <option value="1">一人</option>
+                <option value="2">友人</option>
+                <option value="3">恋人</option>
+                <option value="4">家族</option>
+              </select>
             </div>
             <div class="row">
               <br>
-              <select id="budget" name="budget">
+              <select id="budget" name="budget" style="width:150px;">
                 <option value="">予算を選択して下さい</option>
-                <option value="1">0 ~ 1000円</option>
-                <option value="2">1000 ~ 5000円</option>
-                <option value="3">5000 ~ 10000円</option>
-                <option value="4">10000円以上</option>
+                <option value="1">0 ~ 5000円</option>
+                <option value="2">5000 ~ 10000円</option>
+                <option value="3">10000 ~ 30000円</option>
+                <option value="4">30000円以上</option>
               </select>
             </div>
           </form>
@@ -124,7 +126,7 @@ def main():
     <script src="../js/jquery-1.11.1.min.js"></script>
     <script src="../dist/js/bootstrap.min.js"></script>
     <script src="../assets/js/docs.min.js"></script>
-    <script src="../js/ajax.js"></script>
+    <script src="../js/ajax2.js"></script>
   """
   print "</body></html>"
   import cgitb

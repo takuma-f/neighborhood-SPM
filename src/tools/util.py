@@ -208,6 +208,26 @@ def convertUserDataForGenModel(user):
 
 # SeqModel生成可能な形式にContext, 履歴を変換し保存
 def convertUserDataForGenSeqModel(user):
+
+    def convertActions(actions):
+        conv_actions = list()
+        for action in actions:
+            if action == "Eat":
+                conv_actions.append(1)
+            elif action == "Tea":
+                conv_actions.append(2)
+            elif action == "Play":
+                conv_actions.append(3)
+            elif action == "Sight":
+                conv_actions.append(4)
+            elif action == "Appreciate":
+                conv_actions.append(5)
+            elif action == "Shop":
+                conv_actions.append(6)
+            else:
+                conv_actions.append(0)
+        return conv_actions
+
     f = None
     model_f = None
     result = str()
@@ -219,14 +239,19 @@ def convertUserDataForGenSeqModel(user):
             splited_line
             companion = splited_line[1]
             budget = splited_line[2]
-            genres = splited_line[8:13]
+            # genres = splited_line[8:13]
+            actions = splited_line[13:18]
+            actions = convertActions(actions)
             label = splited_line[18]
             # rates = splited_line[18:23]
             length = 0
             # label = -1
             # rate_sum = 0
-            for genre in genres:
-                if str(genre) != "0":
+            # for genre in genres:
+            #     if str(genre) != "0":
+            #         length += 1
+            for action in actions:
+                if str(action) != "0":
                     length += 1
             result += str(label).replace(('\r\n'or'\r'or'\n'), '')
             # for rate in rates:
@@ -234,11 +259,11 @@ def convertUserDataForGenSeqModel(user):
             # if rate_sum > length/2.0:  # 長さの半分以上満足ならば満足した
             #     label = 1
             # result += str(label)
-            for counter in xrange(0, 4):  # 同伴者
+            for counter in xrange(1, 5):  # 同伴者
                 if counter == int(companion):
-                    result += " "+str(counter+1)+":1"
+                    result += " "+str(counter)+":1"
                 else:
-                    result += " "+str(counter+1)+":0"
+                    result += " "+str(counter)+":0"
             for counter in xrange(1, 5):  # 予算
                 if counter == int(budget):
                     result += " "+str(counter+4)+":1"
@@ -250,13 +275,20 @@ def convertUserDataForGenSeqModel(user):
                 else:
                     result += " "+str(counter+8)+":0"
             margin = 13
-            for genre in genres:
-                for counter in xrange(1, 42):
-                    if counter == int(genre):
+            # for genre in genres:
+            #     for counter in xrange(1, 42):
+            #         if counter == int(genre):
+            #             result += " "+str(counter+margin)+":1"
+            #         else:
+            #             result += " "+str(counter+margin)+":0"
+            #     margin += 41
+            for action in actions:
+                for counter in xrange(1, 7):
+                    if counter == int(action):
                         result += " "+str(counter+margin)+":1"
                     else:
                         result += " "+str(counter+margin)+":0"
-                margin += 41
+                margin += 6
             # for rate, counter in zip(rates, xrange(1, 6)):
             #     if int(rate) == 1:
             #         result += " "+str(counter+216)+":1"
@@ -274,19 +306,15 @@ def convertUserDataForGenSeqModel(user):
             f.close()
 
 
-def main2():
-    user = "0140014"
-    convertUserDataForGenSeqModel(user)
-
-
 def main():
-    for x in xrange(6,10):
+    for x in xrange(6, 10):
         user = "014000"+str(x)
         convertUserDataForGenSeqModel(user)
-    for x in xrange(10,14):
+    for x in xrange(10, 14):
         user = "01400"+str(x)
         convertUserDataForGenSeqModel(user)
 
 
 if __name__ == '__main__':
-    main2()
+    user = "test002"
+    convertUserDataForGenSeqModel(user)
