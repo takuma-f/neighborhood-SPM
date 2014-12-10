@@ -73,10 +73,10 @@ def main():
     conv_data_iter = list()
     for data in data_iter:
         conv_data_iter.append(util.convertAction(data))
-    print '<form id="analystic">'
-    print '<input type="hidden" id="data_iter" value="%s">' % conv_data_iter
-    print '<input type="hidden" id="sim_iter" value="%s">' % sim_iter
-    print '</form>'
+    # print '<form id="analystic">'
+    # print '<input type="hidden" id="data_iter" value="%s">' % conv_data_iter
+    # print '<input type="hidden" id="sim_iter" value="%s">' % sim_iter
+    # print '</form>'
 # ---ここまで---
 
     counter = 0
@@ -142,449 +142,130 @@ def main():
         # 隠れ変数の定義
         print """
         <input type="hidden" id="pattern%s" value="%s">
-        <input type="hidden" id="which%s" value="%s">
+        <input type="hidden" id="type%s" value="%s">
         <input type="hidden" id="ordPlan%s" value="%s">
-        <input type="hidden" id="amtItem%s" value="%s">
+        <input type="hidden" id="amount%s" value="%s">
         <input type="hidden" id="score%s" value="%s">
         <input type="hidden" id="seed" value="%s">
         """ % (counter, str(convert_p), counter, which, counter, counter, counter, len(p), counter, s, unixtime)
 
         for (action, a) in zip(convert_p, p):
             counter_a += 1
-            print '<div class="col-md-4 well">'
+            print '<div class="col-md-4">'
             print '<div class="row">'
             print '<h4>%sヶ所目：%s</h4>' % (counter_a, action)
             print "</div>"
             print '<div class="row">'
             print '<div class="text-center">'
             if a == "1":
-              print """
-              <!--和食・寿司-->
-              <select id="venue%s%s" size="5" style="width:250px;">
-                <option value="tamon">多聞</option>
-                <option value="kassui">手打ちそば処 湧水</option>
-                <option value="suzuki">鰻 鈴木</option>
-                <option value="torafugu">とらふぐ亭</option>
-                <option value="tasuke">多助割烹</option>
-                <option value="chiyoda">割烹 ちよだ</option>
-              </select>
-              """ % (counter, counter_a)
+              print '<p><img src="/images/Resized256/japanese.jpg"></p>'
             elif a == "2":
-              print """
-              <!--中華料理-->
-              <select id="venue%s%s" size="5" style="width:250px;">
-                <option value="tokusyou">徳翔楼</option>
-                <option value="yuen">渝園</option>
-                <option value="syokujin">食神 餃子王</option>
-                <option value="kainanki">海南記</option>
-                <option value="kouna">唐菜</option>
-              </select>
-              """ % (counter, counter_a)
+              print '<p><img src="/images/Resized256/chinese.jpg"></p>'
             elif a == "3":
-              print """
-              <!--焼肉・焼き物・韓国料理-->
-              <select id="venue%s%s" size="5" style="width:250px;">
-                <option value="syokuniku">(卸)調布食肉センター</option>
-                <option value="suehiro">スエヒロ館 調布店</option>
-                <option value="gyushige">牛繁 調布店</option>
-                <option value="gyukaku">牛角 調布店</option>
-                <option value="boteju">ぼてぢゅう 調布パルコ店</option>
-                <option value="massaran">マッサラン</option>
-                <option value="daityou">大長今</option>
-              </select>
-              """ % (counter, counter_a)
+              print '<p><img src="/images/Resized256/yakiniku.jpg"></p>'
             elif a == "4":
-              print """
-              <!--イタリアン・フレンチ他洋食-->
-              <select id="venue%s%s" size="5" style="width:250px;">
-                <option value="aruko">オステリア アルコバレーノ</option>
-                <option value="giliorosso">トラットリア ジリオロッソ</option>
-                <option value="cafebuns">CAFE BUNS</option>
-                <option value="honolulu">ホノルル食堂</option>
-                <option value="ajuru">あじゅーる</option>
-                <option value="xmastei">洋食 クリスマス亭</option>
-              </select>
-              """ % (counter, counter_a)
+              print '<p><img src="/images/Resized256/italian.jpg"></p>'
             elif a == "5":
-              print """
-              <!--ファミリーレストラン-->
-              <select id="venue%s%s" size="5" style="width:250px;">
-                <option value="jonasan">ジョナサン 調布駅前店</option>
-                <option value="bamiyang">バーミヤン 調布駅南店</option>
-                <option value="gust">ガスト 調布店</option>
-              </select>
-              """ % (counter, counter_a)
+              # <!--ファミリーレストラン-->
+              print '<p><img src="/images/Resized256/famires.jpg"></p>'
             elif a == "6":
-              print """
-              <!--定食-->
-              <select id="venue%s%s" size="5" style="width:250px;">
-                <option value="egao">東京エガオ食堂</option>
-                <option value="ootoya">大戸屋 調布北口店</option>
-                <option value="misato">みさと屋 野菜食堂</option>
-                <option value="hasegawa">長谷川</option>
-                <option value="oomura">大村庵</option>
-              </select>
-              """ % (counter, counter_a)
+              # <!--定食-->
+              print '<p><img src="/images/Resized256/ootoya.jpg"></p>'
             elif a == "7":
-              print """
-              <!--カレー・アジア料理-->
-              <select id="venue%s%s" size="5" style="width:250px;">
-                <option value="surabaya">スラバヤ</option>
-                <option value="thai">タイ・トイ</option>
-                <option value="emus">エムスキッチン</option>
-                <option value="raja">インド料理 Raja</option>
-                <option value="taipei">アジアン タイペイ</option>
-              </select>
-              """ % (counter, counter_a)
+              print '<p><img src="/images/Resized256/curry.jpg"></p>'
             elif a == "8":
-              print """
-              <!--ラーメン・麺類-->
-              <select id="venue%s%s" size="5" style="width:250px;">
-                <option value="shibata">しば田</option>
-                <option value="shibasaki">柴崎亭</option>
-                <option value="takechang">たけちゃんにぼしらーめん 調布店</option>
-                <option value="lion">らいおん 調布店</option>
-                <option value="sengawajiro">ラーメン二郎 仙川店</option>
-                <option value="takeya">竹屋 調布店</option>
-                <option value="soramame">そらまめ拉麺本舗</option>
-                <option value="sukekaku">助格家</option>
-                <option value="tatsumi">たつみ</option>
-                <option value="shirataka">しらたか</option>
-                <option value="sennen">千年ラーメン</option>
-              </select>
-              """ % (counter, counter_a)
+              print '<p><img src="/images/Resized256/ramen.jpg"></p>'
             elif a == "9":
-              print """
-              <!--ファストフード・牛丼-->
-              <select id="venue%s%s" size="5" style="width:250px;">
-                <option value="fleshness">フレッシュネスバーガー調布店</option>
-                <option value="mos">モスバーガー 調布南口店</option>
-                <option value="macdonald">マクドナルド 調布北口店</option>
-                <option value="tenya">てんや 調布とうきゅう店</option>
-                <option value="matsuya">松屋 調布北口店</option>
-                <option value="yoshinoya">吉野家 調布北口店</option>
-                <option value="nakau">なか卯 調布北口店</option>
-              </select>
-              """ % (counter, counter_a)
+              print '<p><img src="/images/Resized256/fastfood.jpg"></p>'
             elif a == "10":
-              print """
-              <!--居酒屋・バー-->
-              <select id="venue%s%s" size="5" style="width:250px;">
-                <option value="kuribouzu">厨ぼうず 調布店</option>
-                <option value="dandadan">肉汁餃子製作所 ダンダダン酒場</option>
-                <option value="kennys">KENNY'S</option>
-                <option value="kirakuya">kirakutei KIRAKUYA</option>
-                <option value="uotama">二代目 うおたま</option>
-                <option value="yuming108">Yuming 108</option>
-                <option value="chofuu">炉端 調風</option>
-                <option value="ishi">い志井 本店</option>
-              </select>
-              """ % (counter, counter_a)
+              print '<p><img src="/images/Resized256/pub.jpg"></p>'
             elif a == "11":
-              print """
-              <!--カフェ・スイーツ(和風)-->
-              <select id="venue%s%s" size="5" style="width:250px;">
-                <option value="azukiya">あずきや 安堂</option>
-                <option value="ameya">あめや(深大寺)</option>
-              </select>
-              """ % (counter, counter_a)
+              print '<p><img src="/images/Resized256/cafe(japanese).jpg"></p>'
             elif a == "12":
-              print """
-              <!--カフェ・スイーツ(洋風)-->
-              <select id="venue%s%s" size="5" style="width:250px;">
-                <option value="sanmaro-">サンマロー</option>
-                <option value="tpcafe">TP'S Cafe</option>
-                <option value="miyama">珈琲美学 深山</option>
-                <option value="propella">プロペラ・カフェ</option>
-              </select>
-              """ % (counter, counter_a)
+              print '<p><img src="/images/Resized256/cafe.jpg"></p>'
             elif a == "13":
-              print """
-              <!--遊園地-->
-              <select id="venue%s%s" size="5" style="width:250px;">
-                <option value="sanrioland">サンリオピューロランド</option>
-                <option value="yomiuriland">京王よみうりランド</option>
-                <option value="tdl">東京ディズニーランド・シー</option>
-              </select>
-              """ % (counter, counter_a)
+              # <!--遊園地-->
+              print '<p><img src="/images/Resized256/amusementpark.jpg"></p>'
             elif a == "14":
-              print """
-              <!--水族館-->
-              <select id="venue%s%s" size="5" style="width:250px;">
-                <option value="shinasui">しながわ水族館(品川)</option>
-                <option value="sunshinesui">サンシャイン水族館(池袋)</option>
-                <option value="kasaiaquapark">葛西臨海公園</option>
-              </select>
-              """ % (counter, counter_a)
+              # <!--水族館-->
+              print '<p><img src="/images/Resized256/seapark.jpg"></p>'
             elif a == "15":
-              print """
-              <!--映画館-->
-              <select id="venue%s%s" size="5" style="width:250px;">
-                <option value="tohofuchu">TOHOシネマズ府中</option>
-                <option value="tohoroppongi">TOHOシネマズ六本木ヒルズ</option>
-                <option value="tohoshibuya">TOHOシネマズ渋谷</option>
-              </select>
-              """ % (counter, counter_a)
+              # <!--映画館-->
+              print '<p><img src="/images/Resized256/cinema.jpg"></p>'
             elif a == "16":
-              print """
-              <!--カラオケ・ゲームセンター-->
-              <select id="venue%s%s" size="5" style="width:250px;">
-                <option value="joypolice">東京ジョイポリス(台場)</option>
-                <option value="namco">ナムコナンジャタウン(池袋)</option>
-                <option value="round1">Round1 府中店</option>
-                <option value="bigecho">カラオケ ビッグエコー調布南口店</option>
-              </select>
-              """ % (counter, counter_a)
+              # <!--カラオケ・ゲームセンター-->
+              print '<p><img src="/images/Resized256/karaoke.jpg"></p>'
             elif a == "17":
-              print """
-              <!--スポーツ施設-->
-              <select id="venue%s%s" size="5" style="width:250px;">
-                <option value="round1">Round1 府中店</option>
-                <option value="westrock">クライミングジム ウエストロック</option>
-                <option value="summerland">東京サマーランド(あきる野市)</option>
-              </select>
-              """ % (counter, counter_a)
+              # <!--スポーツ施設-->
+              print '<p><img src="/images/Resized256/pool.jpg"></p>'
             elif a == "18":
-              print """
-              <!--レジャー施設・ビーチ-->
-              <select id="venue%s%s" size="5" style="width:250px;">
-                <option value="suntorybrew">サントリー武蔵野ビール工場</option>
-                <option value="bbqvillage">京王多摩川BBQ-VILLAGE</option>
-                <option value="hikawacamp">氷川キャンプ場(奥多摩町)</option>
-                <option value="showakinen">国営昭和記念公園</option>
-                <option value="summerland">東京サマーランド(あきる野市)</option>
-              </select>
-              """ % (counter, counter_a)
+              # <!--レジャー施設・ビーチ-->
+              print '<p><img src="/images/Resized256/camp.jpg"></p>'
             elif a == "19":
-              print """
-              <!--イベント会場-->
-              <select id="venue%s%s" size="5" style="width:250px;">
-                <option value="ajista">味の素スタジアム</option>
-                <option value="tamagawahanabi">多摩川河川敷(調布市花火大会)</option>
-                <option value="keiokeirin">京王閣競輪場</option>
-                <option value="tokyokeiba">東京競馬場</option>
-              </select>
-              """ % (counter, counter_a)
+              # <!--イベント会場-->
+              print '<p><img src="/images/Resized256/event.jpg"></p>'
             elif a == "20":
-              print """
-              <!--温泉・リゾート施設-->
-              <select id="venue%s%s" size="5" style="width:250px;">
-                <option value="jindaionsen">深大寺天然温泉 湯守の里</option>
-                <option value="kunitachionsen">国立温泉 湯楽の里</option>
-                <option value="taketori">永山健康ランド 竹取の湯</option>
-              </select>
-              """ % (counter, counter_a)
+              # <!--温泉・リゾート施設-->
+              print '<p><img src="/images/Resized256/onsen.jpg"></p>'
             elif a == "21":
-              print """
-              <!--夜遊び・ディスコクラブ-->
-              <select id="venue%s%s" size="5" style="width:250px;">
-                <option value="ageha">Studio Coast(新木場)</option>
-                <option value="womb">WOMB(渋谷)</option>
-                <option value="asia">Club asia(渋谷)</option>
-                <option value="ever">ever(青山)</option>
-                <option value="unit">unit(代官山)</option>
-              </select>
-              """ % (counter, counter_a)
+              # <!--夜遊び・ディスコクラブ-->
+              print '<p><img src="/images/Resized256/discoclub.jpg"></p>'
             elif a == "22":
-              print """
-              <!--神社・仏閣-->
-              <select id="venue%s%s" size="5" style="width:250px;">
-                <option value="jindaiji">深大寺</option>
-                <option value="ookuni">大国魂神社</option>
-                <option value="rakuou">高尾山薬王院</option>
-                <option value="takahata">高幡不動金剛寺</option>
-              </select>
-              """ % (counter, counter_a)
+              print '<p><img src="/images/Resized256/shrine.jpg"></p>'
             elif a == "23":
-              print """
-              <!--史跡-->
-              <select id="venue%s%s" size="5" style="width:250px;">
-                <option value="kondo">近藤勇生家</option>
-                <option value="chofubase">調布基地戦跡</option>
-                <option value="jindaiji">深大寺</option>
-                <option value="ookuni">大国魂神社</option>
-                <option value="tamagawajousui">玉川上水</option>
-              </select>
-              """ % (counter, counter_a)
+              # <!--史跡-->
+              print '<p><img src="/images/Resized256/coloseum.jpg"></p>'
             elif a == "24":
-              print """
-              <!--展望台・タワー-->
-              <select id="venue%s%s" size="5" style="width:250px;">
-                <option value="skytree">東京スカイツリー(押上)</option>
-                <option value="tokyotower">東京タワー(神谷町)</option>
-                <option value="metrogovrnment">東京都庁(新宿)</option>
-              </select>
-              """ % (counter, counter_a)
+              print '<p><img src="/images/Resized256/tower.jpg"></p>'
             elif a == "25":
-              print """
-              <!--公園-->
-              <select id="venue%s%s" size="5" style="width:250px;">
-                <option value="jindaipark">神代植物公園</option>
-                <option value="nogawa">野川緑道</option>
-                <option value="tamagawa">多摩川河川敷</option>
-                <option value="showakinen">国営昭和記念公園</option>
-                <option value="chofubase">京王百草園</option>
-              </select>
-              """ % (counter, counter_a)
+              print '<p><img src="/images/Resized256/park.jpg"></p>'
             elif a == "26":
-              print """
-              <!--博物館-->
-              <select id="venue%s%s" size="5" style="width:250px;">
-                <option value="kyoudo">調布市郷土博物館</option>
-                <option value="saneatsu">調布市武者小路実篤記念館</option>
-                <option value="shimofudaiseki">下布田遺跡・郷土博物館分室</option>
-                <option value="tenmondai">国立天文台</option>
-                <option value="tokyoart">東京アートミュージアム</option>
-                <option value="jibri">三鷹の森ジブリ美術館</option>
-              </select>
-              """ % (counter, counter_a)
+              # <!--博物館-->
+              print '<p><img src="/images/Resized256/museum.jpg"></p>'
             elif a == "27":
-              print """
-              <!--美術館-->
-              <select id="venue%s%s" size="5" style="width:250px;">
-                <option value="kyoudo">調布市郷土博物館</option>
-                <option value="saneatu">調布市武者小路実篤記念館</option>
-                <option value="shimofudaiseki">下布田遺跡・郷土博物館分室</option>
-                <option value="tenmondai">国立天文台</option>
-                <option value="tokyoart">東京アートミュージアム</option>
-                <option value="jiburi">三鷹の森ジブリ美術館</option>
-              </select>
-              """ % (counter, counter_a)
+              # <!--美術館-->
+              print '<p><img src="/images/Resized256/gallely.jpg"></p>'
             elif a == "28":
-              print """
-              <!--資料館-->
-              <select id="venue%s%s" size="5" style="width:250px;">
-                <option value="kyoudo">調布市郷土博物館</option>
-                <option value="saneatu">調布市武者小路実篤記念館</option>
-                <option value="shimofudaiseki">下布田遺跡・郷土博物館分室</option>
-                <option value="tenmondai">国立天文台</option>
-                <option value="tokyoart">東京アートミュージアム</option>
-                <option value="jiburi">三鷹の森ジブリ美術館</option>
-              </select>
-              """ % (counter, counter_a)
+              # <!--資料館-->
+              print '<p><img src="/images/Resized256/gallely.jpg"></p>'
             elif a == "29":
-              print """
-              <!--百貨店-->
-              <select id="venue%s%s" size="5" style="width:250px;">
-                <option value="parco">調布パルコ</option>
-                <option value="isetan">伊勢丹 府中店</option>
-                <option value="keio">京王百貨店 新宿店</option>
-                <option value="odakyu">小田急百貨店 新宿店</option>
-                <option value="lumine">LUMINE 新宿</option>
-              </select>
-              """ % (counter, counter_a)
+              # <!--百貨店-->
+              print '<p><img src="/images/Resized256/mitsukoshi.jpg"></p>'
             elif a == "30":
-              print """
-              <!--ファッション-->
-              <select id="venue%s%s" size="5" style="width:250px;">
-                <option value="parco">調布パルコ</option>
-                <option value="isetan">伊勢丹 府中店</option>
-                <option value="keio">京王百貨店 新宿店</option>
-                <option value="odakyu">小田急百貨店 新宿店</option>
-                <option value="lumine">LUMINE 新宿</option>
-                <option value="sakaeya">きもの処 榮屋</option>
-                <option value="lamainette">オリジナル帽子 La Rainette</option>
-              </select>
-              """ % (counter, counter_a)
+              # <!--ファッション-->
+              print '<p><img src="/images/Resized256/fashion.jpg"></p>'
             elif a == "31":
-              print """
-              <!--食品(持ち帰り)-->
-              <select id="venue%s%s" size="5" style="width:250px;">
-                <option value="eachfanpastry">洋菓子 EACH FAN PASTRY</option>
-                <option value="budoen">ブドー園</option>
-                <option value="nishimura">西村はちみつ 調布店</option>
-              </select>
-              """ % (counter, counter_a)
+              # <!--食品(持ち帰り)-->
+              print '<p><img src="/images/Resized256/souvenir.jpg"></p>'
             elif a == "32":
-              print """
-              <!--菓子(持ち帰り)-->
-              <select id="venue%s%s" size="5" style="width:250px;">
-                <option value="eachfanpastry">洋菓子 EACH FAN PASTRY</option>
-                <option value="budoen">ブドー園</option>
-                <option value="nishimura">西村はちみつ 調布店</option>
-              </select>
-              """ % (counter, counter_a)
+              # <!--菓子(持ち帰り)-->
+              print '<p><img src="/images/Resized256/sweets.jpg"></p>'
             elif a == "33":
-              print """
-              <!--酒類(持ち帰り)-->
-              <select id="venue%s%s" size="5" style="width:250px;">
-                <option value="yamaguchi">リカー＆フーズ やまぐち</option>
-                <option value="oguraya">小倉屋(めじろ台)</option>
-                <option value="keibare">京晴(八王子)</option>
-              </select>
-              """ % (counter, counter_a)
+              # <!--酒類(持ち帰り)-->
+              print '<p><img src="/images/Resized256/liquorstore.jpg"></p>'
             elif a == "34":
-              print """
-              <!--雑貨・土産物-->
-              <select id="venue%s%s" size="5" style="width:250px;">
-                <option value="ameya">あめや(深大寺)</option>
-                <option value="yasaka">アジアン輸入雑貨・家具KAJA調布店</option>
-                <option value="eurosport">EURO SPORT味の素スタジアム店</option>
-                <option value="francfranc">Francfranc調布パルコ店</option>
-              </select>
-              """ % (counter, counter_a)
+              print '<p><img src="/images/Resized256/souvenir.jpg"></p>'
             elif a == "35":
-              print """
-              <!--食器・花器-->
-              <select id="venue%s%s" size="5" style="width:250px;">
-                <option value="francfranc">Francfranc調布パルコ店</option>
-                <option value="kazuki">和食器 和季＜かずき＞</option>
-              </select>
-              """ % (counter, counter_a)
+              # 食器・花器
+              print '<p><img src="/images/Resized256/tableware.jpg"></p>'
             elif a == "36":
-              print """
-              <!--宝飾店-->
-              <select id="venue%s%s" size="5" style="width:250px;">
-                <option value="housekitsutsumi">ジュエリーツツミ 調布パルコ店</option>
-                <option value="housekiishi">ジュエリーイシイ 西友調布店</option>
-              </select>
-              """ % (counter, counter_a)
+              # 宝飾店
+              print '<p><img src="/images/Resized256/jewelyshop.jpg"></p>'
             elif a == "37":
-              print """
-              <!--書店-->
-              <select id="venue%s%s" size="5" style="width:250px;">
-                <option value="shinko">真光書店</option>
-                <option value="tamatsubaki">古書 玉椿</option>
-              </select>
-              """ % (counter, counter_a)
+              # 書店
+              print '<p><img src="/images/Resized256/bookstore.jpg"></p>'
             elif a == "38":
-              print """
-              <!--家電量販店-->
-              <select id="venue%s%s" size="5" style="width:250px;">
-                <option value="yodobashi">ヨドバシカメラ(新宿)</option>
-                <option value="bic">ビックカメラ小田急ハルク店(新宿)</option>
-                <option value="yamada">ヤマダ電機(新宿)</option>
-                <option value="tsukumo">ツクモ電機(秋葉原)</option>
-              </select>
-              """ % (counter, counter_a)
+              # <!--家電量販店-->
+              print '<p><img src="/images/Resized256/souvenir.jpg"></p>'
             elif a == "39":
-              print """
-              <!--スポーツ用品店-->
-              <select id="venue%s%s" size="5" style="width:250px;">
-                <option value="garally2">GARALLY2(新宿)</option>
-                <option value="haruku">小田急ハルク(新宿)</option>
-                <option value="ysroad">Y's Road(新宿)</option>
-              </select>
-              """ % (counter, counter_a)
+              # <!--スポーツ用品店-->
+              print '<p><img src="/images/Resized256/sports.jpg"></p>'
             elif a == "40":
-              print """
-              <!--家具屋-->
-              <select id="venue%s%s" size="5" style="width:250px;">
-                <option value="yasaka">アジアン輸入雑貨・家具KAJA調布店</option>
-                <option value="ikea">IKEA立川</option>
-                <option value="idc">IDC大塚家具立川</option>
-                <option value="yasaka">八坂家具</option>
-              </select>
-              """ % (counter, counter_a)
+              # <!--家具屋-->
+              print '<p><img src="/images/Resized256/furniture.jpg"></p>'
             elif a == "41":
-              print """
-              <!--その他趣味品-->
-              <select id="venue%s%s" size="5" style="width:250px;">
-                <option value="tokensakata">刀剣坂田(日本刀販売・買い取り)</option>
-                <option value="emmygangu">エミー玩具店</option>
-                <option value="radiokaikan">ラジオ会館(秋葉原)</option>
-              </select>
-              """ % (counter, counter_a)
+              # <!--その他趣味品-->
+              print '<p><img src="/images/Resized256/akihabara.jpg"></p>'
             print "</div>"
             print "</div>"
             print "</div>"

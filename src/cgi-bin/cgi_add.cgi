@@ -126,14 +126,14 @@ def main():
         <option value="0">ジャンルを選択</option>
         <optgroup label="Eat">
           <option value="1">和食・寿司</option>
-          <option value="2">中華料理</option>
-          <option value="3">焼肉・焼き物・韓国料理</option>
-          <option value="4">イタリアン・フレンチ他洋食</option>
+          <option value="2">中華・韓国料理</option>
+          <option value="3">焼肉・焼き物</option>
+          <option value="4">洋食・カフェめし</option>
           <option value="5">ファミリーレストラン</option>
           <option value="6">定食</option>
           <option value="7">カレー・アジア料理</option>
           <option value="8">ラーメン・麺類</option>
-          <option value="9">ファストフード・牛丼</option>
+          <option value="9">ファストフード</option>
           <option value="10">居酒屋・バー</option>
         </optgroup>
         <optgroup label="Tea">

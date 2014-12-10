@@ -45,11 +45,11 @@ def convertAction(pattern):
         if action == "1":
             convertedSet.append("和食・寿司")
         elif action == "2":
-            convertedSet.append("中華料理")
+            convertedSet.append("中華・韓国料理")
         elif action == "3":
-            convertedSet.append("焼肉・焼き物・韓国料理")
+            convertedSet.append("焼肉・焼き物")
         elif action == "4":
-            convertedSet.append("イタリアン・フレンチ他洋食")
+            convertedSet.append("洋食・カフェめし")
         elif action == "5":
             convertedSet.append("ファミリーレストラン")
         elif action == "6":
@@ -59,7 +59,7 @@ def convertAction(pattern):
         elif action == "8":
             convertedSet.append("ラーメン・麺類")
         elif action == "9":
-            convertedSet.append("ファストフード・牛丼")
+            convertedSet.append("ファストフード")
         elif action == "10":
             convertedSet.append("居酒屋・バー")
         elif action == "11":

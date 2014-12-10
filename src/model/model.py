@@ -13,7 +13,7 @@ from svmutil import *
 def genModel(user):
     y, x = svm_read_problem('userData/'+user+'_svm.txt')  # 学習データ読み込み
     prob = svm_problem(y, x)  # 学習データ入力
-    param = svm_parameter('-t 2 -c 2.0 -g 2.0')  # パラメータ設定
+    param = svm_parameter('-t 2 -c 64.0 -g 0.0078125')  # パラメータ設定
     model = svm_train(prob, param)  # 学習,分類モデル作成
     return model
 
