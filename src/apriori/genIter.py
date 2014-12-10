@@ -5,17 +5,18 @@ import sys
 sys.path.append('/Users/Admin/dev/neighborhood_SPM/src/')
 sys.stderr = sys.stdout
 from model import model as svm
+from tools import util as util
 
 
 # 類似ユーザーを抽出し逐次的に返す
-def getSimUsers(user, model):
+def getSimUsers(user, model, context):
     # threshold = 0.6  # 過半数超えていれば類似していると判断してよいだろう
     threshold = 0.0  # 検証用
 
-    # システムから自分以外の全てのユーザーを返す(SQL導入後はSQLアクセス)
+    # システムから自分以外の全てのユーザーを返す(将来的にSQL導入)
     def getOtherUsers():
         other_users = list()
-        # other_users = ["0140001", "0140002", "0140003", "0140004", "0140005", "0140006", "0140007", "0140008"]
+        # other_users = ["001", "002", "003", "004", "005", "006", "007", "008"]
         # other_users = ["test001", "test002", "test003", "test004"]
         other_users = ["test005", "test006", "test007", "test008"]
         return other_users
@@ -23,10 +24,12 @@ def getSimUsers(user, model):
     other_users = getOtherUsers()
     for other_user in other_users:
         # if other_user != user:
-        #     # 他ユーザーのモデルが生成されていない場合生成すべきか？
-        #     if svm.getAccuracy(other_user, model) > threshold:
-        #         sim_user = other_user  # わかりやすさのため書いた
-        #         yield sim_user
+        #     util.convertUserDataForGenSeqModel(other_user, context)
+        #     model = svm.genModel(other_user)
+        #     svm.saveModel(other_user+'.model', model)
+        util.convertUserDataForGenSeqModel(other_user, context)
+        model = svm.genModel(other_user)
+        svm.saveModel(other_user+'.model', model)
         if svm.getAccuracy(other_user, model) > threshold:
             sim_user = other_user  # わかりやすさのため書いた
             yield sim_user
@@ -42,44 +45,31 @@ def getHistories(sim_user):
         label = int(splited_line[18])
         contexts = splited_line[1:3]
         genres = splited_line[8:13]
-        # actions = splited_line[13:18]
         for context in contexts:
             history_context.append(context)
         for genre in genres:
             if genre != '0':
                 history.append(genre)
-        # for action in actions:
-        #     if action != '0':
-        #         history.append(action)
         yield label, history_context, history
 
 
-# 履歴のコンテキストが適合しているか判定
-def matchContext(history_context, input_data):
-
-    # 入力されたユーザー情報を処理可能な形式に変換する
-    def convertInputContext(input_data):
-        converted_input = list()
-        converted_input.append(input_data["companion"].value)
-        converted_input.append(input_data["budget"].value)
-        return converted_input
-
-    context = convertInputContext(input_data)
-    if context == history_context:
-        return True
-    else:
-        return False
-
-
 # 類似ユーザーの履歴から入力したlabel=1かつコンテキストに一致するもののリストを返す
-def getDataIter(user, model, input_data):
+def getDataIter(user, model, context):
     data_iter = list()
     sim_iter = list()
 
-    for sim_user in getSimUsers(user, model):
+    # 履歴のコンテキストが適合しているか判定
+    # def matchContext(history_context, input_data):
+    def matchContext(history_context, context):
+        if context == history_context:
+            return True
+        else:
+            return False
+
+    for sim_user in getSimUsers(user, model, context):
         for label, history_context, history in getHistories(sim_user):
-            if label == 1:
-                if matchContext(history_context, input_data):
+            if label == 1:  # 類似ユーザーが正と評価した履歴だけ推薦に利用
+                if matchContext(history_context, context):
                     data_iter.append(history)
                     sim_iter.append(sim_user)
     return data_iter, sim_iter

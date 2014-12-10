@@ -30,62 +30,6 @@ def getAccuracy(comp_user, model):
     return p_label, p_acc[0] / 100  # p_labelとか一緒に出力するとgenIterで正常に判別されなくなる
 
 
-def main3():
-    y, x = svm_read_problem('0140014_svm.txt')  # 学習データ読み込み
-    prob = svm_problem(y, x)  # 学習データ入力
-    param = svm_parameter('-t 2 -c 0.03125 -g 0.0078125')  # パラメータ設定
-    model = svm_train(prob, param)  # 学習,分類モデル作成
-    saveModel('0140014.model', model)
-
-
-def main2():
-    y, x = svm_read_problem('test001_svm.txt')  # 学習データ読み込み
-    prob = svm_problem(y, x)  # 学習データ入力
-    param = svm_parameter('-t 2 -c 0.03125 -g 0.0078125')  # パラメータ設定
-    model = svm_train(prob, param)  # 学習,分類モデル作成
-    saveModel('test001.model', model)
-
-    y, x = svm_read_problem('0140006_svm.txt')  # 学習データ読み込み
-    prob = svm_problem(y, x)  # 学習データ入力
-    model = svm_train(prob, param)  # 学習,分類モデル作成
-    saveModel('0140006.model', model)
-
-    y, x = svm_read_problem('0140007_svm.txt')  # 学習データ読み込み
-    prob = svm_problem(y, x)  # 学習データ入力
-    model = svm_train(prob, param)  # 学習,分類モデル作成
-    saveModel('0140007.model', model)
-
-    y, x = svm_read_problem('0140008_svm.txt')  # 学習データ読み込み
-    prob = svm_problem(y, x)  # 学習データ入力
-    model = svm_train(prob, param)  # 学習,分類モデル作成
-    saveModel('0140008.model', model)
-
-    y, x = svm_read_problem('0140009_svm.txt')  # 学習データ読み込み
-    prob = svm_problem(y, x)  # 学習データ入力
-    model = svm_train(prob, param)  # 学習,分類モデル作成
-    saveModel('0140009.model', model)
-
-    y, x = svm_read_problem('0140010_svm.txt')  # 学習データ読み込み
-    prob = svm_problem(y, x)  # 学習データ入力
-    model = svm_train(prob, param)  # 学習,分類モデル作成
-    saveModel('0140010.model', model)
-
-    y, x = svm_read_problem('0140011_svm.txt')  # 学習データ読み込み
-    prob = svm_problem(y, x)  # 学習データ入力
-    model = svm_train(prob, param)  # 学習,分類モデル作成
-    saveModel('0140011.model', model)
-
-    y, x = svm_read_problem('0140012_svm.txt')  # 学習データ読み込み
-    prob = svm_problem(y, x)  # 学習データ入力
-    model = svm_train(prob, param)  # 学習,分類モデル作成
-    saveModel('0140012.model', model)
-
-    y, x = svm_read_problem('0140013_svm.txt')  # 学習データ読み込み
-    prob = svm_problem(y, x)  # 学習データ入力
-    model = svm_train(prob, param)  # 学習,分類モデル作成
-    saveModel('0140013.model', model)
-
-
 def main():
     y, x = svm_read_problem('test001_svm.txt')  # 学習データ読み込み
     prob = svm_problem(y, x)  # 学習データ入力
