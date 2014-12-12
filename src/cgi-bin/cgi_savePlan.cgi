@@ -24,34 +24,54 @@ def writeFile(form):
         + form['type3'].value + ","\
         + form['type4'].value + ","\
         + form['type5'].value + ","\
-        + form['type6'].value + "\r\n"\
+        + form['type6'].value + ","\
+        + form['type7'].value + ","\
+        + form['type8'].value + ","\
+        + form['type9'].value + ","\
+        + form['type10'].value + "\r\n"\
         + "rate: "\
         + form['rate1'].value + ","\
         + form['rate2'].value + ","\
         + form['rate3'].value + ","\
         + form['rate4'].value + ","\
         + form['rate5'].value + ","\
-        + form['rate6'].value + "\r\n"\
+        + form['rate6'].value + ","\
+        + form['rate7'].value + ","\
+        + form['rate8'].value + ","\
+        + form['rate9'].value + ","\
+        + form['rate10'].value + "\r\n"\
         + "amount: "\
         + form['amount1'].value + ","\
         + form['amount2'].value + ","\
         + form['amount3'].value + ","\
         + form['amount4'].value + ","\
         + form['amount5'].value + ","\
-        + form['amount6'].value + "\r\n"\
+        + form['amount6'].value + ","\
+        + form['amount7'].value + ","\
+        + form['amount8'].value + ","\
+        + form['amount9'].value + ","\
+        + form['amount10'].value + "\r\n"\
         + "score: "\
         + form['score1'].value + ","\
         + form['score2'].value + ","\
         + form['score3'].value + ","\
         + form['score4'].value + ","\
         + form['score5'].value + ","\
-        + form['score6'].value + "\r\n"\
+        + form['score6'].value + ","\
+        + form['score7'].value + ","\
+        + form['score8'].value + ","\
+        + form['score9'].value + ","\
+        + form['score10'].value + "\r\n"\
         + form['pattern1'].value + ",\r\n"\
         + form['pattern2'].value + ",\r\n"\
         + form['pattern3'].value + ",\r\n"\
         + form['pattern4'].value + ",\r\n"\
         + form['pattern5'].value + ",\r\n"\
-        + form['pattern6'].value + ",\r\n\r\n")
+        + form['pattern6'].value + ",\r\n"\
+        + form['pattern7'].value + ",\r\n"\
+        + form['pattern8'].value + ",\r\n"\
+        + form['pattern9'].value + ",\r\n"\
+        + form['pattern10'].value + ",\r\n\r\n")
     except Exception:
         raise
     finally:

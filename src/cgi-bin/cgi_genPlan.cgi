@@ -55,13 +55,13 @@ def main():
     for sim_user in genIter.getSimUsers(user, model, context):
       print "ユーザー:%s (類似度%s)" % (sim_user, svm.getAccuracy(sim_user, model))
       print "<br>"
-      for label, history_context, history in genIter.getHistories(sim_user):
-        print "抽出されたパターン :<br>"
-        history = util.convertAction(history)
-        for h in history:
-          print "%s -> " % h
-        print "<br>"
-      print "<br>"
+    #   for label, history_context, history in genIter.getHistories(sim_user):
+    #     print "抽出されたパターン :<br>"
+    #     history = util.convertAction(history)
+    #     for h in history:
+    #       print "%s -> " % h
+    #     print "<br>"
+    #   print "<br>"
     print "コンテキストにマッチしたパターン :<br>"
     for transaction in transaction_list:
       transaction = util.convertAction(transaction)
@@ -203,7 +203,7 @@ def main():
               print '<p><img src="/images/Resized256/pool.jpg"></p>'
             elif a == "18":
               # <!--レジャー施設・ビーチ-->
-              print '<p><img src="/images/Resized256/camp.jpg"></p>'
+              print '<p><img src="/images/Resized256/pool.jpg"></p>'
             elif a == "19":
               # <!--イベント会場-->
               print '<p><img src="/images/Resized256/event.jpg"></p>'
@@ -217,7 +217,7 @@ def main():
               print '<p><img src="/images/Resized256/shrine.jpg"></p>'
             elif a == "23":
               # <!--史跡-->
-              print '<p><img src="/images/Resized256/coloseum.jpg"></p>'
+              print '<p><img src="/images/Resized256/coliseum.jpg"></p>'
             elif a == "24":
               print '<p><img src="/images/Resized256/tower.jpg"></p>'
             elif a == "25":
@@ -253,7 +253,7 @@ def main():
               print '<p><img src="/images/Resized256/tableware.jpg"></p>'
             elif a == "36":
               # 宝飾店
-              print '<p><img src="/images/Resized256/jewelyshop.jpg"></p>'
+              print '<p><img src="/images/Resized256/jewely.jpg"></p>'
             elif a == "37":
               # 書店
               print '<p><img src="/images/Resized256/bookstore.jpg"></p>'
@@ -282,19 +282,20 @@ def main():
         <input type="radio" form="patternForm" name="rate%s" value="1"> このプランは面白そう！
         <input type="radio" form="patternForm" name="rate%s" value="-1"> このプランはイマイチ
         """ % (counter, counter)
-        if counter == 6:
+        if counter == 10:
           print """
         <br />
         <br />
         <button type="button" class="btn btn-primary btn-small" id="saveRating" form="planForm">
           <i class="glyphicon glyphicon-plus"></i> 評価を送信！
         </button>
+        <span id="response"></span>
           """
         print """
   </div>
 </div>
         """
-        if counter == 6:
+        if counter == 10:
             break  # 6個提示
     print """
   <script src="../js/ajaxSave.js"></script>

@@ -16,9 +16,11 @@ def getSimUsers(user, model, context):
     # システムから自分以外の全てのユーザーを返す(将来的にSQL導入)
     def getOtherUsers():
         other_users = list()
-        # other_users = ["001", "002", "003", "004", "005", "006", "007", "008"]
+        other_users = ["001", "002", "003", "004"]
         # other_users = ["test001", "test002", "test003", "test004"]
-        other_users = ["test005", "test006", "test007", "test008"]
+        # other_users = ["test005", "test006", "test007", "test008"]
+        # other_users = ["test001", "test002", "test003", "test004", "test005", "test006", "test007", "test008"]
+
         return other_users
 
     other_users = getOtherUsers()

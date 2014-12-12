@@ -75,7 +75,7 @@ def main():
       <button type="button" class="btn btn-primary btn-small" id="saveRating" form="patternForm" value="%s">
         <i class="glyphicon glyphicon-plus"></i> 評価を送信！
       </button>
-      <span id="saveResponse"></span>
+      <span id="response"></span>
             """ % (counter)
 
         print"""

@@ -60,9 +60,9 @@ $('#saveRating').click(function() {
 
   var hostUrl= './cgi_writefile2.cgi';
   var param1 = $('#userId').val();
-  var param2 = $('#date').val();
-  var param3 = $('#companion').val();
-  var param4 = $('#budget').val();
+  var param2 = $('#date').val() || "None";
+  var param3 = $('#companion').val() || "None";
+  var param4 = $('#budget').val() || "None";
   var param5 = $('#pattern1').val();
   var param6 = $('#pattern2').val();
   var param7 = $('#pattern3').val();
@@ -73,16 +73,16 @@ $('#saveRating').click(function() {
   var param12 = $('#pattern8').val();
   var param13 = $('#pattern9').val();
   var param14 = $('#pattern10').val();
-  var param15 = $('input:radio[name="rate1"]:checked').val();
-  var param16 = $('input:radio[name="rate2"]:checked').val();
-  var param17 = $('input:radio[name="rate3"]:checked').val();
-  var param18 = $('input:radio[name="rate4"]:checked').val();
-  var param19 = $('input:radio[name="rate5"]:checked').val();
-  var param20 = $('input:radio[name="rate6"]:checked').val();
-  var param21 = $('input:radio[name="rate7"]:checked').val();
-  var param22 = $('input:radio[name="rate8"]:checked').val();
-  var param23 = $('input:radio[name="rate9"]:checked').val();
-  var param24 = $('input:radio[name="rate10"]:checked').val();
+  var param15 = $('input:radio[name="rate1"]:checked').val() || "None";
+  var param16 = $('input:radio[name="rate2"]:checked').val() || "None";
+  var param17 = $('input:radio[name="rate3"]:checked').val() || "None";
+  var param18 = $('input:radio[name="rate4"]:checked').val() || "None";
+  var param19 = $('input:radio[name="rate5"]:checked').val() || "None";
+  var param20 = $('input:radio[name="rate6"]:checked').val() || "None";
+  var param21 = $('input:radio[name="rate7"]:checked').val() || "None";
+  var param22 = $('input:radio[name="rate8"]:checked').val() || "None";
+  var param23 = $('input:radio[name="rate9"]:checked').val() || "None";
+  var param24 = $('input:radio[name="rate10"]:checked').val() || "None";
   $.ajax({
     url: hostUrl,
     type:'POST',
