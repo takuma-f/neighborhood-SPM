@@ -10,28 +10,19 @@ from tools import util as util
 
 # 類似ユーザーを抽出し逐次的に返す
 def getSimUsers(user, model, context):
-    # threshold = 0.6  # 過半数超えていれば類似していると判断してよいだろう
-    threshold = 0.0  # 検証用
+    threshold = 0.7  # 過半数超えていれば類似していると判断してよいだろう
 
     # システムから自分以外の全てのユーザーを返す(将来的にSQL導入)
     def getOtherUsers():
         other_users = list()
         other_users = ["001", "002", "003", "004"]
-        # other_users = ["test001", "test002", "test003", "test004"]
-        # other_users = ["test005", "test006", "test007", "test008"]
         # other_users = ["test001", "test002", "test003", "test004", "test005", "test006", "test007", "test008"]
-
         return other_users
 
     other_users = getOtherUsers()
     for other_user in other_users:
         # if other_user != user:
-        #     util.convertUserDataForGenSeqModel(other_user, context)
-        #     model = svm.genModel(other_user)
-        #     svm.saveModel(other_user+'.model', model)
         util.convertUserDataForGenSeqModel(other_user, context)
-        model = svm.genModel(other_user)
-        svm.saveModel(other_user+'.model', model)
         if svm.getAccuracy(other_user, model) > threshold:
             sim_user = other_user  # わかりやすさのため書いた
             yield sim_user
