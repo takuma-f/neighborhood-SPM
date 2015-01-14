@@ -23,9 +23,9 @@ def main():
     genre4 = input_data["genre4"].value
     genre5 = input_data["genre5"].value
     genre_set = [genre1, genre2, genre3, genre4, genre5]
-    rand_p1 = apriori.genRandomPattern(genre_set, 5, 5)
-    rand_p2 = apriori.genRandomPattern(genre_set, 4, 3)
-    rand_p3 = apriori.genRandomPattern(genre_set, 3, 2)
+    rand_p1 = apriori.genRandomPattern(genre_set, 5, 10)
+    rand_p2 = apriori.genRandomPattern(genre_set, 4, 10)
+    rand_p3 = apriori.genRandomPattern(genre_set, 3, 10)
     print "<!DOCTYPE html>"
 
     for x, p in enumerate(xrange(1, 11)):
@@ -41,12 +41,14 @@ def main():
         <div class="col-md-1"></div>
         """ % (counter, counter)
 
-        if counter < 6:
+        # if counter < 6:
+        #     p = rand_p1.pop()
+        # elif 5 < counter < 9:
+        #     p = rand_p2.pop()
+        # elif 8 < counter < 11:
+        #     p = rand_p3.pop()
+        if counter < 11:
             p = rand_p1.pop()
-        elif 5 < counter < 9:
-            p = rand_p2.pop()
-        elif 8 < counter < 11:
-            p = rand_p3.pop()
         convert_p = util.convertAction(p)
         for o, item in enumerate(convert_p):
             print"""
@@ -64,8 +66,8 @@ def main():
         """
 
         print"""
-      <input type="radio" form="patternForm" name="rate%s" value="1"> あり
-      <input type="radio" form="patternForm" name="rate%s" value="-1"> なし
+      <input type="radio" form="patternForm" name="rate%s" value="1"> このプランは好き！
+      <input type="radio" form="patternForm" name="rate%s" value="-1"> このプランは嫌い
         """ % (counter, counter)
 
         if counter == 10:

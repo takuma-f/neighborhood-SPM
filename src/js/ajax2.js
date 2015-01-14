@@ -83,34 +83,42 @@ $('#saveRating').click(function() {
   var param22 = $('input:radio[name="rate8"]:checked').val() || "None";
   var param23 = $('input:radio[name="rate9"]:checked').val() || "None";
   var param24 = $('input:radio[name="rate10"]:checked').val() || "None";
-  $.ajax({
-    url: hostUrl,
-    type:'POST',
-    scriptCharset: 'utf-8',
-    data: {userId:param1, date:param2, companion:param3, 
-      budget:param4, pattern1:param5, pattern2:param6, 
-      pattern3:param7, pattern4:param8, pattern5:param9, 
-      pattern6:param10, pattern7:param11, pattern8:param12, 
-      pattern9:param13, pattern10:param14, rate1:param15, 
-      rate2:param16, rate3:param17, rate4:param18, 
-      rate5:param19, rate6:param20, rate7:param21, 
-      rate8:param22, rate9:param23, rate10:param24},
-    dataType: 'HTML',
-    timeout: 100000,
-    success: function(res) {
-      $('#saveResponse').html(res);
-      $('#alert').fadeOut(1500).queue(function() {
-        this.remove();
-      });
-    },
-    error: function(XMLHttpRequest, textStatus, errorThrown) {
-      $('#saveResponse').html('<span id="alert">予期せぬエラーが発生しました.</span>');
-      $('#alert').fadeOut(1500).queue(function() {
-        this.remove();
-      });
-    },
-    complete: function() {
-      button.attr("disabled", false);
-    }
-  });
+  if ((param15 != "None") && (param16 != "None") && (param17 != "None") && (param18 != "None") && (param19 != "None") && (param20 != "None") && (param21 != "None") && (param22 != "None") && (param23 != "None") && (param24 != "None")) {
+    $.ajax({
+      url: hostUrl,
+      type:'POST',
+      scriptCharset: 'utf-8',
+      data: {userId:param1, date:param2, companion:param3, 
+        budget:param4, pattern1:param5, pattern2:param6, 
+        pattern3:param7, pattern4:param8, pattern5:param9, 
+        pattern6:param10, pattern7:param11, pattern8:param12, 
+        pattern9:param13, pattern10:param14, rate1:param15, 
+        rate2:param16, rate3:param17, rate4:param18, 
+        rate5:param19, rate6:param20, rate7:param21, 
+        rate8:param22, rate9:param23, rate10:param24},
+      dataType: 'HTML',
+      timeout: 100000,
+      success: function(res) {
+        $('#response').html('<span id="alert">保存しました.</span>');
+        $('#alert').fadeOut(1500).queue(function() {
+          this.remove();
+        });
+      },
+      error: function(XMLHttpRequest, textStatus, errorThrown) {
+        $('#response').html('<span id="alert">予期せぬエラーが発生しました.</span>');
+        $('#alert').fadeOut(1500).queue(function() {
+          this.remove();
+        });
+      },
+      complete: function() {
+        button.attr("disabled", false);
+      }
+    });
+  } else {
+    $('#response').html('<span id="alert">全てのプランに評価してください.</span>');
+    $('#alert').fadeOut(1500).queue(function() {
+      this.remove();
+    });
+    button.attr("disabled", false);
+  }
 });

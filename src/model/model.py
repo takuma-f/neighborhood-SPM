@@ -27,11 +27,18 @@ def saveModel(modelName, model):
 def getAccuracy(comp_user, model):
     yt, xt = svm_read_problem('userData/'+comp_user+'_svm.txt')
     p_label, p_acc, p_val = svm_predict(yt, xt, model)
-    return p_label, p_acc[0] / 100  # p_labelとか一緒に出力するとgenIterで正常に判別されなくなる
+    return p_acc[0] / 100  # p_labelとか一緒に出力するとgenIterで正常に判別されなくなる
+
+
+# AccuracyとLabelを返す
+def getLabelandAccuracy(comp_user, model):
+    yt, xt = svm_read_problem('userData/'+comp_user+'_svm.txt')
+    p_label, p_acc, p_val = svm_predict(yt, xt, model)
+    return p_label, p_acc[0] / 100
 
 
 def main():
-    y, x = svm_read_problem('test001_svm.txt')  # 学習データ読み込み
+    y, x = svm_read_problem('001_svm.txt')  # 学習データ読み込み
     prob = svm_problem(y, x)  # 学習データ入力
     param = svm_parameter('-t 2 -c 2.0 -g 2.0')  # パラメータ設定
     # param = svm_parameter('-t 2 -c 0.03125 -g 0.0078125')  # パラメータ設定

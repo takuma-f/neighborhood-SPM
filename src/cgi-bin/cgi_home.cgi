@@ -98,7 +98,7 @@ def main():
                 </select>
                 <select id="budget" name="budget" style="width:150px;">
                   <option value="">予算を選択して下さい</option>
-                  <option value="1">0 ~ 5000円</option>
+                  <option value="1">5000円以下</option>
                   <option value="2">5000 ~ 10000円</option>
                   <option value="3">10000 ~ 30000円</option>
                   <option value="4">30000円以上</option>

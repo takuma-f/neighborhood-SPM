@@ -10,7 +10,7 @@ from tools import util as util
 
 # 類似ユーザーを抽出し逐次的に返す
 def getSimUsers(user, model, context):
-    threshold = 0.7  # 過半数超えていれば類似していると判断してよいだろう
+    threshold = -0.1  # 40%以上類似
 
     # システムから自分以外の全てのユーザーを返す(将来的にSQL導入)
     def getOtherUsers():

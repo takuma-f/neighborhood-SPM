@@ -53,33 +53,34 @@ def main():
       <div class="row">
     """
     for sim_user in genIter.getSimUsers(user, model, context):
-      print "ユーザー:%s (類似度%s)" % (sim_user, svm.getAccuracy(sim_user, model))
+      label, accuracy = svm.getLabelandAccuracy(sim_user, model)
+      print "ユーザー: %s (類似度%s) Label: %s" % (sim_user, accuracy, label)
       print "<br>"
-    #   for label, history_context, history in genIter.getHistories(sim_user):
-    #     print "抽出されたパターン :<br>"
-    #     history = util.convertAction(history)
-    #     for h in history:
-    #       print "%s -> " % h
-    #     print "<br>"
-    #   print "<br>"
-    print "コンテキストにマッチしたパターン :<br>"
-    for transaction in transaction_list:
-      transaction = util.convertAction(transaction)
-      for t in transaction:
-        print "%s -> " % t
-      print "<br>"
+#       for label, history_context, history in genIter.getHistories(sim_user):
+#         print "抽出されたパターン :<br>"
+#         history = util.convertAction(history)
+#         for h in history:
+#           print "%s -> " % h
+#         print "<br>"
+#       print "<br>"
+#     print "コンテキストにマッチしたパターン :<br>"
+#     for transaction in transaction_list:
+#       transaction = util.convertAction(transaction)
+#       for t in transaction:
+#         print "%s -> " % t
+#       print "<br>"
     print """
     </div>
   </div>
 </div>
     """
-    conv_data_iter = list()
-    for data in data_iter:
-        conv_data_iter.append(util.convertAction(data))
-    # print '<form id="analystic">'
-    # print '<input type="hidden" id="data_iter" value="%s">' % conv_data_iter
-    # print '<input type="hidden" id="sim_iter" value="%s">' % sim_iter
-    # print '</form>'
+#     conv_data_iter = list()
+#     for data in data_iter:
+#         conv_data_iter.append(util.convertAction(data))
+#     print '<form id="analystic">'
+#     print '<input type="hidden" id="data_iter" value="%s">' % conv_data_iter
+#     print '<input type="hidden" id="sim_iter" value="%s">' % sim_iter
+#     print '</form>'
 # ---ここまで---
 
     counter = 0

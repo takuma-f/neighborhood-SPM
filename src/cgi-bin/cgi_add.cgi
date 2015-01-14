@@ -96,7 +96,7 @@ def main():
                   </select>
                   <select id="budget" name="budget" style="width:180px;">
                     <option value="">予算を選択して下さい</option>
-                    <option value="1">0 ~ 5000円</option>
+                    <option value="1">5000円以下</option>
                     <option value="2">5000 ~ 10000円</option>
                     <option value="3">10000 ~ 30000円</option>
                     <option value="4">30000円以上</option>
@@ -125,57 +125,50 @@ def main():
       <select id="genre%s" name="genre%s" style="width:180px;">
         <option value="0">ジャンルを選択</option>
         <optgroup label="Eat">
-          <option value="1">1:和食・寿司</option>
-          <option value="2">2:中華・韓国料理</option>
-          <option value="3">3:焼肉・焼き物</option>
-          <option value="4">4:洋食・カフェめし</option>
-          <option value="5">5:ファミリーレストラン</option>
-          <option value="6">6:定食</option>
-          <option value="7">7:カレー・アジア料理</option>
-          <option value="8">8:ラーメン・麺類</option>
-          <option value="9">9:ファストフード</option>
-          <option value="10">10:居酒屋・バー</option>
+          <option value="1">和食・寿司</option>
+          <option value="2">中華・韓国料理</option>
+          <option value="3">焼肉・焼き物</option>
+          <option value="4">洋食・カフェめし</option>
+          <option value="5">ファミリーレストラン</option>
+          <option value="6">定食</option>
+          <option value="7">カレー・アジア料理</option>
+          <option value="8">ラーメン・麺類</option>
+          <option value="9">ファストフード</option>
         </optgroup>
         <optgroup label="Tea">
-          <option value="11">11:カフェ・スイーツ（和風）</option>
-          <option value="12">12:カフェ・スイーツ（洋風）</option>
+          <option value="11">カフェ・スイーツ（和風）</option>
+          <option value="12">カフェ・スイーツ（洋風）</option>
         </optgroup>
         <optgroup label="Play">
-          <option value="13">13:遊園地</option>
-          <option value="14">14:水族館</option>
-          <option value="15">15:映画館・劇場</option>
-          <option value="16">16:カラオケ・ゲームセンター</option>
-          <option value="17">17:スポーツ施設</option>
-          <option value="18">18:レジャー施設・ビーチ</option>
-          <option value="19">19:イベント会場</option>
-          <option value="20">20:温泉・リゾート施設</option>
-          <option value="21">21:夜遊び・ディスコクラブ</option>
+          <option value="13">遊園地</option>
+          <option value="14">水族館</option>
+          <option value="15">映画館・劇場</option>
+          <option value="16">カラオケ・ゲームセンター</option>
+          <option value="18">ビーチ・スキー場他レジャー施設</option>
+          <option value="19">イベント会場</option>
+          <option value="20">温泉・リゾート施設</option>
+          <option value="21">夜遊び・ディスコクラブ</option>
         </optgroup>
         <optgroup label="Sight">
-          <option value="22">22:神社・仏閣</option>
-          <option value="23">23:史跡</option>
-          <option value="24">24:展望台・タワー</option>
-          <option value="25">25:公園・庭園</option>
+          <option value="22">神社・仏閣</option>
+          <option value="23">史跡</option>
+          <option value="24">展望台・タワー</option>
+          <option value="25">公園・庭園</option>
         </optgroup>
         <optgroup label="Appreciate">
-          <option value="26">26:博物館</option>
-          <option value="27">27:美術館・ギャラリー</option>
-          <option value="28">28:資料館・ミュージアム</option>
+          <option value="26">博物館</option>
+          <option value="27">美術館・ギャラリー</option>
+          <option value="28">資料館・ミュージアム</option>
         </optgroup>
         <optgroup label="Shop">
-          <option value="29">29:百貨店</option>
-          <option value="30">30:ファッション</option>
-          <option value="31">31:食品（持ち帰り）</option>
-          <option value="32">32:菓子（持ち帰り）</option>
-          <option value="33">33:酒類（持ち帰り）</option>
-          <option value="34">34:雑貨・土産物</option>
-          <option value="35">35:食器・花器</option>
-          <option value="36">36:宝飾品</option>
-          <option value="37">37:書店</option>
-          <option value="38">38:家電量販店</option>
-          <option value="39">39:スポーツ用品店</option>
-          <option value="40">40:家具屋</option>
-          <option value="41">41:その他趣味品</option>
+          <option value="30">ファッション</option>
+          <option value="31">食品（持ち帰り）</option>
+          <option value="32">菓子（持ち帰り）</option>
+          <option value="33">酒類（持ち帰り）</option>
+          <option value="34">雑貨・土産物</option>
+          <option value="35">食器・花器</option>
+          <option value="36">宝飾品</option>
+          <option value="37">書店</option>
         </optgroup>
       </select>
     </div>
