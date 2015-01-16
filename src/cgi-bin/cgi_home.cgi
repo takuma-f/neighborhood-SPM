@@ -103,12 +103,41 @@ def main():
                   <option value="3">10000 ~ 30000円</option>
                   <option value="4">30000円以上</option>
                 </select>
+                <select id="focus1" name="focus1" style="width:150px;">
+                  <option value="null">ジャンル1を選択</option>
+                  <option value="">和食・寿司</option>
+                  <option value="">中華・韓国料理</option>
+                  <option value="">焼肉・焼き物</option>
+                  <option value="">洋食・カフェめし</option>
+                  <option value="">定食</option>
+                  <option value="">カレー・アジア料理</option>
+                  <option value="">ラーメン</option>
+                  <option value=""></option>
+                  <option value=""></option>
+                  <option value=""></option>
+                  <option value=""></option>
+                  <option value=""></option>
+                  <option value=""></option>
+                  <option value=""></option>
+                  <option value=""></option>
+                  <option value=""></option>
+                </select>
+                <select id="focus2" name="focus2" style="width:150px;">
+                  <option value="null">ジャンル2を選択</option>
+                  <option value="Eat">食事する</option>
+                  <option value="Tea">お茶する</option>
+                  <option value="Play">遊ぶ</option>
+                  <option value="Sight">名所を見る・歩く</option>
+                  <option value="Appreciate">鑑賞する</option>
+                  <option value="Shop">買物する</option>
+                </select>
               </div>
             </div>
           </div>
           <div class="panel-footer">
             <button type="button" class="btn btn-primary" id="submitContext" style="width:150px;">プランを作る</button>
             <button type="reset" class="btn btn-default" id="resetContext" style="width:150px;">条件をリセット</button>
+            <span id="requestResponse"></span>
           </div>
         </div>
       </div>

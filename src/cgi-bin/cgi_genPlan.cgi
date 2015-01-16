@@ -21,25 +21,22 @@ def main():
     random.seed(unixtime)  # 乱数シードを設定(POPとrandam)
     input_data = cgi.FieldStorage()
     user = input_data["userId"].value
-    context = list()
-    context.append(input_data["companion"].value)
-    context.append(input_data["budget"].value)
-
+    user_input = list()
+    user_input.append(input_data["companion"].value)
+    user_input.append(input_data["budget"].value)
+    user_input.append(input_data["focus1"].value)
+    user_input.append(input_data["focus2"].value)
     # ユーザーのモデルを生成
-    util.convertUserDataForGenSeqModel(user, context)
+    util.convertUserDataForGenSeqModel(user, user_input)
     model = svm.genModel(user)
     svm.saveModel(user+'.model', model)
-
     # 推薦時のコンテキストにおいて類似するユーザーの履歴を取得する
-    data_iter, sim_iter = genIter.getDataIter(user, model, context)
+    data_iter, sim_iter = genIter.getDataIter(user, model, user_input)
     transaction_list, patterns = apriori.genPattern(data_iter, minSupport=0.0)
-
     pattern_dict = neigh.getDict(transaction_list, patterns)
     sorted_dict = sorted(pattern_dict.items(), key=lambda x: x[1])
-
     pattern_confDict = neigh.getConfDict(transaction_list, patterns)
     sorted_confDict = sorted(pattern_confDict.items(), key=lambda x: x[1])
-
     print "<!DOCTYPE html>"
 
 # 検証用の詳細パネル(原則コメントアウト)
@@ -52,7 +49,7 @@ def main():
     <div class="panel-body">
       <div class="row">
     """
-    for sim_user in genIter.getSimUsers(user, model, context):
+    for sim_user in genIter.getSimUsers(user, model, user_input):
       label, accuracy = svm.getLabelandAccuracy(sim_user, model)
       print "ユーザー: %s (類似度%s) Label: %s" % (sim_user, accuracy, label)
       print "<br>"

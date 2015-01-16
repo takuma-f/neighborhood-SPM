@@ -270,9 +270,8 @@ def getConfDict(transaction_list, patterns):
 
 # モジュールのテストメソッド
 def test():
-    # f = open("./testlog.txt", "w")
-    # sys.stdout = f
     transaction_list = [["A","B","C","D","E"]]
+    record = ["A","B","C","D","E"]
 
     patterns = [["A","B","C","D"], ["A","B","D","E"], ["C","D","E"], ["B","D","E"]]
 
@@ -286,7 +285,9 @@ def test():
             util.printError()
     print pattern_dict
     print pattern_confDict
-    # f.close()
+    for pattern in patterns:
+        print getDistances(record, pattern)
+
 
 
 if __name__ == '__main__':

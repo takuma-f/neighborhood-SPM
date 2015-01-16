@@ -40,7 +40,6 @@ def main():
       <form id="patternForm">
         <div class="col-md-1"></div>
         """ % (counter, counter)
-
         # if counter < 6:
         #     p = rand_p1.pop()
         # elif 5 < counter < 9:
@@ -57,19 +56,16 @@ def main():
             </div>
             """ % (o+1, item)
         print '<input type="hidden" id="pattern%s" value="%s">' % (counter ,p)
-
         print """
         </form>
       </div>
     </div>
     <div class="panel-footer">
         """
-
         print"""
-      <input type="radio" form="patternForm" name="rate%s" value="1"> このプランは好き！
-      <input type="radio" form="patternForm" name="rate%s" value="-1"> このプランは嫌い
+      <input type="radio" form="patternForm" name="rate%s" value="1"> このプランは面白そう！
+      <input type="radio" form="patternForm" name="rate%s" value="-1"> このプランはイマイチ
         """ % (counter, counter)
-
         if counter == 10:
             print"""
       <br />
@@ -79,7 +75,6 @@ def main():
       </button>
       <span id="response"></span>
             """ % (counter)
-
         print"""
   </div>
 </div>

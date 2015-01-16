@@ -129,11 +129,9 @@ def main():
           <option value="2">中華・韓国料理</option>
           <option value="3">焼肉・焼き物</option>
           <option value="4">洋食・カフェめし</option>
-          <option value="5">ファミリーレストラン</option>
           <option value="6">定食</option>
           <option value="7">カレー・アジア料理</option>
-          <option value="8">ラーメン・麺類</option>
-          <option value="9">ファストフード</option>
+          <option value="8">ラーメン</option>
         </optgroup>
         <optgroup label="Tea">
           <option value="11">カフェ・スイーツ（和風）</option>
@@ -143,11 +141,9 @@ def main():
           <option value="13">遊園地</option>
           <option value="14">水族館</option>
           <option value="15">映画館・劇場</option>
-          <option value="16">カラオケ・ゲームセンター</option>
           <option value="18">ビーチ・スキー場他レジャー施設</option>
           <option value="19">イベント会場</option>
           <option value="20">温泉・リゾート施設</option>
-          <option value="21">夜遊び・ディスコクラブ</option>
         </optgroup>
         <optgroup label="Sight">
           <option value="22">神社・仏閣</option>
@@ -164,7 +160,6 @@ def main():
           <option value="30">ファッション</option>
           <option value="31">食品（持ち帰り）</option>
           <option value="32">菓子（持ち帰り）</option>
-          <option value="33">酒類（持ち帰り）</option>
           <option value="34">雑貨・土産物</option>
           <option value="35">食器・花器</option>
           <option value="36">宝飾品</option>

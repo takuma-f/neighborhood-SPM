@@ -6,23 +6,33 @@ $('#submitContext').click(function() {
   var param1 = $('#userId').val();
   var param2 = $('#companion').val();
   var param3 = $('#budget').val();
-  $.ajax({
-    url: hostUrl,
-    type:'POST',
-    scriptCharset: 'utf-8',
-    data: {userId:param1, companion:param2, budget:param3},
-    dataType: 'HTML',
-    timeout: 100000,
-    success: function(res) {
-      $('#planArea').html(res);
-    },
-    error: function(XMLHttpRequest, textStatus, errorThrown) {
-      alert(errorThrown);
-    },
-    complete: function() {
-      button.attr('disabled', false);
-    }
-  });
+  var param4 = $('#focus1').val();
+  var param5 = $('#focus2').val();
+  if (param4 != param5) {
+    $.ajax({
+      url: hostUrl,
+      type:'POST',
+      scriptCharset: 'utf-8',
+      data: {userId:param1, companion:param2, budget:param3, focus1:param4, focus2:param5},
+      dataType: 'HTML',
+      timeout: 100000,
+      success: function(res) {
+        $('#planArea').html(res);
+      },
+      error: function(XMLHttpRequest, textStatus, errorThrown) {
+        alert(errorThrown);
+      },
+      complete: function() {
+        button.attr('disabled', false);
+      }
+    });
+  } else {
+    $('#requestResponse').html('<span id="alert">ジャンル1とジャンル2は異なる[行動]を選択してください.</span>');
+    $('#alert').fadeOut(1500).queue(function() {
+      this.remove();
+    });
+    button.attr("disabled", false);
+  }
 });
 
 $('#genPattern').click(function() {
@@ -51,7 +61,7 @@ $('#genPattern').click(function() {
     complete: function() {
       button.attr('disabled', false);
     }
-  });
+  })
 });
 
 $('#saveRating').click(function() {

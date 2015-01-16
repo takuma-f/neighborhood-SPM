@@ -207,7 +207,7 @@ def convertUserDataForGenModel(user):
 
 
 # SeqModel生成可能な形式にContext, 履歴を変換し保存
-def convertUserDataForGenSeqModel(user, context):
+def convertUserDataForGenSeqModel(user, user_input):
 
     def convertActions(actions):
         conv_actions = list()
@@ -232,6 +232,7 @@ def convertUserDataForGenSeqModel(user, context):
     model_f = None
     result = str()
     length = 0
+    context = [user_input[0], user_input[1]]
     try:
         f = open('userData/'+user+'_history.txt', 'r')
         for line in f:
@@ -282,17 +283,3 @@ def convertUserDataForGenSeqModel(user, context):
     finally:
         if (f):
             f.close()
-
-
-def main():
-    for x in xrange(6, 10):
-        user = "014000"+str(x)
-        convertUserDataForGenSeqModel(user)
-    for x in xrange(10, 14):
-        user = "01400"+str(x)
-        convertUserDataForGenSeqModel(user)
-
-
-if __name__ == '__main__':
-    user = "test002"
-    convertUserDataForGenSeqModel(user)
