@@ -58,18 +58,8 @@ def main():
         </div>
         <div class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li><a href="cgi_home.cgi"><i class="glyphicon glyphicon-home"></i> プラン作成</a></li>
-            <li class="active"><a href=""><i class="glyphicon glyphicon-plus-sign"></i> 情報を登録する</a></li>
-            <li><a href="./cgi_viewplan.cgi"><i class="glyphicon glyphicon-list"></i> 保存したプランを見る</a></li>
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">その他<span class="caret"></span></a>
-              <ul class="dropdown-menu" role="menu">
-                <li><a href="#">アカウント設定</a></li>
-                <li class="divider"></li>
-                <!-- <li class="dropdown-header"></li> -->
-                <li><a href="#">Sign off</a></li>
-              </ul>
-            </li>
+            <li><a href="cgi_home.cgi"><i class="glyphicon glyphicon-home"></i> 推薦を受ける</a></li>
+            <li class="active"><a href=""><i class="glyphicon glyphicon-plus-sign"></i> モデルを作る</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
@@ -80,7 +70,7 @@ def main():
         <div class="row">
           <div id="inputContext" class="panel panel-default">
             <div class="panel-heading">
-              <h3 class="panel-title">出かける時に好む・よく取る行動を5つ選択してください！</h3>
+              <h3 class="panel-title">入力をもとにあなたのモデルを作成します！</h3>
             </div>
             <div class="panel-body">
               <div class="row">

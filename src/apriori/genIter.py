@@ -50,9 +50,9 @@ def getSimUsers(user, model, user_input):
     for other_user in other_users:
         if other_user != user:
             util.convertUserDataForGenSeqModel(other_user, user_input)
-        if svm.getAccuracy(other_user, model) > threshold:
-            sim_user = other_user  # わかりやすさのため書いた
-            yield sim_user
+            if svm.getAccuracy(other_user, model) > threshold:
+                sim_user = other_user  # わかりやすさのため書いた
+                yield sim_user
 
 
 # 類似ユーザーの履歴に含まれるラベル、コンテキスト、ジャンル(行動)を取得
