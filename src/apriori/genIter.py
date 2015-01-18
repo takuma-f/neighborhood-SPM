@@ -10,7 +10,7 @@ from tools import util as util
 
 # 類似ユーザーを抽出し逐次的に返す
 def getSimUsers(user, model, user_input):
-    threshold = 0.4  # 40%以上類似
+    threshold = 0.49  # 50%以上類似
 
     # システムから自分以外の全てのユーザーを返す(将来的にSQL導入)
     def getOtherUsers(user_input):
@@ -29,19 +29,19 @@ def getSimUsers(user, model, user_input):
             other_users = ["017", "018", "019", "020"]
         elif (A == "Tea" and B == "Play") or (A == "Play" and B == "Tea"):
             other_users = ["021", "022", "023", "024"]
-        elif (A == "Tea" and B == "Sight") or (A == "Tea" and B == "Sight"):
+        elif (A == "Tea" and B == "Sight") or (A == "Sight" and B == "Tea"):
             other_users = ["025", "026", "027", "028"]
-        elif (A == "Tea" and B == "Appreciate") or (A == "Tea" and B == "Appreciate"):
+        elif (A == "Tea" and B == "Appreciate") or (A == "Appreciate" and B == "Tea"):
             other_users = ["029", "030", "031", "032"]
-        elif (A == "Tea" and B == "Shop") or (A == "Tea" and B == "Shop"):
+        elif (A == "Tea" and B == "Shop") or (A == "Shop" and B == "Tea"):
             other_users = ["033", "034", "035", "036"]
-        elif (A == "Play" and B == "Sight") or (A == "Play" and B == "Sight"):
+        elif (A == "Play" and B == "Sight") or (A == "Sight" and B == "Play"):
             other_users = ["037", "038", "039", "040"]
-        elif (A == "Play" and B == "Appreciate") or (A == "Play" and B == "Appreciate"):
+        elif (A == "Play" and B == "Appreciate") or (A == "Appreciate" and B == "Play"):
             other_users = ["041", "042", "043", "044"]
-        elif (A == "Play" and B == "Shop") or (A == "Play" and B == "Shop"):
+        elif (A == "Play" and B == "Shop") or (A == "Shop" and B == "Play"):
             other_users = ["045", "046", "047", "048"]
-        elif (A == "Sight" and B == "Shop") or (A == "Sight" and B == "Shop"):
+        elif (A == "Sight" and B == "Shop") or (A == "Shop" and B == "Sight"):
             other_users = ["049", "050", "051", "052"]
         elif (A == "Appreciate" and B == "Shop") or (A == "Shop" and B == "Appreciate"):
             other_users = ["053", "054", "055", "056"]

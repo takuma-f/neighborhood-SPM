@@ -58,8 +58,8 @@ def main():
         </div>
         <div class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li><a href="cgi_home.cgi"><i class="glyphicon glyphicon-home"></i> 推薦を受ける</a></li>
-            <li class="active"><a href=""><i class="glyphicon glyphicon-plus-sign"></i> モデルを作る</a></li>
+            <li class="active"><a href=""><i class="glyphicon glyphicon-user"></i> モデルを作る</a></li>
+            <li><a href="cgi_home.cgi"><i class="glyphicon glyphicon-heart"></i> 推薦を受ける</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
@@ -75,8 +75,8 @@ def main():
             <div class="panel-body">
               <div class="row">
                 <div class="col-md-12">
-                  <input type="text" id="userId" name="userId" placeholder="ユーザーIDを入力" style="width:150px; height:30px;">
-                  <input type="date" id="date" name="date" style="width:150px; height:30px;">
+                  <input type="text" id="userId" name="userId" placeholder="ユーザーIDを入力" style="width:180px; height:30px;">
+                  <input type="date" id="date" name="date" style="width:180px; height:30px;">
                   <select id="companion" name="companion" style="width:180px;">
                     <option value="">同伴者を選択して下さい</option>
                     <option value="1">一人</option>
@@ -93,28 +93,17 @@ def main():
                   </select>
                 </div>
               </div>
-              <br />
-              <div class="row">
-                <div class="col-md-1"></div>
+            <div class="row">
+              <br/>
+              <div class="col-md-1"></div>
   """
 
   for x in xrange(1,6):
     print """
     <div class="col-md-2" id="ItemBox">
-      <select id="action%s" name="action%s" style="width:180px;">
-        <option value="0">行動を選択</option>
-        <option value="Eat">食事する</option>
-        <option value="Tea">お茶する</option>
-        <option value="Play">遊ぶ</option>
-        <option value="Sight">名所を見る・歩く</option>
-        <option value="Appreciate">鑑賞する</option>
-        <option value="Shop">買い物する</option>
-      </select>
-      <br>
-      <br>
       <select id="genre%s" name="genre%s" style="width:180px;">
         <option value="0">ジャンルを選択</option>
-        <optgroup label="Eat">
+        <optgroup label="行動: 食事する">
           <option value="1">和食・寿司</option>
           <option value="2">中華・韓国料理</option>
           <option value="3">焼肉・焼き物</option>
@@ -123,11 +112,11 @@ def main():
           <option value="7">カレー・アジア料理</option>
           <option value="8">ラーメン</option>
         </optgroup>
-        <optgroup label="Tea">
+        <optgroup label="行動: お茶する">
           <option value="11">カフェ・スイーツ（和風）</option>
           <option value="12">カフェ・スイーツ（洋風）</option>
         </optgroup>
-        <optgroup label="Play">
+        <optgroup label="行動: 遊ぶ">
           <option value="13">遊園地</option>
           <option value="14">水族館</option>
           <option value="15">映画館・劇場</option>
@@ -135,18 +124,18 @@ def main():
           <option value="19">イベント会場</option>
           <option value="20">温泉・リゾート施設</option>
         </optgroup>
-        <optgroup label="Sight">
+        <optgroup label="行動: 名所を見る・歩く">
           <option value="22">神社・仏閣</option>
           <option value="23">史跡</option>
           <option value="24">展望台・タワー</option>
           <option value="25">公園・庭園</option>
         </optgroup>
-        <optgroup label="Appreciate">
+        <optgroup label="行動: 鑑賞する">
           <option value="26">博物館</option>
           <option value="27">美術館・ギャラリー</option>
           <option value="28">資料館・ミュージアム</option>
         </optgroup>
-        <optgroup label="Shop">
+        <optgroup label="行動: 買物する">
           <option value="30">ファッション</option>
           <option value="31">食品（持ち帰り）</option>
           <option value="32">菓子（持ち帰り）</option>
@@ -157,7 +146,7 @@ def main():
         </optgroup>
       </select>
     </div>
-    """ % (x,x,x,x)
+    """ % (x,x)
 
   print """
           </div>
@@ -179,13 +168,7 @@ def main():
 <script src="../dist/js/bootstrap.min.js"></script>
 <script src="../assets/js/docs.min.js"></script>
 <script src="../js/ajax2.js"></script>
-<script src="../js/ConnectedSelect.js"></script><!-- 行動とジャンルの連動プルダウン -->
   """
-  # ConnectedSelect.jsの関連付けを初期化
-  print "<script>"
-  for x in xrange(1,6):
-    print "ConnectedSelect(['action%s','genre%s']);" % (x, x)
-  print "</script>"
 
   print "</body></html>"
   import cgitb

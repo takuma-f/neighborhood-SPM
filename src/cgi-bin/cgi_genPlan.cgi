@@ -167,10 +167,8 @@ def main():
             elif a == "4":
               print '<p><img src="/images/Resized256/italian.jpg"></p>'
             elif a == "5":
-              # <!--ファミリーレストラン-->
               print '<p><img src="/images/Resized256/famires.jpg"></p>'
             elif a == "6":
-              # <!--定食-->
               print '<p><img src="/images/Resized256/ootoya.jpg"></p>'
             elif a == "7":
               print '<p><img src="/images/Resized256/curry.jpg"></p>'
@@ -185,87 +183,62 @@ def main():
             elif a == "12":
               print '<p><img src="/images/Resized256/cafe.jpg"></p>'
             elif a == "13":
-              # <!--遊園地-->
               print '<p><img src="/images/Resized256/amusementpark.jpg"></p>'
             elif a == "14":
-              # <!--水族館-->
               print '<p><img src="/images/Resized256/seapark.jpg"></p>'
             elif a == "15":
-              # <!--映画館-->
               print '<p><img src="/images/Resized256/cinema.jpg"></p>'
             elif a == "16":
-              # <!--カラオケ・ゲームセンター-->
               print '<p><img src="/images/Resized256/karaoke.jpg"></p>'
             elif a == "17":
-              # <!--スポーツ施設-->
               print '<p><img src="/images/Resized256/pool.jpg"></p>'
             elif a == "18":
-              # <!--レジャー施設・ビーチ-->
               print '<p><img src="/images/Resized256/pool.jpg"></p>'
             elif a == "19":
-              # <!--イベント会場-->
               print '<p><img src="/images/Resized256/event.jpg"></p>'
             elif a == "20":
-              # <!--温泉・リゾート施設-->
               print '<p><img src="/images/Resized256/onsen.jpg"></p>'
             elif a == "21":
-              # <!--夜遊び・ディスコクラブ-->
               print '<p><img src="/images/Resized256/discoclub.jpg"></p>'
             elif a == "22":
               print '<p><img src="/images/Resized256/shrine.jpg"></p>'
             elif a == "23":
-              # <!--史跡-->
               print '<p><img src="/images/Resized256/coliseum.jpg"></p>'
             elif a == "24":
               print '<p><img src="/images/Resized256/tower.jpg"></p>'
             elif a == "25":
               print '<p><img src="/images/Resized256/park.jpg"></p>'
             elif a == "26":
-              # <!--博物館-->
               print '<p><img src="/images/Resized256/museum.jpg"></p>'
             elif a == "27":
-              # <!--美術館-->
               print '<p><img src="/images/Resized256/gallely.jpg"></p>'
             elif a == "28":
-              # <!--資料館-->
               print '<p><img src="/images/Resized256/gallely.jpg"></p>'
             elif a == "29":
-              # <!--百貨店-->
               print '<p><img src="/images/Resized256/mitsukoshi.jpg"></p>'
             elif a == "30":
-              # <!--ファッション-->
               print '<p><img src="/images/Resized256/fashion.jpg"></p>'
             elif a == "31":
-              # <!--食品(持ち帰り)-->
               print '<p><img src="/images/Resized256/souvenir.jpg"></p>'
             elif a == "32":
-              # <!--菓子(持ち帰り)-->
               print '<p><img src="/images/Resized256/sweets.jpg"></p>'
             elif a == "33":
-              # <!--酒類(持ち帰り)-->
               print '<p><img src="/images/Resized256/liquorstore.jpg"></p>'
             elif a == "34":
               print '<p><img src="/images/Resized256/souvenir.jpg"></p>'
             elif a == "35":
-              # 食器・花器
               print '<p><img src="/images/Resized256/tableware.jpg"></p>'
             elif a == "36":
-              # 宝飾店
               print '<p><img src="/images/Resized256/jewely.jpg"></p>'
             elif a == "37":
-              # 書店
               print '<p><img src="/images/Resized256/bookstore.jpg"></p>'
             elif a == "38":
-              # <!--家電量販店-->
               print '<p><img src="/images/Resized256/souvenir.jpg"></p>'
             elif a == "39":
-              # <!--スポーツ用品店-->
               print '<p><img src="/images/Resized256/sports.jpg"></p>'
             elif a == "40":
-              # <!--家具屋-->
               print '<p><img src="/images/Resized256/furniture.jpg"></p>'
             elif a == "41":
-              # <!--その他趣味品-->
               print '<p><img src="/images/Resized256/akihabara.jpg"></p>'
             print "</div>"
             print "</div>"
@@ -294,7 +267,7 @@ def main():
 </div>
         """
         if counter == 10:
-            break  # 6個提示
+            break  # 10個提示
     print """
   <script src="../js/ajaxSave.js"></script>
     """

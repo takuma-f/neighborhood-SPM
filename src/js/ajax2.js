@@ -27,7 +27,7 @@ $('#submitContext').click(function() {
       }
     });
   } else {
-    $('#requestResponse').html('<span id="alert">ジャンル1とジャンル2は異なる[行動]を選択してください.</span>');
+    $('#requestResponse').html('<span id="alert">ジャンル1とジャンル2は異なる行動から選択してください.</span>');
     $('#alert').fadeOut(1500).queue(function() {
       this.remove();
     });

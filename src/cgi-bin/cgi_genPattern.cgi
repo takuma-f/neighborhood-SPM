@@ -52,7 +52,9 @@ def main():
         for o, item in enumerate(convert_p):
             print"""
             <div class="col-md-2" id="ItemBox">
-              %s箇所目：%s
+              %s箇所目
+              <br />
+              %s
             </div>
             """ % (o+1, item)
         print '<input type="hidden" id="pattern%s" value="%s">' % (counter ,p)
