@@ -10,7 +10,7 @@ from tools import util as util
 
 # 類似ユーザーを抽出し逐次的に返す
 def getSimUsers(user, model, user_input):
-    threshold = 0.49  # 50%以上類似
+    threshold = 0.6  # 60%以上類似
 
     # システムから自分以外の全てのユーザーを返す(将来的にSQL導入)
     def getOtherUsers(user_input):
@@ -45,12 +45,13 @@ def getSimUsers(user, model, user_input):
             other_users = ["049", "050", "051", "052"]
         elif (A == "Appreciate" and B == "Shop") or (A == "Shop" and B == "Appreciate"):
             other_users = ["053", "054", "055", "056"]
+        # other_users = ["001", "002", "003", "004", "005", "006", "007", "008", "013", "014", "015", "016", "017", "018", "019", "020", "021", "022", "023", "024", "029", "030", "031", "032", "033", "034", "035", "036", "041", "042", "043", "044", "045", "046", "047", "048", "053", "054", "055", "056"]
         return other_users
     other_users = getOtherUsers(user_input)
     for other_user in other_users:
         if other_user != user:
             util.convertUserDataForGenSeqModel(other_user, user_input)
-            if svm.getAccuracy(other_user, model) > threshold:
+            if svm.getAccuracy(other_user, model) >= threshold:
                 sim_user = other_user  # わかりやすさのため書いた
                 yield sim_user
 

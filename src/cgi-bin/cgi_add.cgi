@@ -4,11 +4,13 @@
 import sys
 sys.path.append('/Users/Admin/dev/neighborhood_SPM/src/')
 sys.stderr = sys.stdout
+import datetime
 import os
 from cgi import escape
 
 
 def main():
+  today = datetime.date.today()
   print "<!DOCTYPE html>"
   print
   print """
@@ -76,7 +78,7 @@ def main():
               <div class="row">
                 <div class="col-md-12">
                   <input type="text" id="userId" name="userId" placeholder="ユーザーIDを入力" style="width:180px; height:30px;">
-                  <input type="date" id="date" name="date" style="width:180px; height:30px;">
+                  <input type="hidden" id="date" name="date" value="%s">
                   <select id="companion" name="companion" style="width:180px;">
                     <option value="">同伴者を選択して下さい</option>
                     <option value="1">一人</option>
@@ -96,7 +98,7 @@ def main():
             <div class="row">
               <br/>
               <div class="col-md-1"></div>
-  """
+  """ % today.isoformat()
 
   for x in xrange(1,6):
     print """

@@ -5,12 +5,14 @@ import sys
 sys.path.append('/Users/Admin/dev/neighborhood_SPM/src/')
 sys.stderr = sys.stdout
 import os
+import datetime
 from cgi import escape
 
 from tools import util as util
 
 
 def main():
+  today = datetime.date.today()
   print "<!DOCTYPE html>"
   print
   print """
@@ -79,9 +81,10 @@ def main():
             <div class="row">
               <div class="col-md-2">
                 <input type="text" id="userId" name="userId" placeholder="ユーザーIDを入力" style="width:180px; height:30px;">
-                <br />
-                <input type="date" id="date" name="date" style="width:180px; height:30px;">
+                <input type="hidden" id="date" name="date" value="%s">
               </div>
+  """ % today.isoformat()
+  print """
               <div class="col-md-2">
                 <select id="companion" name="companion" style="width:180px;">
                   <option value="">同伴者を選択して下さい</option>
@@ -93,7 +96,7 @@ def main():
                 <br />
                 <br />
                 <select id="focus1" name="focus1" style="width:180px;">
-                  <option value="0">重視するジャンル1</option>
+                  <option value="0">順序を重視するジャンル1</option>
                   <optgroup label="行動: 食事する">
                     <option value="Eat">和食・寿司</option>
                     <option value="Eat">中華・韓国料理</option>
@@ -148,7 +151,7 @@ def main():
                 <br />
                 <br />
                 <select id="focus2" name="focus2" style="width:180px;">
-                  <option value="0">重視するジャンル2</option>
+                  <option value="0">順序を重視するジャンル2</option>
                   <optgroup label="行動: 食事する">
                     <option value="Eat">和食・寿司</option>
                     <option value="Eat">中華・韓国料理</option>

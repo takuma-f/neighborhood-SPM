@@ -60,12 +60,15 @@ def main():
 #           print "%s -> " % h
 #         print "<br>"
 #       print "<br>"
-#     print "コンテキストにマッチしたパターン :<br>"
-#     for transaction in transaction_list:
-#       transaction = util.convertAction(transaction)
-#       for t in transaction:
-#         print "%s -> " % t
-#       print "<br>"
+    print "コンテキストにマッチしたパターン :<br>"
+    for transaction in transaction_list:
+      transaction = util.convertAction(transaction)
+      for i, t in enumerate(transaction):
+        if i+1 != len(transaction):
+          print "%s -> " % t
+        else:
+          print t
+      print "<br>"
     print """
     </div>
   </div>
@@ -250,9 +253,9 @@ def main():
       <div class="panel-footer">
         """
         print """
-        <input type="radio" form="patternForm" name="rate%s" value="1"> このプランは面白そう！
-        <input type="radio" form="patternForm" name="rate%s" value="-1"> このプランはイマイチ
-        """ % (counter, counter)
+        <input type="radio" form="patternForm" name="rate%s" id="yes%s" value="1"><label for="yes%s">　このプランは面白そう！</label>
+        <input type="radio" form="patternForm" name="rate%s" id="no%s" value="-1"><label for="no%s">　このプランはイマイチ</label>
+        """ % (counter, counter, counter, counter, counter, counter)
         if counter == 10:
           print """
         <br />

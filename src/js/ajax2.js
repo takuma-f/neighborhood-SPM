@@ -115,7 +115,7 @@ $('#saveRating').click(function() {
         });
       },
       error: function(XMLHttpRequest, textStatus, errorThrown) {
-        $('#response').html('<span id="alert">予期せぬエラーが発生しました.</span>');
+        $('#response').html('<span id="alert">予期しないエラーが発生しました.</span>');
         $('#alert').fadeOut(1500).queue(function() {
           this.remove();
         });

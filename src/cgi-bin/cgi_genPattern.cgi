@@ -65,9 +65,9 @@ def main():
     <div class="panel-footer">
         """
         print"""
-      <input type="radio" form="patternForm" name="rate%s" value="1"> このプランは面白そう！
-      <input type="radio" form="patternForm" name="rate%s" value="-1"> このプランはイマイチ
-        """ % (counter, counter)
+      <input type="radio" form="patternForm" name="rate%s" id="yes%s" value="1"><label for="yes%s">　このプランは面白そう！</label>
+      <input type="radio" form="patternForm" name="rate%s" id="no%s" value="-1"><label for="no%s">　このプランはイマイチ</label>
+        """ % (counter, counter, counter, counter, counter, counter)
         if counter == 10:
             print"""
       <br />

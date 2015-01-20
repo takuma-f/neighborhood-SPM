@@ -55,9 +55,8 @@ def main():
     try:
         form = cgi.FieldStorage()
         writeFile(form)
-        print '<span id="alert">登録完了.</span>'
     except Exception:
-        print '<span id="alert">入力エラー.</span>'
+        reise
     cgitb.enable()
 
 
