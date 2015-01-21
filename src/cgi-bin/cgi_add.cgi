@@ -60,8 +60,9 @@ def main():
         </div>
         <div class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href=""><i class="glyphicon glyphicon-user"></i> モデルを作る</a></li>
-            <li><a href="cgi_home.cgi"><i class="glyphicon glyphicon-heart"></i> 推薦を受ける</a></li>
+          <li class="active"><a href=""><i class="glyphicon glyphicon-user"></i> モデルを作る</a></li>
+          <li><a href="./cgi_homeConf.cgi"><i class="glyphicon glyphicon-heart"></i> 推薦を受ける (1)</a></li>
+          <li><a href="./cgi_homeNeigh.cgi"><i class="glyphicon glyphicon-heart"></i> 推薦を受ける (2)</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>

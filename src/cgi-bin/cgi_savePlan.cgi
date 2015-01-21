@@ -62,6 +62,16 @@ def writeFile(form):
         + form['score8'].value + ","\
         + form['score9'].value + ","\
         + form['score10'].value + "\r\n"\
+        + form['intpattern1'].value + ",\r\n"\
+        + form['intpattern2'].value + ",\r\n"\
+        + form['intpattern3'].value + ",\r\n"\
+        + form['intpattern4'].value + ",\r\n"\
+        + form['intpattern5'].value + ",\r\n"\
+        + form['intpattern6'].value + ",\r\n"\
+        + form['intpattern7'].value + ",\r\n"\
+        + form['intpattern8'].value + ",\r\n"\
+        + form['intpattern9'].value + ",\r\n"\
+        + form['intpattern10'].value + ",\r\n"\
         + form['pattern1'].value + ",\r\n"\
         + form['pattern2'].value + ",\r\n"\
         + form['pattern3'].value + ",\r\n"\

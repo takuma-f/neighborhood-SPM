@@ -2,7 +2,14 @@ $('#submitContext').click(function() {
   var button = $(this);
     button.attr('disabled', true);
 
-  var hostUrl= './cgi_genPlan.cgi';
+  if (button.val() == 'conf') {
+    var hostUrl = './cgi_genPlanConf.cgi';
+  } else if (button.val() == 'neigh') {
+    var hostUrl = './cgi_genPlanNeigh.cgi'
+  } else {
+    var hostUrl = './cgi_genPlan.cgi'
+  }
+
   var param1 = $('#userId').val();
   var param2 = $('#companion').val();
   var param3 = $('#budget').val();

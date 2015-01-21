@@ -5,12 +5,13 @@ import sys
 sys.path.append('/Users/Admin/dev/neighborhood_SPM/src/')
 sys.stderr = sys.stdout
 from model import model as svm
+from neighborhood import neighborhood as neigh
 from tools import util as util
 
 
 # 類似ユーザーを抽出し逐次的に返す
 def getSimUsers(user, model, user_input):
-    threshold = 0.6  # 60%以上類似
+    threshold = 0.5  # 50%以上類似
 
     # システムから自分以外の全てのユーザーを返す(将来的にSQL導入)
     def getOtherUsers(user_input):

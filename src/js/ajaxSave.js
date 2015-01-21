@@ -61,6 +61,17 @@ $('#saveRating').click(function() {
   var param53 = $('input:radio[name="rate8"]:checked').val() || "None";
   var param54 = $('input:radio[name="rate9"]:checked').val() || "None";
   var param55 = $('input:radio[name="rate10"]:checked').val() || "None";
+
+  var param56 = $('#intpattern1').val() || "None";
+  var param57 = $('#intpattern2').val() || "None";
+  var param58 = $('#intpattern3').val() || "None";
+  var param59 = $('#intpattern4').val() || "None";
+  var param60 = $('#intpattern5').val() || "None";
+  var param61 = $('#intpattern6').val() || "None";
+  var param62 = $('#intpattern7').val() || "None";
+  var param63 = $('#intpattern8').val() || "None";
+  var param64 = $('#intpattern9').val() || "None";
+  var param65 = $('#intpattern10').val() || "None";
   if ((param46 != "None") && (param47 != "None") && (param48 != "None") && (param49 != "None") && (param50 != "None") && (param51 != "None") && (param52 != "None") && (param53 != "None") && (param54 != "None") && (param55 != "None")) {
     $.ajax({
       url: hostUrl,
@@ -76,7 +87,9 @@ $('#saveRating').click(function() {
         pattern1:param36, pattern2:param37, pattern3:param38, pattern4:param39, pattern5:param40, 
         pattern6:param41, pattern7:param42, pattern8:param43, pattern9:param44, pattern10:param45, 
         rate1:param46, rate2:param47, rate3:param48, rate4:param49, rate5:param50, 
-        rate6:param51, rate7:param52, rate8:param53, rate9:param54, rate10:param55},
+        rate6:param51, rate7:param52, rate8:param53, rate9:param54, rate10:param55, intpattern1:param56, 
+        intpattern2:param57, intpattern3:param58, intpattern4:param59, intpattern5:param60, intpattern6:param61, 
+        intpattern7:param62, intpattern8:param63, intpattern9:param64, intpattern10:param65},
         // 最後のカンマ忘れやすいので注意すること
       dataType: 'HTML',
       timeout: 100000,
