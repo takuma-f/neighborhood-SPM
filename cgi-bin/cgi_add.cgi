@@ -61,9 +61,9 @@ def main():
         </div>
         <div class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-          <li class="active"><a href=""><i class="glyphicon glyphicon-user"></i> モデルを作る</a></li>
-          <li><a href="./cgi_homeConf.cgi"><i class="glyphicon glyphicon-heart"></i> 推薦を受ける (1)</a></li>
-          <li><a href="./cgi_homeNeigh.cgi"><i class="glyphicon glyphicon-heart"></i> 推薦を受ける (2)</a></li>
+          <li class="active"><a href=""><i class="glyphicon glyphicon-user"></i> 好みを入力する</a></li>
+          <li><a href="./cgi_homeConf.cgi"><i class="glyphicon glyphicon-heart"></i> 推薦を受ける①</a></li>
+          <li><a href="./cgi_homeNeigh.cgi"><i class="glyphicon glyphicon-heart"></i> 推薦を受ける②</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
@@ -74,7 +74,7 @@ def main():
         <div class="row">
           <div id="inputContext" class="panel panel-default">
             <div class="panel-heading">
-              <h3 class="panel-title">入力をもとにあなたのモデルを作成します！</h3>
+              <h3 class="panel-title">あなたの好みのプランを入力します！</h3>
             </div>
             <div class="panel-body">
               <div class="row">

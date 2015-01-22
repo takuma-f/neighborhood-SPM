@@ -1,11 +1,11 @@
 #!/usr/bin/env python
-# coding: UTF-8
+# -*- coding: UTF-8 -*-
 
 import sys
-sys.path.append('/Users/Admin/dev/neighborhood_SPM/src/')
 sys.stderr = sys.stdout
 import cgi
 import cgitb
+cgitb.enable()
 from tools import util as util
 
 
@@ -13,7 +13,7 @@ from tools import util as util
 def writeFile(form):
     f = None
     try:
-        f = open('userData/'+form['userId'].value+'.log', 'a')
+        f = open('userData/' + form['date'].value + form['userId'].value + '.log', 'a')
         f.write("date: " + form['date'].value + "\r\n"\
         + "companion: " + form['companion'].value + "\r\n"\
         + "budget: " + form['budget'].value + "\r\n"\
@@ -90,13 +90,12 @@ def writeFile(form):
 
 
 def main():
-    print '<!DOCTYPE html>'
+    print "Content-Type: text/html"
     try:
         form = cgi.FieldStorage()
         writeFile(form)
     except Exception:
         raise
-    cgitb.enable()
 
 
 if __name__ == '__main__':
