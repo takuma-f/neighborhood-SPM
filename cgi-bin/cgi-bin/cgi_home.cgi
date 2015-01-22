@@ -13,7 +13,7 @@ from tools import util as util
 
 def main():
   today = datetime.date.today()
-  print "<!DOCTYPE html>"
+  print "Content-Type: text/html"
   print
   print """
 <html lang="ja">
