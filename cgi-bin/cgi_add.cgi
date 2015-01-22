@@ -1,17 +1,19 @@
 #!/usr/bin/env python
-# coding: UTF-8
+# -*- coding: UTF-8 -*-
 
 import sys
-sys.path.append('/Users/Admin/dev/neighborhood_SPM/src/')
 sys.stderr = sys.stdout
-import datetime
 import os
+import datetime
+import cgitb
+cgitb.enable()
+
 from cgi import escape
 
 
 def main():
   today = datetime.date.today()
-  print "<!DOCTYPE html>"
+  print "Content-Type: text/html"
   print
   print """
 <html lang="ja">
@@ -21,22 +23,21 @@ def main():
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="TakumaFUJITSUKA" content="">
-    <link rel="icon" href="../../favicon.ico">
 
     <title>Perfect Planner</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="../dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="./dist/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="../dist/css/starter-template.css" rel="stylesheet">
+    <link href="./dist/css/starter-template.css" rel="stylesheet">
 
     <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
-    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
-    <script src="../assets/js/ie-emulation-modes-warning.js"></script>
+    <!--[if lt IE 9]><script src="./assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <script src="./assets/js/ie-emulation-modes-warning.js"></script>
 
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src="../assets/js/ie10-viewport-bug-workaround.js"></script>
+    <script src="./assets/js/ie10-viewport-bug-workaround.js"></script>
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -168,14 +169,12 @@ def main():
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-<script src="../dist/js/bootstrap.min.js"></script>
-<script src="../assets/js/docs.min.js"></script>
-<script src="../js/ajax2.js"></script>
+<script src="./dist/js/bootstrap.min.js"></script>
+<script src="./assets/js/docs.min.js"></script>
+<script src="./js/ajax2.js"></script>
   """
 
   print "</body></html>"
-  import cgitb
-  cgitb.enable()
 
 
 if __name__ == '__main__':
