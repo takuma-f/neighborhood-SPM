@@ -2,8 +2,6 @@
 # coding: UTF-8
 
 import sys
-sys.path.append('/Library/Python/2.7/site-packages/libsvm-3.17/python')
-sys.path.append('/Users/Admin/dev/neighborhood_SPM/src/')
 sys.stderr = sys.stdout
 from svm import *
 from svmutil import *
@@ -38,13 +36,11 @@ def getLabelandAccuracy(comp_user, model):
 
 
 def main():
-    y, x = svm_read_problem('001_svm.txt')  # 学習データ読み込み
+    y, x = svm_read_problem('../userData/usui-test_svm.txt')  # 学習データ読み込み
     prob = svm_problem(y, x)  # 学習データ入力
-    param = svm_parameter('-t 2 -c 2.0 -g 2.0')  # パラメータ設定
-    # param = svm_parameter('-t 2 -c 0.03125 -g 0.0078125')  # パラメータ設定
+    param = svm_parameter('-t 2 -c 64.0 -g 0.0078125')  # パラメータ設定
     model = svm_train(prob, param)  # 学習,分類モデル作成
-    saveModel('test001_svm.model', model)
-    test_name = "0140006_svm.txt"
+    test_name = "../userData/001_svm.txt"
     yt, xt = svm_read_problem(test_name)
     p_label, p_acc, p_val = svm_predict(yt, xt, model)
     print p_label, p_acc[0]

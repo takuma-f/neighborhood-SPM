@@ -5,9 +5,9 @@ $('#submitContext').click(function() {
   if (button.val() == 'conf') {
     var hostUrl = './cgi_genPlanConf.cgi';
   } else if (button.val() == 'neigh') {
-    var hostUrl = './cgi_genPlanNeigh.cgi'
+    var hostUrl = './cgi_genPlanNeigh.cgi';
   } else {
-    var hostUrl = './cgi_genPlan.cgi'
+    var hostUrl = './cgi_genPlan.cgi';
   }
 
   var param1 = $('#userId').val();
