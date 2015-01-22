@@ -1,7 +1,7 @@
 $('#saveRating').click(function() {
   var btn = $(this);
     btn.attr('disabled', true);
-  var hostUrl= './../cgi_savePlan.cgi';
+  var hostUrl= './cgi_savePlan.cgi';
   var param1 = $('#userId').val();
   var param2 = $('#date').val();
   var param3 = $('#companion').val();
