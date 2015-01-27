@@ -79,121 +79,79 @@ def main():
           </div>
           <div class="panel-body">
             <div class="row">
-              <div class="col-md-2">
+              <div class="col-md-12">
                 <input type="text" id="userId" name="userId" placeholder="ユーザーIDを入力" style="width:180px; height:30px;">
                 <input type="hidden" id="date" name="date" value="%s">
-              </div>
   """ % today.isoformat()
   print """
-              <div class="col-md-2">
-                <select id="companion" name="companion" style="width:180px;">
-                  <option value="">同伴者を選択して下さい</option>
-                  <option value="1">一人</option>
-                  <option value="2">友人</option>
-                  <option value="3">恋人</option>
-                  <option value="4">家族</option>
-                </select>
-                <br />
-                <br />
-                <select id="focus1" name="focus1" style="width:180px;">
-                  <option value="0">順序を重視するジャンル1</option>
-                  <optgroup label="行動: 食事する">
-                    <option value="Eat">和食・寿司</option>
-                    <option value="Eat">中華・韓国料理</option>
-                    <option value="Eat">焼肉・焼き物</option>
-                    <option value="Eat">洋食・カフェめし</option>
-                    <option value="Eat">定食</option>
-                    <option value="Eat">カレー・アジア料理</option>
-                    <option value="Eat">ラーメン</option>
-                  </optgroup>
-                  <optgroup label="行動: お茶する">
-                    <option value="Tea">カフェ・スイーツ（和風）</option>
-                    <option value="Tea">カフェ・スイーツ（洋風）</option>
-                  </optgroup>
-                  <optgroup label="行動: 遊ぶ">
-                    <option value="Play">遊園地</option>
-                    <option value="Play">水族館</option>
-                    <option value="Play">映画館・劇場</option>
-                    <option value="Play">ビーチ・スキー場他レジャー施設</option>
-                    <option value="Play">イベント会場</option>
-                    <option value="Play">温泉・リゾート施設</option>
-                  </optgroup>
-                  <optgroup label="行動: 名所を見る・歩く">
-                    <option value="Sight">神社・仏閣</option>
-                    <option value="Sight">史跡</option>
-                    <option value="Sight">展望台・タワー</option>
-                    <option value="Sight">公園・庭園</option>
-                  </optgroup>
-                  <optgroup label="行動: 鑑賞する">
-                    <option value="Appreciate">博物館</option>
-                    <option value="Appreciate">美術館・ギャラリー</option>
-                    <option value="Appreciate">資料館・ミュージアム</option>
-                  </optgroup>
-                  <optgroup label="行動: 買物する">
-                    <option value="Shop">ファッション</option>
-                    <option value="Shop">食品（持ち帰り）</option>
-                    <option value="Shop">菓子（持ち帰り）</option>
-                    <option value="Shop">雑貨・土産物</option>
-                    <option value="Shop">食器・花器</option>
-                    <option value="Shop">宝飾品</option>
-                    <option value="Shop">書店</option>
-                  </optgroup>
-                </select>
-              </div>
-              <div class="col-md-2">
-                <select id="budget" name="budget" style="width:180px;">
-                  <option value="">予算を選択して下さい</option>
-                  <option value="1">5000円以下</option>
-                  <option value="2">5000 ~ 10000円</option>
-                  <option value="3">10000 ~ 30000円</option>
-                  <option value="4">30000円以上</option>
-                </select>
-                <br />
-                <br />
-                <select id="focus2" name="focus2" style="width:180px;">
-                  <option value="0">順序を重視するジャンル2</option>
-                  <optgroup label="行動: 食事する">
-                    <option value="Eat">和食・寿司</option>
-                    <option value="Eat">中華・韓国料理</option>
-                    <option value="Eat">焼肉・焼き物</option>
-                    <option value="Eat">洋食・カフェめし</option>
-                    <option value="Eat">定食</option>
-                    <option value="Eat">カレー・アジア料理</option>
-                    <option value="Eat">ラーメン</option>
-                  </optgroup>
-                  <optgroup label="お茶する">
-                    <option value="Tea">カフェ・スイーツ（和風）</option>
-                    <option value="Tea">カフェ・スイーツ（洋風）</option>
-                  </optgroup>
-                  <optgroup label="行動: 遊ぶ">
-                    <option value="Play">遊園地</option>
-                    <option value="Play">水族館</option>
-                    <option value="Play">映画館・劇場</option>
-                    <option value="Play">ビーチ・スキー場他レジャー施設</option>
-                    <option value="Play">イベント会場</option>
-                    <option value="Play">温泉・リゾート施設</option>
-                  </optgroup>
-                  <optgroup label="行動: 名所を見る・歩く">
-                    <option value="Sight">神社・仏閣</option>
-                    <option value="Sight">史跡</option>
-                    <option value="Sight">展望台・タワー</option>
-                    <option value="Sight">公園・庭園</option>
-                  </optgroup>
-                  <optgroup label="行動: 鑑賞する">
-                    <option value="Appreciate">博物館</option>
-                    <option value="Appreciate">美術館・ギャラリー</option>
-                    <option value="Appreciate">資料館・ミュージアム</option>
-                  </optgroup>
-                  <optgroup label="行動: 買物する">
-                    <option value="Shop">ファッション</option>
-                    <option value="Shop">食品（持ち帰り）</option>
-                    <option value="Shop">菓子（持ち帰り）</option>
-                    <option value="Shop">雑貨・土産物</option>
-                    <option value="Shop">食器・花器</option>
-                    <option value="Shop">宝飾品</option>
-                    <option value="Shop">書店</option>
-                  </optgroup>
-                </select>
+<select id="situation" name="situation" style="width:190px;">
+  <option value="">好みを入力した状況を選択</option>
+  <option value="1">状況①: [一人, 5000円以下]</option>
+  <option value="2">状況②: [一人, 5000〜10000円]</option>
+  <option value="3">状況③: [一人, 10000円〜30000円]</option>
+  <option value="4">状況④: [一人, 30000円以上]</option>
+  <option value="5">状況⑤: [友人, 5000円以下]</option>
+  <option value="6">状況⑥: [友人, 5000〜10000円]</option>
+  <option value="7">状況⑦: [友人, 10000円〜30000円]</option>
+  <option value="8">状況⑧: [友人, 30000円以上]</option>
+  <option value="9">状況⑨: [恋人, 5000円以下]</option>
+  <option value="10">状況⑩: [恋人, 5000〜10000円]</option>
+  <option value="11">状況⑪: [恋人, 10000円〜30000円]</option>
+  <option value="12">状況⑫: [恋人, 30000円以上]</option>
+  <option value="13">状況⑬: [家族, 5000円以下]</option>
+  <option value="14">状況⑭: [家族, 5000〜10000円]</option>
+  <option value="15">状況⑮: [家族, 10000円〜30000円]</option>
+  <option value="16">状況⑯: [家族, 30000円以上]</option>
+</select>
+  """
+  for i in xrange(1,3):
+    print """
+<select id="focus%s" name="focus%s" style="width:190px;">
+  <option value="0">順序を重視するジャンル%s</option>
+  <optgroup label="行動: 食事する">
+    <option value="Eat">和食・寿司</option>
+    <option value="Eat">中華・韓国料理</option>
+    <option value="Eat">焼肉・焼き物</option>
+    <option value="Eat">洋食・カフェめし</option>
+    <option value="Eat">定食</option>
+    <option value="Eat">カレー・アジア料理</option>
+    <option value="Eat">ラーメン</option>
+  </optgroup>
+  <optgroup label="行動: お茶する">
+    <option value="Tea">カフェ・スイーツ（和風）</option>
+    <option value="Tea">カフェ・スイーツ（洋風）</option>
+  </optgroup>
+  <optgroup label="行動: 遊ぶ">
+    <option value="Play">遊園地</option>
+    <option value="Play">遊園地・水族館</option>
+    <option value="Play">映画館・劇場</option>
+    <option value="Play">ビーチ・スキー場他レジャー施設</option>
+    <option value="Play">イベント会場</option>
+    <option value="Play">温泉・リゾート施設</option>
+  </optgroup>
+  <optgroup label="行動: 名所を見る・歩く">
+    <option value="Sight">神社・仏閣</option>
+    <option value="Sight">史跡</option>
+    <option value="Sight">展望台・タワー</option>
+    <option value="Sight">公園・庭園</option>
+  </optgroup>
+  <optgroup label="行動: 鑑賞する">
+    <option value="Appreciate">博物館</option>
+    <option value="Appreciate">美術館・ギャラリー</option>
+    <option value="Appreciate">資料館・ミュージアム</option>
+  </optgroup>
+  <optgroup label="行動: 買物する">
+    <option value="Shop">ファッション</option>
+    <option value="Shop">食品（持ち帰り）</option>
+    <option value="Shop">菓子（持ち帰り）</option>
+    <option value="Shop">雑貨・土産物</option>
+    <option value="Shop">食器・花器</option>
+    <option value="Shop">宝飾品</option>
+    <option value="Shop">書店</option>
+  </optgroup>
+</select>
+    """ % (i, i, i)
+  print """
               </div>
             </div>
           </div>
