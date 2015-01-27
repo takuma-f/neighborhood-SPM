@@ -79,80 +79,32 @@ def main():
             <div class="panel-body">
               <div class="row">
                 <div class="col-md-12">
-                  <input type="text" id="userId" name="userId" placeholder="ユーザーIDを入力" style="width:180px; height:30px;">
-                  <input type="hidden" id="date" name="date" value="%s">
-                  <select id="companion" name="companion" style="width:180px;">
-                    <option value="">同伴者を選択して下さい</option>
-                    <option value="1">一人</option>
-                    <option value="2">友人</option>
-                    <option value="3">恋人</option>
-                    <option value="4">家族</option>
-                  </select>
-                  <select id="budget" name="budget" style="width:180px;">
-                    <option value="">予算を選択して下さい</option>
-                    <option value="1">5000円以下</option>
-                    <option value="2">5000 ~ 10000円</option>
-                    <option value="3">10000 ~ 30000円</option>
-                    <option value="4">30000円以上</option>
-                  </select>
-                </div>
-              </div>
-            <div class="row">
-              <br/>
-              <div class="col-md-1"></div>
-  """ % today.isoformat()
-
-  for x in xrange(1,6):
-    print """
-    <div class="col-md-2" id="ItemBox">
-      <select id="genre%s" name="genre%s" style="width:180px;">
-        <option value="0">ジャンルを選択</option>
-        <optgroup label="行動: 食事する">
-          <option value="1">和食・寿司</option>
-          <option value="2">中華・韓国料理</option>
-          <option value="3">焼肉・焼き物</option>
-          <option value="4">洋食・カフェめし</option>
-          <option value="6">定食</option>
-          <option value="7">カレー・アジア料理</option>
-          <option value="8">ラーメン</option>
-        </optgroup>
-        <optgroup label="行動: お茶する">
-          <option value="11">カフェ・スイーツ（和風）</option>
-          <option value="12">カフェ・スイーツ（洋風）</option>
-        </optgroup>
-        <optgroup label="行動: 遊ぶ">
-          <option value="13">遊園地</option>
-          <option value="14">水族館</option>
-          <option value="15">映画館・劇場</option>
-          <option value="18">ビーチ・スキー場他レジャー施設</option>
-          <option value="19">イベント会場</option>
-          <option value="20">温泉・リゾート施設</option>
-        </optgroup>
-        <optgroup label="行動: 名所を見る・歩く">
-          <option value="22">神社・仏閣</option>
-          <option value="23">史跡</option>
-          <option value="24">展望台・タワー</option>
-          <option value="25">公園・庭園</option>
-        </optgroup>
-        <optgroup label="行動: 鑑賞する">
-          <option value="26">博物館</option>
-          <option value="27">美術館・ギャラリー</option>
-          <option value="28">資料館・ミュージアム</option>
-        </optgroup>
-        <optgroup label="行動: 買物する">
-          <option value="30">ファッション</option>
-          <option value="31">食品（持ち帰り）</option>
-          <option value="32">菓子（持ち帰り）</option>
-          <option value="34">雑貨・土産物</option>
-          <option value="35">食器・花器</option>
-          <option value="36">宝飾品</option>
-          <option value="37">書店</option>
-        </optgroup>
-      </select>
-    </div>
-    """ % (x,x)
-
+  """
   print """
+<input type="text" id="userId" name="userId" placeholder="ユーザーIDを入力" style="width:180px; height:30px;">
+<input type="hidden" id="date" name="date" value="%s">
+<select id="situation" name="situation" style="width:190px;">
+  <option value="">状況を選択してください</option>
+  <option value="1">状況①: [一人, 5000円以下]</option>
+  <option value="2">状況②: [一人, 5000〜10000円]</option>
+  <option value="3">状況③: [一人, 10000円〜30000円]</option>
+  <option value="4">状況④: [一人, 30000円以上]</option>
+  <option value="5">状況⑤: [友人, 5000円以下]</option>
+  <option value="6">状況⑥: [友人, 5000〜10000円]</option>
+  <option value="7">状況⑦: [友人, 10000円〜30000円]</option>
+  <option value="8">状況⑧: [友人, 30000円以上]</option>
+  <option value="9">状況⑨: [恋人, 5000円以下]</option>
+  <option value="10">状況⑩: [恋人, 5000〜10000円]</option>
+  <option value="11">状況⑪: [恋人, 10000円〜30000円]</option>
+  <option value="12">状況⑫: [恋人, 30000円以上]</option>
+  <option value="13">状況⑬: [家族, 5000円以下]</option>
+  <option value="14">状況⑭: [家族, 5000〜10000円]</option>
+  <option value="15">状況⑮: [家族, 10000円〜30000円]</option>
+  <option value="16">状況⑯: [家族, 30000円以上]</option>
+</select>
+  """ % today.isoformat()
+  print """
+            </div>
           </div>
         </div>
         <div class="panel-footer">
@@ -168,7 +120,7 @@ def main():
 <!-- Bootstrap core JavaScript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="./js/jquery-1.11.1.min.js"></script>
 <script src="./dist/js/bootstrap.min.js"></script>
 <script src="./assets/js/docs.min.js"></script>
 <script src="./js/ajax2.js"></script>

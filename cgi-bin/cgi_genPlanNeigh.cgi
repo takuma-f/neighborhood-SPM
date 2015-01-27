@@ -42,41 +42,41 @@ def main():
     sorted_confDict = sorted(pattern_confDict.items(), key=lambda x: x[1])
     print "Content-Type: text/html"
 
-# 検証用の詳細パネル(原則コメントアウト)
+# 検証用の詳細パネル(実験時はコメントアウト)
 # ---ここから---
-#     print """
-# <div id="detail" class="panel panel-default">
-#   <div class="panel-heading">
-#     <h3 class="panel-title">抽出データ詳細</h3>
-#   </div>
-#     <div class="panel-body">
-#       <div class="row">
-#     """
-#     for sim_user in genIter.getSimUsers(user, model, user_input):
-#       label, accuracy = svm.getLabelandAccuracy(sim_user, model)
-#       print "ユーザー: %s (類似度%s) Label: %s" % (sim_user, accuracy, label)
-#       print "<br>"
-#     print "コンテキストにマッチしたパターン :<br>"
-#     for transaction in transaction_list:
-#       transaction = util.convertAction(transaction)
-#       for i, t in enumerate(transaction):
-#         if i+1 != len(transaction):
-#           print "%s -> " % t
-#         else:
-#           print t
-#       print "<br>"
-#     print """
-#     </div>
-#   </div>
-# </div>
-#     """
-#     conv_data_iter = list()
-#     for data in data_iter:
-#         conv_data_iter.append(util.convertAction(data))
-#     print '<form id="analystic">'
-#     print '<input type="hidden" id="data_iter" value="%s">' % conv_data_iter
-#     print '<input type="hidden" id="sim_iter" value="%s">' % sim_iter
-#     print '</form>'
+    print """
+<div id="detail" class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">抽出データ詳細</h3>
+  </div>
+    <div class="panel-body">
+      <div class="row">
+    """
+    for sim_user in genIter.getSimUsers(user, model, user_input, -0.1):
+      label, accuracy = svm.getLabelandAccuracy(sim_user, model)
+      print "ユーザー: %s (類似度%s) Label: %s" % (sim_user, accuracy, label)
+      print "<br>"
+    print "コンテキストにマッチしたパターン :<br>"
+    for transaction in transaction_list:
+      transaction = util.convertAction(transaction)
+      for i, t in enumerate(transaction):
+        if i+1 != len(transaction):
+          print "%s → " % t
+        else:
+          print t
+      print "<br>"
+    print """
+    </div>
+  </div>
+</div>
+    """
+    conv_data_iter = list()
+    for data in data_iter:
+        conv_data_iter.append(util.convertAction(data))
+    print '<form id="analystic">'
+    print '<input type="hidden" id="data_iter" value="%s">' % conv_data_iter
+    print '<input type="hidden" id="sim_iter" value="%s">' % sim_iter
+    print '</form>'
 # ---ここまで---
 
     counter = 0
@@ -86,9 +86,6 @@ def main():
     # for p, s in sorted_dict:
     for i in xrange(1, 11):
         counter += 1
-        # if counter == 1:
-        #   top_score = s
-        # recommend_score = 100 * (s/top_score)
         print """
 <div id="plan%s" class="panel panel-default">
   <div class="panel-heading">
@@ -106,43 +103,6 @@ def main():
             which = "neigh"  # 隣接度のマーカー
             neigh_count += 1
             display.append(p)
-
-        # 乱数で入れ替える
-        # if random.randint(1, 2) == 1:
-        #     if neigh_count < 3:
-        #         p, s = sorted_dict.pop()
-        #         while (p in display) or (len(util.convertList(p)) < 4):
-        #             p, s = sorted_dict.pop()
-        #         else:
-        #             which = "neigh"  # 隣接度のマーカー
-        #             neigh_count += 1
-        #             display.append(p)
-        #     else:
-        #         p, s = sorted_confDict.pop()
-        #         while (p in display) or (len(util.convertList(p)) < 4):
-        #             p, s = sorted_confDict.pop()
-        #         else:
-        #           which = "conf"  # 信頼度のマーカー
-        #           conf_count += 1
-        #           display.append(p)
-        # else:
-        #     if conf_count < 3:
-        #         p, s = sorted_confDict.pop()
-        #         while (p in display) or (len(util.convertList(p)) < 4):
-        #             p, s = sorted_confDict.pop()
-        #         else:
-        #           which = "conf"  # 信頼度のマーカー
-        #           conf_count += 1
-        #           display.append(p)
-        #     else:
-        #         p, s = sorted_dict.pop()
-        #         while (p in display) or (len(util.convertList(p)) < 4):
-        #             p, s = sorted_dict.pop()
-        #         else:
-        #             which = "neigh"  # 隣接度のマーカー
-        #             neigh_count += 1
-        #             display.append(p)
-
         p = util.convertList(p)  # ここでpはlist()でなく文字列になっていることに注意
         convert_p = util.convertAction(p)
         counter_a = 0

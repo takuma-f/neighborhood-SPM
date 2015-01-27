@@ -86,9 +86,6 @@ def main():
     # for p, s in sorted_dict:
     for i in xrange(1, 11):
         counter += 1
-        # if counter == 1:
-        #   top_score = s
-        # recommend_score = 100 * (s/top_score)
         print """
 <div id="plan%s" class="panel panel-default">
   <div class="panel-heading">
@@ -106,43 +103,6 @@ def main():
             which = "conf"  # 隣接度のマーカー
             conf_count += 1
             display.append(p)
-
-        # 乱数で入れ替える
-        # if random.randint(1, 2) == 1:
-        #     if neigh_count < 3:
-        #         p, s = sorted_dict.pop()
-        #         while (p in display) or (len(util.convertList(p)) < 4):
-        #             p, s = sorted_dict.pop()
-        #         else:
-        #             which = "neigh"  # 隣接度のマーカー
-        #             neigh_count += 1
-        #             display.append(p)
-        #     else:
-        #         p, s = sorted_confDict.pop()
-        #         while (p in display) or (len(util.convertList(p)) < 4):
-        #             p, s = sorted_confDict.pop()
-        #         else:
-        #           which = "conf"  # 信頼度のマーカー
-        #           conf_count += 1
-        #           display.append(p)
-        # else:
-        #     if conf_count < 3:
-        #         p, s = sorted_confDict.pop()
-        #         while (p in display) or (len(util.convertList(p)) < 4):
-        #             p, s = sorted_confDict.pop()
-        #         else:
-        #           which = "conf"  # 信頼度のマーカー
-        #           conf_count += 1
-        #           display.append(p)
-        #     else:
-        #         p, s = sorted_dict.pop()
-        #         while (p in display) or (len(util.convertList(p)) < 4):
-        #             p, s = sorted_dict.pop()
-        #         else:
-        #             which = "neigh"  # 隣接度のマーカー
-        #             neigh_count += 1
-        #             display.append(p)
-
         p = util.convertList(p)  # ここでpはlist()でなく文字列になっていることに注意
         convert_p = util.convertAction(p)
         counter_a = 0

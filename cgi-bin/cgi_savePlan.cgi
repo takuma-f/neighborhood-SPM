@@ -17,6 +17,9 @@ def writeFile(form):
         f.write("date: " + form['date'].value + "\r\n"\
         + "companion: " + form['companion'].value + "\r\n"\
         + "budget: " + form['budget'].value + "\r\n"\
+        + "focus: "\
+        + form['focus1'].value + ','\
+        + form['focus2'].value + "\r\n"\
         + "seed: " + form['seed'].value + "\r\n"\
         + "type: "\
         + form['type1'].value + ","\
