@@ -10,8 +10,7 @@ from tools import util as util
 
 
 # 類似ユーザーを抽出し逐次的に返す
-def getSimUsers(user, model, user_input):
-    threshold = 0.5  # 50%以上類似
+def getSimUsers(user, model, user_input, threshold=0.5):
 
     # システムから自分以外の全てのユーザーを返す(将来的にSQL導入)
     def getOtherUsers(user_input):
