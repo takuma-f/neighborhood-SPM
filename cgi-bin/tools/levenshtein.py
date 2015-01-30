@@ -24,17 +24,76 @@ def levenshtein_distance(a, b):
 
 
 def main():
-    # hoge = ["D, A, B, E, C", "D, E, A, C, B", "D, A, E, C, B"]
-    # fuga = ["D, A, E, B, C", "B, C, A, E, D", "C, E, A, B", "E, A, B, C, D", "E, C, D, A, B", "D, C, E, A, B", "E, B, A, C, D", "D, E, B, C, A", "C, E, A, B, D", "A, D, B, E, C"]
-    # fuga = ["E, A, B, C, D", "A, C, D, B, E", "B, D, E, C", "E, D, A, C, B", "A, D, B, E", "B, D, E, A, C", "D, A, E, B, C", "C, D, A, B", "C, A, E, D", "E, B, A, C, D"]
+    # usui-test
+    # hoge = ["DABEC", "DEACB", "DAECB"]
+    # hoge = ["DBECA"]
+    # fuga = ["DAEBC", "BCAED", "CEAB", "EABCD", "ECDAB", "DCEAB", "EBACD", "DEBCA", "CEABD", "ADBEC"]
+    # fuga = ["DAEBC", "DCEA", "ADBE", "ADBEC"]
+    # fuga = ["EABCD", "ACDBE", "BDEC", "EDACB", "ADBE", "BDEAC", "DAEBC", "CDAB", "CAED", "EBACD"]
 
-    # hoge = ["A, E, D, C, B", "B, E, D, A, C", "D, B, C, E, A", "E, D, A, C, B", "E, A, D, B, C"]
-    # fuga = ["D, E, C, B, A", "D, E, B, C, A", "D, B, C, A, E", "D, C, B, A, E", "D, E, B, A, C", "B, C, A, E", "D, C, B, A", "C, B, A, E", "D, B, C, A", "D, E, B, A"]
-    # fuga = ["C, A, B, D", "A, E, C, B", "C, A, B, E", "C, A, B, E, D", "B, E, A, C, D", "A, B, E, D", "D, E, B, A", "A, E, D, C, B", "B, E, A, D", "B, E, A, C"]
+    # hoge = ["AEDCB", "BEDAC", "DBCEA", "EDACB", "EADBC"]
+    # hoge = ["EAEBC"]
+    # fuga = ["DECBA", "DEBCA", "DBCAE", "DCBAE", "DEBAC", "BCAE", "DCBA", "CBAE", "DBCA", "DEBA"]
+    # fuga = ["CABD", "AECB", "CABE", "CABED", "BEACD", "ABED", "DEBA", "AEDCB", "BEAD", "BEAC"]
 
-    hoge = ["C, B, D, A, E", "C, E, A, B, D", "C, D, B, E, A", "A, C, B, D, E", "A, C, E, D, B", "B, D, A, C, E"]
-    # fuga = ["A, E, C, D, B", "C, E, B, D, A", "C, D, B, A, E", "B, A, D, C, E", "C, E, A, D, B", "C, D, A, B, E", "C, B, D, A, E", "C, A, E, B, D", "D, B, A, C, E", "B, D, A, E"]
-    fuga = ["B, E, D, C", "D, B, A, C, E", "D, B, A, E", "C, A, E, B, D", "B, A, D, C", "A, E, C, D, B", "E, D, C, A, B", "E, C, D, B", "C, D, B, A, E", "A, C, D, B"]
+    # hoge = ["CBDAE", "CEABD", "CDBEA", "ACBDE", "ACEDB", "BDACE"]
+    # hoge = ["CADBE"]
+    # fuga = ["AECDB", "CEBDA", "CDBAE", "BADCE", "CEADB", "CDABE", "CBDAE", "CAEBD", "DBACE", "BDAE"]
+    # fuga = ["BEDC", "DBACE", "DBAE", "CAEBD", "BADC", "AECDB", "EDCAB", "ECDB", "CDBAE", "ACDB"]
+
+    # 2015-01-24kumiko
+    # hoge = ["DEACB"]
+    # fuga = ["BCAE", "DECBA", "BEACD", "DCABE", "ACBED", "DBCAE", "BEAD", "CDAB", "AEDCB", "CBADE"]
+    # fuga = ["DEBC", "ADEBC", "DEBCA", "ECDBA", "DBCAE", "CAEDB", "ACDBE", "BAECD", "CEBDA", "CBDAE"]
+    # hoge = ["CADBE"]
+    # fuga = ["ADCEB", "BAEC", "AEBDC", "EBAD", "DCEB", "BDEC", "CEABD", "EBACD", "DECAB", "BDAEC"]
+    # fuga = ["ADCEB", "CDBEA", "CEBAD", "BAECD", "CDAEB", "CEABD", "CBEAD", "CADBE", "EBACD", "BEAD"]
+    # hoge = ["DBCAE"]
+    # fuga = ["EDAB", "BCAE", "BCED", "BCAD", "ACDEB", "CDAB", "CEDAB", "BCAED", "DEABC", "EBADC", ]
+    # fuga = ["EBADC", "DCBEA", "DCBAE", "DACBE", "DACB", "DACEB", "CADBE", "DCAEB", "BCAED", "DCBE"]
+    # hoge = ["CAEDB"]
+    # fuga = ["BCED", "EDAB", "ACDE", "EADC", "BCAE", "EBDC", "CEDAB", "BCAED", "ACDB", "ACDEB"]
+    # fuga = ["EBADC", "CAEDB", "BCAED", "EBAD", "BADC", "CAED", "CEDAB", "EBAC", "DCBEA", "DCEBA"]
+
+    # 2015-01-26yatsushiro
+    # hoge = ["DACBE"]
+    # fuga = ["DAEBC", "DEBAC", "DEBCA", "DAEB", "DEACB", "DEBC", "BEACD", "EBAC", "EBCA", "EACB"]
+    # hoge = ["DEACB"]
+    # fuga = ["ADCEB", "BDAC", "AEBDC", "DABCE", "ECAD", "EBAD", "ECAB", "CDAEB", "CEABD", "BAEC"]
+    # hoge = ["BCADE"]
+    # fuga = ["CAEDB", "EDACB", "DACBE", "DCAEB", "ACDEB", "DCEBA", "CAED", "DACB", "BCAED", "CADBE"]
+    # hoge = ["DACEB"]
+    # fuga = ["BAECD", "ECAB", "ACBE", "BEADC", "DACE", "EBAD", "EBACD", "DACB", "DCBE", "ECAD"]
+
+    # 2015-01-26Osawa
+    # hoge = ["DACBE"]
+    # fuga = ["BADCE", "DABEC", "ECBAD", "ADCBE", "AEDB", "DAEC", "EBDAC", "DBEAC", "BDAC", "ABCDE"]
+    # hoge = ["CBDAE"]
+    # fuga = ["DABCE", "BAECD", "AEDCB", "EACBD", "BEDAC", "ECBAD", "BACDE", "DABC", "CEDA", "EDAC"]
+    # hoge = ["DACBE"]
+    # fuga = ["BCAE", "EDAB", "EADC", "BCED", "BCAD", "EBDC", "CDAB", "CEDAB", "ACDE", "ACDEB"]
+    # hoge = ["DACBE"]
+    # fuga = ["ECDAB", "BEDCA", "ECDA", "CDAB", "EDCA", "CDAEB", "BDAEC", "AEBDC", "DAECB", "BEDC"]
+
+    # 2015-01-26ota
+    # hoge = ["ACDBE"]
+    # fuga = ["ACBED", "BACDE", "BACD", "BEACD", "ACDE", "EACDB", "ACBE", "EACD", "CBED", "EBCA"]
+    # hoge = ["ACDBE"]
+    # fuga = ["ACBDE", "CABDE", "CABD", "ABDE", "CBDE", "EADBC", "ACBD", "EDBCA", "EDBAC", "CEAB"]
+    # hoge = ["ACDBE"]
+    # fuga = ["BEDCA", "AEBDC", "CBDE", "ECDAB", "CDAEB", "EBDC", "CDAB", "ADCEB", "CABDE", "BAEC"]
+    # hoge = ["DACBE"]
+    # fuga = ["ADCEB", "ECDAB", "CADBE", "BDAEC", "CDAEB", "CDAB", "CADE", "CABDE", "CBDE", "AEBDC"]
+
+    # 2015-01-26kawata
+    # hoge = ["DEACB"]
+    # fuga = ["CDAB", "ECDAB", "AEDCB", "BEACD", "EDAB", "BEAD", "BEAC", "DCABE", "CBADE", "ACBED"]
+    # hoge = ["DACBE"]
+    # fuga = ["BEDAC", "DCABE", "ACDEB", "AEBCD", "DBAE", "DBAC", "DBAEC", "EDAC", "CABE", "DABCE"]
+    # hoge = ["DCAEB"]
+    # fuga = ["DCBEA", "DCBAE", "EACDB", "CBEA", "DCBE", "DCBA", "EACD", "CBAE", "BEACD", "BEAC"]
+    hoge = ["CADBE"]
+    fuga = ["EBACD", "CDBEA", "CDBAE", "CADBE", "CADB", "CADEB", "DACBE", "CDAEB", "BDAEC", "CDBE"]
 
     # s1 = sys.argv[1]
     # s2 = sys.argv[2]
@@ -42,9 +101,10 @@ def main():
         otaku = 0
         print s1
         for s2 in fuga:
-            print s2, levenshtein_distance(s1, s2)
+            print s2+":", levenshtein_distance(s1, s2)
             otaku += levenshtein_distance(s1, s2)
-        print otaku / len(fuga)
+        result = float(otaku) / len(fuga)
+        print "Ave:"+str(result)
 
 if __name__ == '__main__':
     main()
