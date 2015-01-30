@@ -175,12 +175,10 @@ def getNeighborhood(transaction_list, pattern):
     neighborhood = 0
 
     # 入力したパターンの部分パターンをリストで返す
-    # せっかくここで部分パターンの距離求めてるんだからこの値も返したい
     def getSubPattern(pattern):
         sp_list = list()
         try:
-            pass
-            if len(pattern) != 1:  # これでいいのか？
+            if len(pattern) != 1:
                 sp_combinations = list(combinations(pattern, len(pattern)-1))
                 for sp in sp_combinations:
                     sp_distance = getDistances(pattern, sp)
@@ -287,7 +285,6 @@ def test():
     print pattern_confDict
     for pattern in patterns:
         print getDistances(record, pattern)
-
 
 
 if __name__ == '__main__':
